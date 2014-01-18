@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Word Game </title>
+<link href="./lib/dist/css/bootstrap.css" rel="stylesheet">
+<link href="./lib/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+<script type="text/javascript" src = "lib/jquery.js"></script>
+<script>
+	global.document = document;
+	global.console = console;
+	global.$ = $;
+</script>
+</head>
+<body>
+	<div class = "container">
+		<div class = "row">
+		<div class="col-xs-10 col-xs-offset-1">
+			<br>
+			<div class = "panel panel-default">
+						<input class = "btn btn-success col-xs-4" type = "button" id = 'getHint' disabled = "true" value = "Get Hint">
+						<input class = "btn btn-success col-xs-4" type = "button" id = 'newGame'  value = "New Game">
+						<input class = "btn btn-success col-xs-4" type = "button" id = 'giveUp' disabled="true"  value = "Give Up">
+			</div>
+			<br>
+			<div class="panel panel-default" id = "resultArea" hidden = "true"></div>
+			<div class="panel panel-default" id = "definitionArea">
+				<div id = "definition">Definition:</div>
+				<div id = "hint">Hint:</div>
+			</div>
+			<div class = 'input-group panel  col-xs-12'>
+				<input class = "form-control" placeholder = "Your Guess" type="text" id = "guess" ><br><br>
+				<input class = "btn btn-success" type = "button" id = 'submitGuess' disabled = "true" value = "Submit Guess">
+			</div>
+			<div class = 'input-group col-xs-12'>
+				<div class='input-group'>
+					<span class="input-group-addon">Host</span>
+					<input type = "text" name = "host" id = "host" class="form-control">
+				</div>
+				<div class='input-group'>
+					<span class="input-group-addon">Port</span>
+					<input type = "text" name = "port" id = "port" class="form-control">
+				</div>
+				<input class = 'btn btn-success' type = "button" id = "submitHost" name = "submitHost" value = "Submit">
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src = "js/menu.js"></script>
+</html>

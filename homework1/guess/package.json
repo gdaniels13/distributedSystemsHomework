@@ -1,0 +1,10 @@
+{
+  "name": "Guessing Game",
+  "main": "index.html",
+  "window":{
+  	"toolbar":false,
+  	"width":375,
+  	"height":375,
+  	"resizable":false
+  }
+}
