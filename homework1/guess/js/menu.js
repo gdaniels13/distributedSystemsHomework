@@ -1,8 +1,10 @@
+//these are all of the button handles 
+
 var gui = require('nw.gui');
 
 var socket = require('./js/socket.js');
 
-//load host and port into text boxes
+//load host and port into text boxes on start up
 $('#host').attr('value',socket.config.serverHost);
 $('#port').attr('value',socket.config.serverPort);
 

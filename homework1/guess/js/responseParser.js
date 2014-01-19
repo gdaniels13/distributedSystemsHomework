@@ -1,5 +1,13 @@
 function splitAtComma(toSplit){
-	return toSplit.split(',');
+	var toReturn =  toSplit.split(',');
+
+	//glue the definition back together if there was a comma in it
+	for(var i = 3; toReturn[i] !== undefined ; i++)
+		{
+			toReturn[2]+=',' + toReturn[i];
+		}
+
+	return toReturn;
 }
 
 
@@ -8,8 +16,9 @@ function parser(toParse){
 	var toReturn = {};
 	toReturn.type = toParse.substring(0,toParse.indexOf(':'));
 	var data = toParse.substring(toParse.indexOf(':')+1,toParse.length);
-	
+
 	data = splitAtComma(data);
+	
 
 	switch(toReturn.type){
 		case 'def':
@@ -40,10 +49,11 @@ function parser(toParse){
 
 
 function test(){
-	console.log(parser('def:5163,_______,earth measurement on a large scale'));	
+	console.log(parser('def:5163,_______,"earth measurement, on a large scale"'));	
 	console.log(parser('answer:24,F,180'));	
 	console.log(parser('error:Invalid GameId'));	
 	console.log(parser('hint:__buli__'));	
 }
+
 
 module.exports = parser;

@@ -1,3 +1,5 @@
+//handles all the communication and routing/parsing of the responses
+
 var ui = require('./ui.js');
 var dgram = require('dgram');
 var parser = require('./responseParser.js');
