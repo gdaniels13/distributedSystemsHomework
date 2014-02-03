@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build">
+	<path id="build.classpath">
+		<pathelement location="classes"/>
+	</path>
+	<target name="init">
+		<mkdir dir="classes"/>
+	</target>
+	<target name="clean">
+		<delete dir="classes"/>
+	</target>
+	<target depends="init" name="build">
+		<javac srcdir="." destdir="classes" source="1.5" target="1.5" fork="yes">
+			<classpath refid="build.classpath"/>
+			<include name="Register.java"/>
+			<include name="Params.java"/>
+			<include name="Move.java"/>
+			<include name="ThrowBomb.java"/>
+			<include name="ClockTick.java"/>
+			<include name="Target.java"/>
+			<include name="GetMaterial.java"/>
+			<include name="DecreaseHealth.java"/>
+			<include name="Layout.java"/>
+			<include name="ParameterR.java"/>
+			<include name="FieldR.java"/>
+			<include name="Request.java"/>
+			<include name="Message.java"/>
+			<include name="Acknowledge.java"/>
+			<include name="AgentsReq.java"/>
+			<include name="Material.java"/>
+			<include name="FieldRes.java"/>
+			<include name="ParameterRes.java"/>
+			<include name="Response.java"/>
+			<include name="AgentsRes.java"/>
+			<include name="GetField.java"/>
+			<include name="GetAgents.java"/>
+		</javac>
+	</target>
+</project>
