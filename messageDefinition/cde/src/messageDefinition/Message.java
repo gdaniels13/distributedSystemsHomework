@@ -41,13 +41,13 @@ public abstract class Message {
             case ERROR:
                 break;
             case ACK:
-            return new Acknowledge(string);
+                return new Acknowledge(string);
             case AGENTREQ:
-            break;
+                return new AgentsReq(string);
             case AGENTRES:
             break;
             case CLOCKTICK:
-            break;
+                return new ClockTick(string);
             case DECREASEHEALTH:
             break;
             case EXCUSEREQ:

@@ -22,7 +22,10 @@ public abstract class Request extends Message {
         this.requestType = requestType;
     }
 
-
+    @Override
+    public String serialize() {
+        return mesString() + reString();
+    }
 
     public String reString(){
         return requestType.toString() + DELIMITER + DELIMITER;
