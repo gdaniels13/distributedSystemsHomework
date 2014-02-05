@@ -8,6 +8,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ *
+ *  a = b+c
+ *
  * Created by gregor on 2/2/14.
  */
 public class RegisterTest {
@@ -16,8 +19,7 @@ public class RegisterTest {
     public void testConstructors() throws Exception {
 
         //test deserializing constructor
-        Register reg = new Register("REQUEST@1234@4567@iwinner@@"+
-                                "REGISTER@@BRILLIANTSTUDENT@1231");
+        Register reg = new Register("REQUEST@1234@4567@iwinner@@REGISTER@@BRILLIANTSTUDENT@1231");
 
         assertEquals(reg.agentID, "1231");
         assertEquals(reg.agentType, MessageType.BRILLIANTSTUDENT);
@@ -26,8 +28,6 @@ public class RegisterTest {
         assertEquals(reg.senderId,"iwinner");
 
         reg = new Register(MessageType.REQUEST,1234,4567,"iwinner",MessageType.REGISTER,MessageType.BRILLIANTSTUDENT,"1231");
-
-
         assertEquals(reg.agentID, "1231");
         assertEquals(reg.agentType, MessageType.BRILLIANTSTUDENT);
         assertEquals(reg.messageID, 1234);
