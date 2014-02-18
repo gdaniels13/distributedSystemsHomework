@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.net.*;
 
 /**
@@ -14,11 +13,15 @@ public class Listener implements Runnable
 	int port = 9876;
 	int messageLength = 1024;
 	byte[] receiveBuffer;
+    DatagramPacket receivePacket;
+
+
 	public Listener()
 	{
-
 		receiveBuffer = new byte[messageLength];
-		try
+        receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+
+        try
 		{
 			listenerSocket = new DatagramSocket(port);
 		}
@@ -26,31 +29,18 @@ public class Listener implements Runnable
 		{
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public void run()
 	{
-		try{
-			System.out.println("running");
-			byte[] receiveData = new byte[1024];
-			byte[] sendData = new byte[1024];
-			while(true)
+        try{
+            System.out.println("running");
+            while(true)
 			{
-				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-				listenerSocket.receive(receivePacket);
-
+                listenerSocket.receive(receivePacket);
 				String sentence = new String( receivePacket.getData());
 				System.out.println("RECEIVED: " + sentence);
-				InetAddress IPAddress = receivePacket.getAddress();
-				//sender
-				int port = receivePacket.getPort();
-				String capitalizedSentence = sentence.toUpperCase();
-				sendData = capitalizedSentence.getBytes();
-				DatagramPacket sendPacket =
-								new DatagramPacket(sendData, sendData.length, IPAddress, port);
-				listenerSocket.send(sendPacket);
 			}
 		}
 		catch(Exception e){

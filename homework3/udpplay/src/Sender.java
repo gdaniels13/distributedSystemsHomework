@@ -24,12 +24,12 @@ public class Sender
       clientSocket.send(sendPacket);
 
 
-			//receive the response
-			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-			clientSocket.receive(receivePacket);
-			String modifiedSentence = new String(receivePacket.getData());
-			System.out.println("FROM SERVER:" + modifiedSentence);
-			clientSocket.close();
+//			//receive the response
+//			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+//			clientSocket.receive(receivePacket);
+//			String modifiedSentence = new String(receivePacket.getData());
+//			System.out.println("FROM SERVER:" + modifiedSentence);
+//			clientSocket.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();

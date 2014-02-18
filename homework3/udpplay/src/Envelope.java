@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
 
 /**
  * Created with IntelliJ IDEA.
