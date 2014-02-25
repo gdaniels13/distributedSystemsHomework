@@ -1,5 +1,6 @@
 package Communication;
 
+import Common.ByteList;
 import Messages.Message;
 
 import java.lang.Override;
@@ -27,14 +28,33 @@ public class Envelope
 
 	public Envelope(DatagramPacket info)
 	{
-		//this.message = new Message(new String(info.getData()));
+		ByteList byteList = new ByteList();
+		byteList.Add(info.getData());
+		try
+		{
+			message = Message.Create(byteList);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
 		this.address = new Endpoint(info.getPort(),info.getAddress());
 	}
 
 	public DatagramPacket toDatagramPacket(){
-
-		DatagramPacket p = new DatagramPacket(message.toString().getBytes(),
-													message.toString().getBytes().length,address.getAddress(),  address.getPort());
+		ByteList bl = new ByteList();
+		try
+		{
+			message.Encode(bl);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		byte ba[] =  bl.ToBytes();
+		DatagramPacket p = new DatagramPacket(ba,	ba.length,address.getAddress(),  address.getPort());
 		return p;
 	}
 

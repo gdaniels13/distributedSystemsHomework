@@ -28,16 +28,16 @@ public class Communicator
 
 		try
 		{
-			socket = new DatagramSocket(port, InetAddress.getByName(Config.address));
+			socket = new DatagramSocket(port);
 		}
 		catch(SocketException e)
 		{
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
-		catch(UnknownHostException e)
-		{
-			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-		}
+//		catch(UnknownHostException e)
+//		{
+//			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//		}
 	}
 
 	private static void init(){
@@ -52,7 +52,7 @@ public class Communicator
 		return instance.listen(Config.listenTimeout);
 	}
 
-	private Envelope listen(int listenTimeout)
+	public Envelope listen(int listenTimeout)
 	{
 		try
 		{
@@ -77,7 +77,8 @@ public class Communicator
 	private void sender(Envelope envelope){
 		try
 		{
-			socket.send(envelope.toDatagramPacket());
+			DatagramPacket d = envelope.toDatagramPacket();
+			socket.send(d);
 		}
 		catch(IOException e)
 		{

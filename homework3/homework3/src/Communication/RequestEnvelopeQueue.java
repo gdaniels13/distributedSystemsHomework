@@ -45,11 +45,12 @@ public class RequestEnvelopeQueue
     }
 
     private void insert(Envelope e) {
-        String conversationId =e.getMessage().getConversationId().toString();
+
+        String conversationId = e.getMessage().getConversationId().toString();
         String messageNr = e.getMessage().getMessageNr().toString();
         ConcurrentLinkedQueue<Envelope> t = instance.qMap.get(conversationId);
-
-        if(t==null && conversationId.compareTo(messageNr) == 0){ //new Message insert new Queue
+			System.out.println(e.toString());
+			if(t==null && conversationId.compareTo(messageNr) == 0){ //new Message insert new Queue
             t = new ConcurrentLinkedQueue<>();
             t.add(e);
             qMap.put(conversationId,t);
@@ -61,7 +62,7 @@ public class RequestEnvelopeQueue
     }
 
     public static Envelope pop(MessageNumber mn){
-
+			return null;
     }
 
 
