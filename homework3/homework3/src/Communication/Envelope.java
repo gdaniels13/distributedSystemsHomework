@@ -27,7 +27,7 @@ public class Envelope
 
 	public Envelope(DatagramPacket info)
 	{
-		this.message = new Message(new String(info.getData()));
+		//this.message = new Message(new String(info.getData()));
 		this.address = new Endpoint(info.getPort(),info.getAddress());
 	}
 

@@ -1,6 +1,14 @@
 package Communication;
 
+import Common.MessageNumber;
+import Messages.Message;
+import com.sun.xml.internal.bind.v2.util.QNameMap;
+import sun.security.jca.GetInstance;
+
+import java.awt.image.ConvolveOp;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Created by gregor on 2/18/14.
@@ -10,11 +18,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RequestEnvelopeQueue
 {
-    ConcurrentLinkedQueue<Envelope> queue;
+    ConcurrentHashMap<String,ConcurrentLinkedQueue<Envelope>> qMap;
+
+
     private static RequestEnvelopeQueue instance;
 
     private RequestEnvelopeQueue(){
-        queue = new ConcurrentLinkedQueue<>();
+        qMap = new ConcurrentHashMap<>();
     }
 
     public static RequestEnvelopeQueue getInstance(){
@@ -29,17 +39,30 @@ public class RequestEnvelopeQueue
     }
 
     public static void push(Envelope e){
-        init();
-        instance.queue.add(e);
+        getInstance();
+        instance.insert(e);
+
     }
 
-    public static Envelope pop(){
-        init();
-        return instance.queue.poll();
+    private void insert(Envelope e) {
+        String conversationId =e.getMessage().getConversationId().toString();
+        String messageNr = e.getMessage().getMessageNr().toString();
+        ConcurrentLinkedQueue<Envelope> t = instance.qMap.get(conversationId);
+
+        if(t==null && conversationId.compareTo(messageNr) == 0){ //new Message insert new Queue
+            t = new ConcurrentLinkedQueue<>();
+            t.add(e);
+            qMap.put(conversationId,t);
+        }
+        else if(t!= null){ //conversation id exists add the message to the queue
+            t.add(e);
+        }
+
     }
 
-		public static int getSize(){
-			init();
-			return instance.queue.size();
-		}
+    public static Envelope pop(MessageNumber mn){
+
+    }
+
+
 }
