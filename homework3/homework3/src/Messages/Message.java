@@ -169,6 +169,7 @@ public abstract class Message implements Comparable
 		return flag;
 	}
 
+
 	public  int GetHashCode()
 	{
 		return super.hashCode();

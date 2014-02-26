@@ -85,4 +85,8 @@ public class Communicator
 			e.printStackTrace();
 		}
 	}
+
+    public static void setPort(int port){
+
+    }
 }

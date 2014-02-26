@@ -18,13 +18,14 @@ import java.util.concurrent.ConcurrentMap;
 
 public class RequestEnvelopeQueue
 {
-    ConcurrentHashMap<String,ConcurrentLinkedQueue<Envelope>> qMap;
-
+    ConcurrentHashMap<String,String> qMap; //keep a record of valid conversations
+    ConcurrentLinkedQueue<Envelope> eQueue;//queue to pull things outof
 
     private static RequestEnvelopeQueue instance;
 
     private RequestEnvelopeQueue(){
         qMap = new ConcurrentHashMap<>();
+        this.eQueue = new ConcurrentLinkedQueue<>();
     }
 
     public static RequestEnvelopeQueue getInstance(){
@@ -41,29 +42,24 @@ public class RequestEnvelopeQueue
     public static void push(Envelope e){
         getInstance();
         instance.insert(e);
-
     }
 
     private void insert(Envelope e) {
-
         String conversationId = e.getMessage().getConversationId().toString();
         String messageNr = e.getMessage().getMessageNr().toString();
-        ConcurrentLinkedQueue<Envelope> t = instance.qMap.get(conversationId);
-			System.out.println(e.toString());
-			if(t==null && conversationId.compareTo(messageNr) == 0){ //new Message insert new Queue
-            t = new ConcurrentLinkedQueue<>();
-            t.add(e);
+        String t = instance.qMap.get(conversationId);
+
+        if(t==null && conversationId.compareTo(messageNr) == 0){ //new Message insert new Queue
             qMap.put(conversationId,t);
+            eQueue.add(e);
         }
         else if(t!= null){ //conversation id exists add the message to the queue
-            t.add(e);
+            eQueue.add(e);
         }
-
     }
 
-    public static Envelope pop(MessageNumber mn){
-			return null;
+    public static Envelope pop(){
+        init();
+        return instance.eQueue.poll();
     }
-
-
 }

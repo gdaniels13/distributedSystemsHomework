@@ -3,6 +3,7 @@ import Communication.Communicator;
 import Communication.Envelope;
 import Communication.Listener;
 import Messages.JoinGame;
+import Messages.Message;
 
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -20,11 +21,25 @@ public class Main {
 ////			t.start();
 			ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
 			JoinGame jg = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+//
+//			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);
+//			Communicator.send(e);
+//			Thread.sleep(100);
+//			Envelope ne = Communicator.receive();
+//			System.out.println(ne.toString());
 
-			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);
-			Communicator.send(e);
-			Thread.sleep(100);
-			Envelope ne = Communicator.receive();
-			System.out.println(ne.toString());
+            Message t = jg;
+
+            Class jgt = jg.getClass();
+
+            Class tt = t.getClass();
+
+
+
+
+
+
+
+
 		}
 }
