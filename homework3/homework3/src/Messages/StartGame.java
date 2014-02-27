@@ -29,9 +29,9 @@ public class StartGame extends Request
     {
         StartGame result = null;
 
-        if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+        if (bytes == null || bytes.getRemainingToRead() < StartGame.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (bytes.PeekInt16() != ClassId)
+        else if (bytes.PeekInt16() != StartGame.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -45,7 +45,7 @@ public class StartGame extends Request
     @Override
     public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(StartGame.getClassId());                              // Write out this class id first
 
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                                 // can write the length here later
@@ -86,12 +86,15 @@ public class StartGame extends Request
 	}
 	
   	public static short getClassId() {
-		return (short) MESSAGE_CLASS_IDS.StartGame.getValue();
+  		ClassId =  (short) MESSAGE_CLASS_IDS.StartGame.getValue();
+  		return ClassId;
 	}
 	
   	public static int getMinimumEncodingLength() {
-		return 4                // Object header
-                + 2;              // GameId
+  		MinimumEncodingLength =  4                // Object header
+  								+ 2;              // GameId
+  		System.out.println("StartGame.MinimumEncodingLength" + MinimumEncodingLength);
+  		return MinimumEncodingLength;
 	}
 	
   	@Override

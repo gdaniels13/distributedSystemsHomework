@@ -29,9 +29,9 @@ public class RemoveComponent extends Request
     {
         RemoveComponent result = null;
 
-        if (messageBytes == null || messageBytes.getRemainingToRead() < MinimumEncodingLength)
+        if (messageBytes == null || messageBytes.getRemainingToRead() < RemoveComponent.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (messageBytes.PeekInt16() != ClassId)
+        else if (messageBytes.PeekInt16() != RemoveComponent.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -49,7 +49,7 @@ public class RemoveComponent extends Request
 		@Override
 	public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(RemoveComponent.getClassId());                              // Write out this class id first
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                          // can write the length here later
         bytes.Add((short)0);                             // Write out a place holder for the length
@@ -74,7 +74,9 @@ public class RemoveComponent extends Request
     }
 
 	public static short getClassId() {
-		return (short)MESSAGE_CLASS_IDS.RemoveComponent.getValue(); 
+		ClassId =  (short)MESSAGE_CLASS_IDS.RemoveComponent.getValue();
+		System.out.println("RemoveComponent.ClassId " + ClassId);
+		return ClassId;
 	}
 	
 	public short getComponentId() {
@@ -88,6 +90,7 @@ public class RemoveComponent extends Request
 	public static int getMinimumEncodingLength() {
 		MinimumEncodingLength =  4                // Object header
                 				+ 2;             // ComponentId
+		System.out.println("RemoveComponent.MinimumEncodingLength" + MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 

@@ -1,15 +1,13 @@
-package Doer;
+package Dispatcher;
 
 import Communication.Envelope;
 import Communication.RequestEnvelopeQueue;
-import Messages.*;
-
-import java.lang.reflect.Type;
 
 /**
  * Created by gregor on 2/25/14.
  */
-public class Doer implements Runnable{
+public class Dispatcher implements Runnable{
+
     @Override
     public void run() {
         Envelope cur;
@@ -17,21 +15,15 @@ public class Doer implements Runnable{
             cur = RequestEnvelopeQueue.pop();
             if(cur != null)
             {
-                route(cur);
-
+                dispatch(cur);
             }
         }
     }
 
-    private void route(Envelope cur) {
-        Class t = cur.getClass();
-
-        if(t == AckNak.class){
-             
-        }
-
-
+    private void dispatch(Envelope cur) {
 
 
     }
+
+
 }

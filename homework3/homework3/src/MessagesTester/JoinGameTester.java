@@ -1,8 +1,11 @@
 package MessagesTester;
 
 import static org.junit.Assert.*;
+
+import Messages.Message;
 import org.junit.Test;
 import org.omg.CORBA.portable.ApplicationException;
+
 import Common.ByteList;
 import Common.ComponentInfo;
 import Messages.JoinGame;
@@ -70,7 +73,7 @@ public class JoinGameTester {
         assertSame(agentInfo, jg.getAgentInfo());
 
     }
-	
+   
 	@Test
 	 public void JoinGame_EncodingAndDecoding() throws ApplicationException, Exception
     {
@@ -84,9 +87,17 @@ public class JoinGameTester {
         assertSame(agentInfo, jg1.getAgentInfo());
 
         ByteList bytes = new ByteList();
+       
         jg1.Encode(bytes);
-        JoinGame jg2 = JoinGame.Create(bytes);
-        System.out.println("jg1.getGameId() @@@" + jg1.getGameId());
+    
+      /*  System.out.println(bytes.getLength());
+        for (int i = 0; i< bytes.get_sections().size(); i++)
+        	System.out.print(bytes.get_sections().get(i).toString().charAt(i) + " ");
+        System.out.println();*/
+        	
+		JoinGame jg2 = (JoinGame) Message.Create(bytes);
+		
+		System.out.println("jg1.getGameId() @@@" + jg1.getGameId());
         System.out.println("jg1.getANumber() @@@" + jg1.getANumber());
         System.out.println("jg1.getFirstName() @@@" + jg1.getFirstName());
         System.out.println("jg1.getLastName() @@@" + jg1.getLastName());
@@ -96,10 +107,10 @@ public class JoinGameTester {
         System.out.println("jg2.getFirstName() @@@" + jg2.getFirstName());
         System.out.println("jg2.getLastName() @@@" + jg2.getLastName());
         		
-        //assertEquals(jg1.getGameId(), jg2.getGameId());
-        //assertEquals(jg1.getANumber(), jg2.getANumber());
-        //assertEquals(jg1.getFirstName(), jg2.getFirstName());
-        //assertEquals(jg1.getLastName(), jg2.getLastName());
+        assertEquals(jg1.getGameId(), jg2.getGameId());
+        assertEquals(jg1.getANumber(), jg2.getANumber());
+        assertEquals(jg1.getFirstName(), jg2.getFirstName());
+        assertEquals(jg1.getLastName(), jg2.getLastName());
 
         bytes.Clear();
         jg1.Encode(bytes);

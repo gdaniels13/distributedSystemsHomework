@@ -109,20 +109,5 @@ public class StatusInfoTester {
     }
 }
 
-/*   System.out.println("status1.Id " + status1.Id);
-System.out.println("status2.Id " + status2.Id);
-
-System.out.println("$$$ ===status1.Location.getX() =  " + status1.Location.getX());
-System.out.println("$$$ ===status1.Location.getY() =  " + status1.Location.getY());
-System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ");
-
-
-      /*  System.out.println("$$$ ===status2.Location.getX() =  " + status2.Location.getX());
-        System.out.println("$$$ ===status2.Location.getY() =  " + status2.Location.getY());
-        System.out.println("$$$ ===status2.Location.Y = " + status2.Location.getY());
-        System.out.println("$$$ ===status2.Location.X = " + status2.Location.getX());
-        System.out.println("status2.Location.getX() = " + status2.Location.getX());
-        */
-
 
 

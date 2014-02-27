@@ -29,18 +29,18 @@ public class Envelope
 	public Envelope(DatagramPacket info)
 	{
 		ByteList byteList = new ByteList();
-		byteList.Add(info.getData());
-		try
+        byteList.Add(info.getData());
+        try
 		{
-			message = Message.Create(byteList);
-		}
+            this.message = Message.Create(byteList);
+        }
 		catch(Exception e)
 		{
-			e.printStackTrace();
-		}
+            e.printStackTrace();
+        }
 
-
-		this.address = new Endpoint(info.getPort(),info.getAddress());
+        this.packet = info;
+        this.address = new Endpoint(info.getPort(),info.getAddress());
 	}
 
 	public DatagramPacket toDatagramPacket(){

@@ -93,7 +93,7 @@ public abstract class Reply extends Message
     {
         Reply result = null;
 
-        if (messageBytes == null || messageBytes.getLength() < 6)
+        if (messageBytes == null || messageBytes.getRemainingToRead() < 6)
             throw new ApplicationException("Invalid message byte array", null);
 
         short msgType = messageBytes.PeekInt16();
@@ -109,7 +109,7 @@ public abstract class Reply extends Message
     @Override
     public  void Encode(ByteList messageBytes) throws UnknownHostException, NotActiveException, Exception
     {
-        messageBytes.Add(ClassId);                            // Write out this class id first
+        messageBytes.Add(Reply.getClassId());                            // Write out this class id first
 
         short lengthPos = messageBytes.getCurrentWritePosition();    // Get the current write position, so we
                                                                 // can write the length here later
@@ -170,6 +170,7 @@ public abstract class Reply extends Message
 
 	public static short getClassId() {
 		ClassId =  (short)MESSAGE_CLASS_IDS.Reply.getValue();
+		System.out.println("Reply.ClassId" +  ClassId);
 		return ClassId;
 	}
 
@@ -179,6 +180,7 @@ public abstract class Reply extends Message
                 					+ 1              // ReplyType
                 					+ 1              // Status
                 					+ 2;             // Note
+		System.out.println("Reply.MinimumEncodingLength" + MinimumEncodingLength);
 		return MinimumEncodingLength;
     }
 }

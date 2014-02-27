@@ -1,10 +1,6 @@
 package Messages;
 
-import java.io.NotActiveException;
-import java.net.UnknownHostException;
-
 import org.omg.CORBA.portable.ApplicationException;
-
 import Common.ByteList;
 import Common.Tick;
 
@@ -36,9 +32,9 @@ public class ValidateTick extends Request
     {
         ValidateTick result = null;
 
-        if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+        if (bytes == null || bytes.getRemainingToRead() < ValidateTick.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (bytes.PeekInt16() != ClassId)
+        else if (bytes.PeekInt16() != ValidateTick.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -52,7 +48,7 @@ public class ValidateTick extends Request
     @Override 
     public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(ValidateTick.getClassId());                              // Write out this class id first
 
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                                 // can write the length here later
@@ -98,14 +94,16 @@ public class ValidateTick extends Request
 
 	public static int getMinimumEncodingLength() {
 		MinimumEncodingLength =  4                // Object header
-                 + 2              // ComponentId
-                 + 1;
+								+ 2              // ComponentId
+								+ 1;
+		System.out.println("ValidateTick.MinimumEncodingLength" +  MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 	
 	public static short getClassId()
 	{
-		return (short) MESSAGE_CLASS_IDS.ValidateTick.getValue();
+		ClassId =  (short) MESSAGE_CLASS_IDS.ValidateTick.getValue();
+		return ClassId;
 	}
 	
 	@Override

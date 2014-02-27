@@ -11,6 +11,8 @@ import Common.Tick;
 public class Eat extends Request
 	{
 	private static short ClassId;
+	
+
 	public short ZombieId;
     public short TargetId;
     public Tick EnablingTick;
@@ -38,9 +40,9 @@ public class Eat extends Request
     {
         Eat result = null;
 
-        if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+        if (bytes == null || bytes.getRemainingToRead() < Eat.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (bytes.PeekInt16() != ClassId)
+        else if (bytes.PeekInt16() != Eat.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -53,7 +55,7 @@ public class Eat extends Request
     @Override
     public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(Eat.getClassId());                              // Write out this class id first
 
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                          // can write the length here later
@@ -81,7 +83,12 @@ public class Eat extends Request
         bytes.RestorePreviosReadLimit();
     }
     
-   	public short getZombieId() {
+    public static short getClassId() {
+		ClassId  = (short) MESSAGE_CLASS_IDS.Eat.getValue();
+		return ClassId;
+	}
+    
+    public short getZombieId() {
 		return ZombieId;
 	}
 

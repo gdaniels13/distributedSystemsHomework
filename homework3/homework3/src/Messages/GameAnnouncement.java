@@ -33,7 +33,7 @@ public class GameAnnouncement extends Request
 
         if (messageBytes == null || messageBytes.getLength() < 14)
             throw new ApplicationException("Invalid message byte array", null);
-        else if (messageBytes.PeekInt16() != ClassId)
+        else if (messageBytes.PeekInt16() != GameAnnouncement.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -47,7 +47,7 @@ public class GameAnnouncement extends Request
     @Override 
     public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                                 // Write out this class id first
+        bytes.Add(GameAnnouncement.getClassId());                                 // Write out this class id first
 
         short lengthPos = bytes.getCurrentWritePosition();       // Get the current write position, so we
                                                             // can write the length here later

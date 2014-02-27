@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 
 import org.omg.CORBA.portable.ApplicationException;
 
+import Common.ComponentInfo.PossibleAgentType;
 import Messages.Message.MESSAGE_CLASS_IDS;
 
 public abstract class DistributableObject
@@ -53,6 +54,16 @@ public abstract class DistributableObject
         	return temp;
         }
         
+        public static DISTRIBUTABLE_CLASS_IDS fromByte(short b) 
+        {
+        	DISTRIBUTABLE_CLASS_IDS temp = null;
+            for(DISTRIBUTABLE_CLASS_IDS t : DISTRIBUTABLE_CLASS_IDS.values())
+            {
+                if( t.value== b)
+                    temp = t;
+            } 
+            return temp;  //or throw exception
+        }
     };
     
 
@@ -60,14 +71,10 @@ public abstract class DistributableObject
     {
         DistributableObject result = null;
 
-        if (bytes == null || bytes.getLength() < 6)
-			try {
-				throw new ApplicationException("Invalid byte array", null);
-			} catch (ApplicationException e2) {
-				e2.printStackTrace();
-			}
-
-        DISTRIBUTABLE_CLASS_IDS objType = DISTRIBUTABLE_CLASS_IDS.getByValue((int)bytes.PeekInt16()); 
+        if (bytes == null || bytes.getRemainingToRead() < 4)
+			throw new ApplicationException("Invalid byte array", null);
+			
+        DISTRIBUTABLE_CLASS_IDS objType = DISTRIBUTABLE_CLASS_IDS.fromByte(bytes.PeekInt16()); 
      
         switch (objType)
         {

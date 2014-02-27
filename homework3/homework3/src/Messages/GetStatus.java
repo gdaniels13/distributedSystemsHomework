@@ -22,9 +22,9 @@ public class GetStatus extends Request
     {
         GetStatus result = null;
 
-        if (messageBytes == null || messageBytes.getRemainingToRead() < MinimumEncodingLength)
+        if (messageBytes == null || messageBytes.getRemainingToRead() < GetStatus.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (messageBytes.PeekInt16() != ClassId)
+        else if (messageBytes.PeekInt16() != GetStatus.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -38,7 +38,7 @@ public class GetStatus extends Request
     @Override
     public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(GetStatus.getClassId());                              // Write out this class id first
 
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                                 // can write the length here later

@@ -70,7 +70,7 @@ public abstract class Message implements Comparable
     {
         Message result = null;
 
-        if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+        if (bytes == null || bytes.getRemainingToRead() < Message.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
 
         short msgType = bytes.PeekInt16();
@@ -86,11 +86,12 @@ public abstract class Message implements Comparable
 	
 	public void Encode(ByteList bytes) throws UnknownHostException,	NotActiveException, Exception 
 	{
-		bytes.Add(getClassId()); // Write out the class type
+		bytes.Add(Message.getClassId()); // Write out the class type
 
 		short lengthPos = bytes.getCurrentWritePosition(); // Get the current write position, so we
 														// can write the length here later
 		bytes.Add((short) 0); 			// Write out a place holder for the length
+		bytes.getRemainingToRead();
 		bytes.AddObjects(getMessageNr(), getConversationId());
 		short length = (short)(bytes.getCurrentWritePosition() - lengthPos - 2);
 		bytes.WriteInt16To(lengthPos, length); // Write out the length of this object
@@ -102,10 +103,10 @@ public abstract class Message implements Comparable
 		short objLength = bytes.GetInt16();
 
 		bytes.SetNewReadLimit(objLength);
-
-		setMessageNr((MessageNumber) bytes.GetDistributableObject());
-		setConversationId((MessageNumber) bytes.GetDistributableObject());
-
+		bytes.getRemainingToRead();
+		MessageNr = ((MessageNumber) bytes.GetDistributableObject());
+		ConversationId = ((MessageNumber) bytes.GetDistributableObject());
+		bytes.getRemainingToRead();
 		bytes.RestorePreviosReadLimit();
 	}
 
@@ -169,7 +170,6 @@ public abstract class Message implements Comparable
 		return flag;
 	}
 
-
 	public  int GetHashCode()
 	{
 		return super.hashCode();
@@ -177,6 +177,7 @@ public abstract class Message implements Comparable
 
 	public static short getClassId() {
 		ClassId =  (short) MESSAGE_CLASS_IDS.Message.getValue();
+		System.out.println("Message.ClassId: " + ClassId);
 		return ClassId;
 	}
 
@@ -200,6 +201,7 @@ public abstract class Message implements Comparable
 		MinimumEncodingLength =  4 			// Object header
 								+ 1
 								+ 1;
+		System.out.println("Message.MinimumEncodingLength " + MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 }

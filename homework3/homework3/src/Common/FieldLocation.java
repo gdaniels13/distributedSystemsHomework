@@ -105,7 +105,7 @@ public class FieldLocation extends DistributableObject
 	@Override
 	protected void Decode(ByteList bytes) throws ApplicationException, Exception
 	{
-		if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+		if (bytes == null || bytes.getRemainingToRead() < getMinimumEncodingLength())
 			throw new ApplicationException("Invalid byte array", null);
 		else
 			if (bytes.PeekInt16() != getClassId())

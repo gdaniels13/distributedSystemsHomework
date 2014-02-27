@@ -27,7 +27,7 @@ public class TickTester {
         System.out.println("tick1.getLogicalClock() = " + tick1.getLogicalClock());
         System.out.println("tick2.getLogicalClock() = " + tick2.getLogicalClock());
         
-        assertEquals(tick1.getLogicalClock() + 1 , tick2.getLogicalClock()); // + 1 ?
+        assertEquals(tick1.getLogicalClock() + 1 , tick2.getLogicalClock()); 
         assertNotEquals(tick1.getHashCode(), tick2.getHashCode());
     }
 

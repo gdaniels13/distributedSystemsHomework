@@ -93,9 +93,9 @@ public class StatusInfo extends DistributableObject
 	@Override
 	protected void Decode(ByteList bytes) throws Exception 
 	{
-		System.out.println("Inside Decode" + bytes.getRemainingToRead());
-		System.out.println("Inside Decode" + getMinimumEncodingLength());
-		System.out.println("Inside Decode" + getClassId());
+		//System.out.println("Inside Decode" + bytes.getRemainingToRead());
+		//System.out.println("Inside Decode" + getMinimumEncodingLength());
+		//System.out.println("Inside Decode" + getClassId());
 		//System.out.println("Inside Decode" + bytes.PeekInt16());
 		
 		if (bytes == null || (bytes.getRemainingToRead() < getMinimumEncodingLength()))

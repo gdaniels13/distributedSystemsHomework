@@ -34,9 +34,9 @@ public class EndGame extends Request
     {
         EndGame result = null;
 
-        if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+        if (bytes == null || bytes.getRemainingToRead() < EndGame.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (bytes.PeekInt16() != ClassId)
+        else if (bytes.PeekInt16() != EndGame.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -50,7 +50,7 @@ public class EndGame extends Request
 	@Override
     public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(EndGame.getClassId());                              // Write out this class id first
 
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                                 // can write the length here later
@@ -92,7 +92,8 @@ public class EndGame extends Request
 
 	public static short getClassId()
 	{ 
-		return (short) MESSAGE_CLASS_IDS.EndGame.getValue();
+		ClassId =  (short) MESSAGE_CLASS_IDS.EndGame.getValue();
+		return ClassId;
 	}
 	
 	@Override

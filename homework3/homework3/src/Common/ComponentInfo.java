@@ -64,9 +64,16 @@ public class ComponentInfo extends DistributableObject
     {
         setId(id);
         setAgentType(type);
+        printAll();
     }
 
-    // new
+    private void printAll() {
+    	getClassId();
+    	getMinimumEncodingLength();
+		
+	}
+
+	// new
     public static ComponentInfo Create(ByteList bytes) throws ApplicationException, Exception
     {
         ComponentInfo result = new ComponentInfo();
@@ -77,7 +84,7 @@ public class ComponentInfo extends DistributableObject
     @Override
     public void Encode(ByteList bytes) throws UnknownHostException, Exception
     {
-        bytes.Add(getClassId());                             // Write out the class type
+        bytes.Add(ComponentInfo.getClassId());                             // Write out the class type
 
         short lengthPos = bytes.getCurrentWritePosition();   // Get the current write position, so we
                                                         // can write the length here later
@@ -95,7 +102,7 @@ public class ComponentInfo extends DistributableObject
 	@Override
 	protected void Decode(ByteList bytes) throws ApplicationException, Exception
     {
-    	if (bytes == null || bytes.getRemainingToRead() < getMinimumEncodingLength())
+    	if (bytes == null || bytes.getRemainingToRead() < ComponentInfo.getMinimumEncodingLength())
     		throw new ApplicationException("Invalid byte array", null);
 		else if (bytes.PeekInt16() != getClassId())
 				throw new ApplicationException("Invalid class id", null);
@@ -106,10 +113,10 @@ public class ComponentInfo extends DistributableObject
 				    	
 			bytes.SetNewReadLimit(objLength);
 				    
-			AgentType = (PossibleAgentType.fromByte(bytes.GetByte()));
-			Id = (bytes.GetInt16());
-			CommmunicationEndPoint = ((EndPoint) bytes.GetDistributableObject()); // EndPoint.Create(bytes);
-			Status = ((StatusInfo)bytes.GetDistributableObject()); //	StatusInfo.Create(bytes);
+			setAgentType((PossibleAgentType.fromByte(bytes.GetByte())));
+			setId((bytes.GetInt16()));
+			setCommmunicationEndPoint(((EndPoint) bytes.GetDistributableObject())); // EndPoint.Create(bytes);
+			setStatus((StatusInfo)bytes.GetDistributableObject()); //	StatusInfo.Create(bytes);
 
 		    bytes.RestorePreviosReadLimit();
 		}
@@ -121,6 +128,7 @@ public class ComponentInfo extends DistributableObject
 
 	public void setId(short id) {
 		Id = id;
+		System.out.println("ComponentInfo.Id " + Id);
 	}
 
 	public PossibleAgentType getAgentType() {
@@ -149,16 +157,19 @@ public class ComponentInfo extends DistributableObject
 
 	public static int getMinimumEncodingLength() 
 	{
+		
 		MinimumEncodingLength =  4             			// Object header
                 					+ 2           		  	// Id
                 					+ 1          		  	// Agent Types
                 					+ 1 					//EndPoint.MinimumEncodingLength
                 					+ 1; 					//Tick.MinimumEncodingLength;
+		System.out.println("ComponentInfo.MinimumEncodingLength =" + MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 
 	public static short getClassId() {
     	ClassId =  (short)DISTRIBUTABLE_CLASS_IDS.ComponentInfo.getValue();
+    	System.out.println("ComponentInfo.ClassId " + ClassId);
     	return ClassId;
 	}
 }

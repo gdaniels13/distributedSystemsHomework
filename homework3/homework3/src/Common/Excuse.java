@@ -88,10 +88,7 @@ public class Excuse extends DistributableObject
         if (Ticks == null) Ticks = new ArrayList<Tick>();
         bytes.Add((short)Ticks.size());
         for (Tick tick : Ticks)
-        	bytes.Add(tick);    // tick.Encode(bytes);
-
-        //if (RequestTick == null) RequestTick = new Tick(0, 0);
-        //RequestTick.Encode(bytes);
+        	bytes.Add(tick);    
         bytes.Add(RequestTick);
         
         short length = (short)(bytes.getCurrentWritePosition() - lengthPos - 2);

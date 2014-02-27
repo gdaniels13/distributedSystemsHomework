@@ -39,9 +39,9 @@ public class ThrowBomb extends Request
     {
         ThrowBomb result = null;
 
-        if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+        if (bytes == null || bytes.getRemainingToRead() < ThrowBomb.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (bytes.PeekInt16() != ClassId)
+        else if (bytes.PeekInt16() != ThrowBomb.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -55,7 +55,7 @@ public class ThrowBomb extends Request
     @Override
     public void Encode(ByteList bytes) throws Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(ThrowBomb.getClassId());                              // Write out this class id first
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                                 // can write the length here later
         bytes.Add((short)0);                             // Write out a place holder for the length
@@ -114,7 +114,8 @@ public class ThrowBomb extends Request
 	}
 
 	public static short getClassId() {
-		return (short) MESSAGE_CLASS_IDS.ThrowBomb.getValue();
+		ClassId =  (short) MESSAGE_CLASS_IDS.ThrowBomb.getValue();
+		return ClassId;
 	}
 
 	public static int getMinimumEncodingLength() {
@@ -123,6 +124,7 @@ public class ThrowBomb extends Request
                 					+ 1              // Bomb
                 					+ 1              // TowardsSquare
                 					+ 1;             // EnablingTick
+		System.out.println("ThrowBomb.MinimumEncodingLength" + MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 

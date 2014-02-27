@@ -28,9 +28,9 @@ public class ChangeStrength extends Request
     {
         ChangeStrength result = null;
 
-        if (messageBytes == null || messageBytes.getRemainingToRead() < MinimumEncodingLength)
+        if (messageBytes == null || messageBytes.getRemainingToRead() < ChangeStrength.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
-        else if (messageBytes.PeekInt16() != ClassId)
+        else if (messageBytes.PeekInt16() != ChangeStrength.getClassId())
             throw new ApplicationException("Invalid message class id", null);
         else
         {
@@ -43,7 +43,7 @@ public class ChangeStrength extends Request
 
     public void Encode(ByteList bytes) throws UnknownHostException, NotActiveException, Exception
     {
-        bytes.Add(ClassId);                              // Write out this class id first
+        bytes.Add(ChangeStrength.getClassId());                              // Write out this class id first
 
         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
                                                                 // can write the length here later
@@ -75,7 +75,8 @@ public class ChangeStrength extends Request
     
     public static short getClassId()
  	{
- 		return (short)MESSAGE_CLASS_IDS.ChangeStrength.getValue();
+    	ClassId =  (short)MESSAGE_CLASS_IDS.ChangeStrength.getValue();
+    	return ClassId;
  	}
    
     public short getDeltaValue() {

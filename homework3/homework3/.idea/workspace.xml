@@ -56,7 +56,7 @@
       </breakpoint>
     </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/Communication/Envelope.java" line="38" class="Communication.Envelope" package="Communication">
+      <breakpoint url="file://$PROJECT_DIR$/src/Main.java" line="34" class="Main" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -71,7 +71,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/Main.java" line="32" class="Main" package="">
+      <breakpoint url="file://$PROJECT_DIR$/src/Communication/Envelope.java" line="31" class="Communication.Envelope" package="Communication">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -95,133 +95,44 @@
     <favorites_list name="homework3" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.48232323">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="GetStatus.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Messages/GetStatus.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="56" column="0" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1290">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="JoinGameTester.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/MessagesTester/JoinGameTester.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="105" column="28" selection-start="4008" selection-end="4008" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="2025">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ByteList.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Common/ByteList.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="331" column="70" selection-start="9594" selection-end="9594" vertical-scroll-proportion="0.0" vertical-offset="4965" max-vertical-offset="7305">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Main.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="38" column="0" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="615">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="EnvelopeQueueTest.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/CommunicationTester/EnvelopeQueueTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="43" column="5" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CommunicatorTest.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/CommunicationTester/CommunicatorTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="37" column="0" selection-start="1049" selection-end="1049" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="RequestEnvelopeQueue.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Communication/RequestEnvelopeQueue.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="37" column="4" selection-start="1009" selection-end="1009" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Doer.java" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/Doer/Doer.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="29" column="13" selection-start="568" selection-end="568" vertical-scroll-proportion="0.8349328" vertical-offset="0" max-vertical-offset="645">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="Communicator.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Communication/Communicator.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="91" column="1" selection-start="1732" selection-end="1732" vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="1455">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Envelope.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Communication/Envelope.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="70" column="0" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Message.java" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/Messages/Message.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="167" column="14" selection-start="4434" selection-end="4434" vertical-scroll-proportion="0.75849056" vertical-offset="1368" max-vertical-offset="2295">
-                  <folding>
-                    <element signature="class#MESSAGE_CLASS_IDS#0;class#Message#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Move.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Messages/Move.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="80" column="4" selection-start="2700" selection-end="2700" vertical-scroll-proportion="0.0" vertical-offset="513" max-vertical-offset="1530">
-                  <folding>
-                    <element signature="method#getMinimumEncodingLength#0;class#Move#0" expanded="false" />
-                    <element signature="method#compareTo#0;class#Move#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="Message.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Messages/Message.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="24" selection-start="597" selection-end="597" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2940">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dispatcher.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Dispatcher/Dispatcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="0" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExecutionStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Dispatcher/ExecutionStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="115" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JoinGameExecution.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Dispatcher/JoinGameExecution.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="8" selection-start="170" selection-end="170" vertical-scroll-proportion="0.12793177" vertical-offset="0" max-vertical-offset="938">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -235,13 +146,21 @@
         <option value="$PROJECT_DIR$/src/CommunicationTester/EnvelopeQueueTest.java" />
         <option value="$PROJECT_DIR$/src/Communication/Config.java" />
         <option value="$PROJECT_DIR$/src/Common/ByteList.java" />
-        <option value="$PROJECT_DIR$/src/Communication/Envelope.java" />
         <option value="$PROJECT_DIR$/src/CommunicationTester/CommunicatorTest.java" />
         <option value="$PROJECT_DIR$/src/Communication/Communicator.java" />
         <option value="$PROJECT_DIR$/src/Communication/RequestEnvelopeQueue.java" />
-        <option value="$PROJECT_DIR$/src/Messages/Message.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Doer/Doer.java" />
+        <option value="$PROJECT_DIR$/src/Messages/Message.java" />
+        <option value="$PROJECT_DIR$/src/MessagesTester/AckNakTester.java" />
+        <option value="$PROJECT_DIR$/src/MessagesTester/AckNakTesterTest.java" />
+        <option value="$PROJECT_DIR$/src/MessagesTester/JoinGameTester.java" />
+        <option value="$PROJECT_DIR$/src/Communication/Envelope.java" />
+        <option value="$PROJECT_DIR$/src/Messages/Request.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/Doer/Dispatcher.java" />
+        <option value="$PROJECT_DIR$/src/Dispatcher/Dispatcher.java" />
+        <option value="$PROJECT_DIR$/src/Dispatcher/ExecutionStrategy.java" />
+        <option value="$PROJECT_DIR$/src/Dispatcher/JoinGameExecution.java" />
       </list>
     </option>
   </component>
@@ -277,6 +196,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -327,7 +247,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Messages" />
+              <option name="myItemId" value="MessagesTester" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -345,27 +265,26 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Doer" />
+              <option name="myItemId" value="Dispatcher" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit3" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BSvZP 02-24-2014/3d party/org.hamcrest.core_1.3.0.v201303031735.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/3d party/org.hamcrest.core_1.3.0.v201303031735.jar!/" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -381,36 +300,16 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="junit.framework.TestCase" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="MessagesTester" />
       <recent name="Communication" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="junit.framework.TestCase" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration default="false" name="All in homework3 (2)" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="homework3" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.MessagesTester in homework3">
     <configuration default="false" name="JoinGameTester" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="homework3" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -461,28 +360,6 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="CommunicationTester in homework3" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="homework3" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="CommunicationTester" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <option name="VM_PARAMETERS" />
@@ -502,6 +379,50 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AckNakTester" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework3" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="MessagesTester" />
+      <option name="MAIN_CLASS_NAME" value="MessagesTester.AckNakTester" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="All in homework3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework3" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -633,19 +554,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.All in homework3 (2)" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.JoinGameTester" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.MessagesTester in homework3" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.CommunicationTester in homework3" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.JoinGameTester" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.MessagesTester in homework3" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AckNakTester" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.All in homework3" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Main" />
         <item index="1" class="java.lang.String" itemvalue="JUnit.MessagesTester in homework3" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.JoinGameTester" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CommunicationTester in homework3" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.All in homework3 (2)" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in homework3" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.AckNakTester" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.JoinGameTester" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -654,6 +575,23 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9d4c90bb-9a96-4e9c-af58-c58c9be04b7f" name="Default" comment="" />
@@ -661,6 +599,26 @@
       <updated>1393314840763</updated>
     </task>
     <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="1969" y="24" width="1871" height="1056" extended-state="6" />
@@ -670,20 +628,20 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40932643" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40829015" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988626" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13395298" sideWeight="0.5904888" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33471504" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16839804" sideWeight="0.5904888" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32435232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -715,12 +673,163 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/CommunicationTester/EnvelopeQueueTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="5" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommunicationTester/CommunicatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="1049" selection-end="1049" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/RequestEnvelopeQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="4" selection-start="1009" selection-end="1009" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1065">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Dispatcher/Dispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="9" selection-start="578" selection-end="578" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="645">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/Communicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="1" selection-start="1732" selection-end="1732" vertical-scroll-proportion="0.0" vertical-offset="1365" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/Envelope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="0" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="169" column="14" selection-start="4562" selection-end="4562" vertical-scroll-proportion="0.0" vertical-offset="2535" max-vertical-offset="3180">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MessagesTester/AckNakTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1350">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="4" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.0" vertical-offset="1140" max-vertical-offset="1905">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/GetStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="0" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1365">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MessagesTester/JoinGameTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="105" column="28" selection-start="4008" selection-end="4008" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="2025">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Common/ByteList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="331" column="70" selection-start="9594" selection-end="9594" vertical-scroll-proportion="0.0" vertical-offset="4965" max-vertical-offset="7305">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="0" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommunicationTester/EnvelopeQueueTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="5" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommunicationTester/CommunicatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="1049" selection-end="1049" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/RequestEnvelopeQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="4" selection-start="1009" selection-end="1009" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1065">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Dispatcher/Dispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="13" selection-start="568" selection-end="568" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="645">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/Communicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="1" selection-start="1732" selection-end="1732" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/Envelope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="0" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="167" column="14" selection-start="4434" selection-end="4434" vertical-scroll-proportion="0.0" vertical-offset="2505" max-vertical-offset="3150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="4" selection-start="2700" selection-end="2700" vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="1935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Messages/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="108" column="36" selection-start="3140" selection-end="3140" vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="3135">
-          <folding>
-            <element signature="class#MESSAGE_CLASS_IDS#0;class#Message#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -761,72 +870,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Communication/Listener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="24" selection-start="468" selection-end="468" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Messages/JoinGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
+        <state line="28" column="24" selection-start="468" selection-end="468" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Communication/Config.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="51" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
+        <state line="12" column="51" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Communication/Endpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="3" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MessagesTester/AckNakTester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="190" selection-end="190" vertical-scroll-proportion="-1.1734694" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MessagesTester/JoinGameTester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="28" selection-start="4008" selection-end="4008" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Common/ByteList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="331" column="70" selection-start="9594" selection-end="9594" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
+        <state line="34" column="3" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CommunicationTester/EnvelopeQueueTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="5" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Communication/Envelope.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="0" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Communication/Communicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="1" selection-start="1732" selection-end="1732" vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="1455">
           <folding />
         </state>
       </provider>
@@ -845,45 +904,131 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Messages/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="4" selection-start="2700" selection-end="2700" vertical-scroll-proportion="0.0" vertical-offset="513" max-vertical-offset="1530">
-          <folding>
-            <element signature="method#getMinimumEncodingLength#0;class#Move#0" expanded="false" />
-            <element signature="method#compareTo#0;class#Move#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Messages/GetStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1290">
+        <state line="56" column="0" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="1365">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Messages/Message.java">
+    <entry file="file://$PROJECT_DIR$/src/Messages/Move.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="14" selection-start="4434" selection-end="4434" vertical-scroll-proportion="0.75849056" vertical-offset="1368" max-vertical-offset="2295">
-          <folding>
-            <element signature="class#MESSAGE_CLASS_IDS#0;class#Message#0" expanded="false" />
-          </folding>
+        <state line="76" column="4" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.33142856" vertical-offset="805" max-vertical-offset="1680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MessagesTester/JoinGameTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="18" selection-start="550" selection-end="550" vertical-scroll-proportion="0.336" vertical-offset="0" max-vertical-offset="2070">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Common/ByteList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="355" column="29" selection-start="10310" selection-end="10310" vertical-scroll-proportion="0.0" vertical-offset="4455" max-vertical-offset="7635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/Envelope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0" vertical-offset="393" max-vertical-offset="1200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Communication/Communicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1080" selection-end="1080" vertical-scroll-proportion="0.0" vertical-offset="588" max-vertical-offset="1455">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0" vertical-offset="107" max-vertical-offset="615">
+        <state line="37" column="0" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.8316222" vertical-offset="0" max-vertical-offset="495">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Doer/Doer.java">
+    <entry file="file://$PROJECT_DIR$/src/Messages/TickDelivery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="13" selection-start="568" selection-end="568" vertical-scroll-proportion="0.8349328" vertical-offset="0" max-vertical-offset="645">
+        <state line="7" column="1" selection-start="159" selection-end="159" vertical-scroll-proportion="0.15400411" vertical-offset="0" max-vertical-offset="1485">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/StartGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="109" selection-end="109" vertical-scroll-proportion="-1.3713163" vertical-offset="758" max-vertical-offset="1560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/JoinGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="1540" selection-end="1540" vertical-scroll-proportion="0.31827113" vertical-offset="528" max-vertical-offset="2160">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="0" selection-start="5726" selection-end="5726" vertical-scroll-proportion="0.31827113" vertical-offset="2028" max-vertical-offset="3075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/Reply.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="0" selection-start="2957" selection-end="2957" vertical-scroll-proportion="0.70726913" vertical-offset="1035" max-vertical-offset="2520">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/ValidateTick.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="5" selection-start="3273" selection-end="3273" vertical-scroll-proportion="0.7419962" vertical-offset="1106" max-vertical-offset="1650">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MessagesTester/AckNakTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="33" selection-start="1678" selection-end="1678" vertical-scroll-proportion="-0.19020715" vertical-offset="806" max-vertical-offset="1350">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Messages/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="24" selection-start="597" selection-end="597" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Dispatcher/Dispatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Dispatcher/ExecutionStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="115" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Dispatcher/JoinGameExecution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="8" selection-start="170" selection-end="170" vertical-scroll-proportion="0.12793177" vertical-offset="0" max-vertical-offset="938">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -963,7 +1108,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>commons-codec-1.9</last-edited>
+          <last-edited>junit</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -24,12 +24,12 @@ public class ByteListTester {
         // Case 2: 3 different objects
         myBytes = new ByteList(true, 123,"Hello"); //
         assertNotNull(myBytes);
-        assertEquals(1 + 4 + (2 + (2*5) +2), myBytes.getLength());
+        assertEquals(1 + 4 + (2 + (2*5)), myBytes.getLength());
 
         // Case 3: 3 strings of lengths 5, 5, and 52
         myBytes = new ByteList("Hello", "There", "You amazing software developer and brilliant student");
         assertNotNull(myBytes);
-        assertEquals((2 + 2*5 + 2) + (2 + 2*5 + 2) + (2 + 2*52 + 2), myBytes.getLength());
+        assertEquals((2 + 2*5 ) + (2 + 2*5 ) + (2 + 2*52 ), myBytes.getLength());
              
         // Case 4: with a bunch of other parameters types
         ByteList moreBytes = new ByteList(  myBytes,
@@ -170,7 +170,7 @@ public class ByteListTester {
         // Case 11: Write out a string
         myBytes = new ByteList("abc");
         System.out.println(myBytes.getLength());
-        assertEquals(2 + 2 + 2*3, myBytes.getLength());
+        assertEquals(2 + 2*3, myBytes.getLength());
         assertEquals((byte)0, myBytes.getByteValue(0));
         assertEquals((byte) (2 + 2*3), myBytes.getByteValue(1));
 

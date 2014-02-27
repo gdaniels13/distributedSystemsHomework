@@ -33,7 +33,8 @@ public class ByteList
 	private short _addCurrentOffset = (short)0;
 	private short _readCurrentPosition = (short)0;
 	private Stack<Short> _readLimitStack = new Stack<Short>();
-	private int RemainingToRead; 
+	
+	private  int RemainingToRead;
 	private short CurrentWritePosition;
     private static final int SECTION_SIZE = 1024;
     private ArrayList<byte[]> _sections = new ArrayList<byte[]>();
@@ -64,8 +65,7 @@ public class ByteList
             System.arraycopy(bytes, 0,                               // Source
             				_sections.get(sectionIdx), sectionOffset,   				 // Destination
             				bytes.length );                    	     // Length Short.SIZE
-           
-        }
+         }
     }
     
     public void CopyFromBytes(byte[] bytes)
@@ -178,13 +178,20 @@ public class ByteList
     	Add(bytes);
       }
 
-    public void Add(String value) throws UnsupportedEncodingException, ApplicationException 
+    
+	public void Add(String value) throws UnsupportedEncodingException, ApplicationException 
     {
-        if (value != null)
+        if ((value != null) && (value.length() != 0))
         {        	
         	byte[] bytes = value.getBytes(Charset.forName("UTF-16"));
-           	Add((short) bytes.length);
-            Add(bytes);
+        	Add((short) bytes.length);
+        	byte[] tmp = new byte[bytes.length-2];
+           	
+        	for (int i=0; i<bytes.length-2; i += 2) {
+           		tmp[i] = bytes[i+3];
+           		tmp[i+1] = bytes[i+2];
+           	}
+        	Add(tmp);
         }
         else
             Add((short) 0);
@@ -207,9 +214,7 @@ public class ByteList
             while (cnt < length)
             {
                 short blockSize = (short) Math.min(SECTION_SIZE - _addCurrentOffset, length - cnt);
-                System.arraycopy(value, offset + cnt,
-                				_sections.get(_addCurrentSection), _addCurrentOffset,
-                                blockSize);
+                System.arraycopy(value, offset + cnt, _sections.get(_addCurrentSection), _addCurrentOffset, blockSize);
 
                 cnt += blockSize;
                 _addCurrentOffset += blockSize;
@@ -268,7 +273,7 @@ public class ByteList
     public short PeekInt16() throws Exception
     {
        	short result = BitConverter.toInt16(GetBytes(2), 0);
-    	_readCurrentPosition = (short) (_readCurrentPosition - 2);   // Move the current read position back two bytes
+    	_readCurrentPosition = (short) (_readCurrentPosition - (short)2);   // Move the current read position back two bytes
         return result;
     }
 
@@ -302,19 +307,34 @@ public class ByteList
     {
         String result = "";
         short length = GetInt16();
+        
         if (length > 0)
-        	result = new String(GetBytes(length), "UTF-16");
-        			//org.apache.commons.codec.binary.StringUtils.newStringUtf16(GetBytes(length));
-        return result;
+        {
+        	byte[] tmp = GetBytes(length - 2);
+        	byte[] bytes = new byte[tmp.length + 2];
+        	bytes[0]  = -2;
+        	bytes[1]  = -1;
+        	for (int i = 0; i < tmp.length; i += 2)
+        	{
+        		bytes[i+3] = tmp[i];
+        		bytes[i+2] = tmp[i+1];
+        	}
+        	
+        	result = new String(bytes, "UTF-16");
+        }
+        	
+       System.out.println("result from ByteList.GetString() is: " + result );
+       return result;
     }
     
     public int getRemainingToRead() 
     {
     	int tmpMax = (_readLimitStack.size() == 0) ? this.getLength() : _readLimitStack.peek();
     	RemainingToRead =  (_readCurrentPosition >= tmpMax) ? 0 : tmpMax - _readCurrentPosition;
+    	System.out.println("ByteList.RemainingToRead:" + RemainingToRead);
     	return RemainingToRead;
 	}
-
+    
     public byte[] GetBytes(int length) throws ApplicationException
     {
         if ((_readLimitStack.size() > 0) && ((_readCurrentPosition + length) > _readLimitStack.peek()))
@@ -329,9 +349,7 @@ public class ByteList
             int sectionOffset = _readCurrentPosition - sectionIndex * SECTION_SIZE;
 
             int cnt = Math.min(SECTION_SIZE - sectionOffset, length - bytesRead);
-            System.arraycopy(_sections.get(sectionIndex), sectionOffset, 
-            		result, bytesRead, 
-            		cnt);
+            System.arraycopy(_sections.get(sectionIndex), sectionOffset, result, bytesRead, cnt);
 
             sectionOffset = 0;
             _readCurrentPosition = ((short) ((_readCurrentPosition +  (short)cnt)));
@@ -472,11 +490,42 @@ public class ByteList
         if (isNullTerminated)
         	container[0]++;
         return result;
+        
+        /*
+         *  String result = "";
+        short length = GetInt16();
+        
+        if (length > 0)
+        {
+        	byte[] tmp = GetBytes(length);
+        	byte[] bytes = new byte[tmp.length + 2];
+        	bytes[0]  = -2;
+        	bytes[1]  = -1;
+        	for (int i = 0; i < tmp.length; i += 2)
+        	{
+        		bytes[i+3] = tmp[i];
+        		bytes[i+2] = tmp[i+1];
+        	}
+        	
+        	result = new String(bytes, "UTF-16");
+        }
+        	
+       System.out.println("result from ByteList.GetString() is: " + result );
+       return result;
+         * */
     }
    
     public short getCurrentWritePosition() 
     {
     	CurrentWritePosition = (short) (_addCurrentSection * SECTION_SIZE + _addCurrentOffset);
+    	System.out.println("ByteList.CurrentWritePosition: "+ CurrentWritePosition);
     	return CurrentWritePosition;
 	}
+    
+    public static void main(String[] args) throws NotActiveException, UnknownHostException, Exception
+    {
+    	ByteList list = new ByteList("Ali");
+    	System.out.println(list.GetString());
+    	
+    }
 }

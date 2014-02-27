@@ -22,24 +22,16 @@ public class Main {
 			ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
 			JoinGame jg = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
 //
-//			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);
-//			Communicator.send(e);
-//			Thread.sleep(100);
-//			Envelope ne = Communicator.receive();
-//			System.out.println(ne.toString());
-
-            Message t = jg;
-
-            Class jgt = jg.getClass();
-
-            Class tt = t.getClass();
+			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);
+			Communicator.send(e);
 
 
+            Envelope ne = Communicator.receive();
+			while(ne== null){
+                ne = Communicator.receive();
 
+            }
 
-
-
-
-
+            System.out.println(ne.toString());
 		}
 }

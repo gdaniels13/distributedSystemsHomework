@@ -64,47 +64,108 @@ public abstract class Request extends Message
         RequestType = type;
     }
 
-    //new
+//    //new
+//    public static Request Create(ByteList bytes) throws ApplicationException, Exception
+//    {
+//        Request result = null;
+//
+//        if (bytes == null || bytes.getRemainingToRead() < Request.getMinimumEncodingLength())
+//            throw new ApplicationException("Invalid message byte array", null);
+//
+//        short msgType = bytes.PeekInt16();
+//
+//        if (msgType == (short) MESSAGE_CLASS_IDS.GameAnnouncement.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.JoinGame.getValue())
+//        	result = JoinGame.Create(bytes);
+//        if (msgType == (short) MESSAGE_CLASS_IDS.AddComponent.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.RemoveComponent.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.StartGame.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.EndGame.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.GetResource.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.TickDelivery.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.ValidateTick.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.Move.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.ThrowBomb.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.Eat.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.ChangeStrength.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.Collaborate.getValue()) ;
+//        if (msgType == (short) MESSAGE_CLASS_IDS.GetStatus.getValue()) ;
+//        else
+//
+//           throw new ApplicationException("Invalid Message Class Id", null);
+//        return result;
+//    }
+
     public static Request Create(ByteList bytes) throws ApplicationException, Exception
     {
         Request result = null;
-        
-        if (bytes == null || bytes.getRemainingToRead() < MinimumEncodingLength)
+
+        if (bytes == null || bytes.getRemainingToRead() < Request.getMinimumEncodingLength())
             throw new ApplicationException("Invalid message byte array", null);
 
         short msgType = bytes.PeekInt16();
-        
-        if (msgType == (short) MESSAGE_CLASS_IDS.GameAnnouncement.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.JoinGame.getValue())
-        	result = JoinGame.Create(bytes);
-        if (msgType == (short) MESSAGE_CLASS_IDS.AddComponent.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.RemoveComponent.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.StartGame.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.EndGame.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.GetResource.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.TickDelivery.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.ValidateTick.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.Move.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.ThrowBomb.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.Eat.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.ChangeStrength.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.Collaborate.getValue()) ;
-        if (msgType == (short) MESSAGE_CLASS_IDS.GetStatus.getValue()) ;
-        else
-        	
-           throw new ApplicationException("Invalid Message Class Id", null);
+
+        if (msgType == (short) MESSAGE_CLASS_IDS.GameAnnouncement.getValue()){
+            result = GameAnnouncement.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.JoinGame.getValue()){
+            result = JoinGame.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.AddComponent.getValue()) {
+            result = AddComponent.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.RemoveComponent.getValue()) {
+            result = RemoveComponent.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.StartGame.getValue()) {
+            result = StartGame.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.EndGame.getValue()) {
+            result = EndGame.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.GetResource.getValue()) {
+            result = GetResource.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.TickDelivery.getValue()) {
+            result = TickDelivery.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.ValidateTick.getValue()) {
+            result = ValidateTick.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.Move.getValue()) {
+            result = Move.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.ThrowBomb.getValue()) {
+            result = ThrowBomb.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.Eat.getValue()) {
+            result = Eat.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.ChangeStrength.getValue()) {
+            result = ChangeStrength.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.Collaborate.getValue()) {
+            result = Collaborate.Create(bytes);
+        }
+        else if (msgType == (short) MESSAGE_CLASS_IDS.GetStatus.getValue()) {
+            result = GetStatus.Create(bytes);
+        }
+        else{
+            throw new ApplicationException("Invalid Message Class Id", null);
+        }
+
         return result;
     }
 	
 	@Override 
     public void Encode(ByteList messageBytes) throws NotActiveException, UnknownHostException, Exception
     {
-        messageBytes.Add(getClassId());                           // Write out this class id first
+        messageBytes.Add(Request.getClassId());                           // Write out this class id first
 
         short lengthPos = messageBytes.getCurrentWritePosition();   // Get the current write position, so we
                                                                // can write the length here later
         messageBytes.Add((short) 0);                           // Write out a place holder for the length
-
+        messageBytes.getRemainingToRead();
         super.Encode(messageBytes);                             // Encode stuff from base class
 
         messageBytes.Add((byte)RequestType.getValue());         // Write out a place holder for the length
@@ -120,7 +181,7 @@ public abstract class Request extends Message
         short objLength = messageBytes.GetInt16();
 
         messageBytes.SetNewReadLimit(objLength);
-
+        messageBytes.getRemainingToRead();
         super.Decode(messageBytes);
         
         int temp = (int) messageBytes.GetByte();
@@ -131,6 +192,7 @@ public abstract class Request extends Message
  	public static short getClassId()
 	{
 		ClassId =  (short) MESSAGE_CLASS_IDS.Request.getValue();
+		System.out.println("Request.ClassId: " + ClassId);
 		return ClassId;
 	}
   
@@ -146,6 +208,7 @@ public abstract class Request extends Message
 	{
 		MinimumEncodingLength = 4                // Object header
                  + 1;             // RequestType
+		System.out.println("Request.MinimumEncodingLength" + MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 }
