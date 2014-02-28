@@ -1,13 +1,18 @@
 package CommunicationTester;
 
 
+import Common.ComponentInfo;
 import Communication.Envelope;
-import Communication.RequestEnvelopeQueue;
+import Communication.EnvelopeQueue;
+import Messages.JoinGame;
 import Messages.Message;
 import org.junit.Test;
 
 import java.net.InetAddress;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,29 +22,25 @@ import static org.junit.Assert.assertEquals;
  */
 public class EnvelopeQueueTest
 {
-//	@Test
-//	public void testPushPop() throws Exception
-//	{
-//		Message message = new Message("testMessage");
-//		int port= 9368;
-//		InetAddress address = InetAddress.getByName("localhost");
-//
-//		Envelope e = new Envelope(message,address,port);
-//
-//		assertEquals(0, RequestEnvelopeQueue.getSize());
-//		RequestEnvelopeQueue.push(e);
-//		assertEquals(1, RequestEnvelopeQueue.getSize());
-//		RequestEnvelopeQueue.push(e);
-//		assertEquals(2, RequestEnvelopeQueue.getSize());
-//		Envelope temp = RequestEnvelopeQueue.pop();
-//
-//		assertEquals(e.toString(),temp.toString());
-//		assertEquals(1,RequestEnvelopeQueue.getSize());
-//		RequestEnvelopeQueue.pop();
-//		assertEquals(0,RequestEnvelopeQueue.getSize());
-//
-//		Envelope t = RequestEnvelopeQueue.pop();
-//		assertEquals(null,t);
-//
-//	}
+	@Test
+	public void testPushPop() throws Exception
+	{
+        ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
+        JoinGame jg1 = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+        Envelope sent = new Envelope(jg1, InetAddress.getByName("localhost"),1234);
+        EnvelopeQueue eq = new EnvelopeQueue();
+
+        Envelope e = eq.pop();
+        assertNull(e);
+
+        eq.push(sent);
+        eq.push(sent);
+
+        e = eq.pop();
+        assertNotNull(e);
+        assertEquals(e,sent);
+        e = eq.pop();
+        assertNotNull(e);
+        assertEquals(e,sent);
+	}
 }

@@ -9,9 +9,22 @@ package Communication;
 
 public class Config
 {
-	public static final int port=9834;
-	public static final String address = "localhost";
-//	public static final String address = "192.123.248.90";
-	public static final int messageLength = 1024;
-	public static final int listenTimeout  = 50;
+	private int port=9834;
+	private int messageLength = 1024;
+
+    public int getPort() {
+        return port;
+    }
+
+    public int getMessageLength() {
+        return messageLength;
+    }
+
+    public void setMessageLength(int messageLength) {
+        this.messageLength = messageLength;
+    }
+
+    public Config(int port) {
+        this.port = port;
+    }
 }

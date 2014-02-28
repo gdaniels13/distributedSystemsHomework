@@ -16,22 +16,23 @@ public class Main {
     public static void main(String[] args) throws UnknownHostException, InterruptedException
 		{
 //			Listener listener = new Listener();
-//			Thread t = new Thread(listener);
-////			listener.start();
-////			t.start();
-			ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
-			JoinGame jg = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+////			Thread t = new Thread(listener);
+//////			listener.start();
+//////			t.start();
+//			ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
+//			JoinGame jg = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+////
+//			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);
+//			communicator.send(e);
 //
-			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);
-			Communicator.send(e);
-
-
-            Envelope ne = Communicator.receive();
-			while(ne== null){
-                ne = Communicator.receive();
-
-            }
-
-            System.out.println(ne.toString());
-		}
+//
+//            Envelope ne = Communicator.receive();
+//			while(ne== null){
+//                ne = Communicator.receive();
+//
+//            }
+//
+//            System.out.println(ne.toString());
+//		}
+        }
 }

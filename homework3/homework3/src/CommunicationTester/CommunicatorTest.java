@@ -1,8 +1,10 @@
 package CommunicationTester;
 
+import Common.ComponentInfo;
 import Communication.Communicator;
 import Communication.Config;
 import Communication.Envelope;
+import Messages.JoinGame;
 import Messages.Message;
 
 import java.net.InetAddress;
@@ -17,21 +19,47 @@ import static junit.framework.Assert.assertEquals;
  */
 public class CommunicatorTest
 {
-//	@org.junit.Test
-//	public void testSendReceive() throws Exception
-//	{
-//		Message m = new Message("blah test message");
-//		Envelope sent = new Envelope(m, InetAddress.getByName(Config.address),Config.port);
-//
-//		Envelope received = Communicator.receive();
-//
-//		assertEquals(null,received); //make sure we return null on timeout
-//
-//		Communicator.send(sent); //send the message
-//
-//		received = Communicator.receive();
-//		byte[] temp = new byte[Config.messageLength];
-//		assertEquals(m.getMessage(), received.getMessage().getMessage().substring(0,m.getMessage().length()));
-//		assertEquals(sent.getAddress().getAddress(),received.getAddress().getAddress());
-//	}
+	@org.junit.Test
+	public void testSendReceive() throws Exception
+	{
+        Config config = new Config(9876);
+        Communicator communicator = new Communicator(config);
+
+        ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
+        JoinGame jg1 = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+
+        Envelope sent = new Envelope(jg1, InetAddress.getByName("localhost"),config.getPort());
+
+        communicator.send(sent);
+        Envelope received = communicator.listen();
+        JoinGame jg2 = (JoinGame) received.getMessage();
+
+        assertEquals(jg1.getGameId(), jg2.getGameId());
+        assertEquals(jg1.getANumber(), jg2.getANumber());
+        assertEquals(jg1.getFirstName(), jg2.getFirstName());
+        assertEquals(jg1.getLastName(), jg2.getLastName());
+	}
+
+    //this tests connecting to a remote server.
+    //the server should be running check that if this test fails
+    @org.junit.Test
+    public void testSendReceiveRemote() throws Exception
+    {
+        Config config = new Config(9875);
+        Communicator communicator = new Communicator(config);
+
+        ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
+        JoinGame jg1 = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+
+        Envelope sent = new Envelope(jg1, InetAddress.getByName("thingsforreasons.com"),9876);
+
+        communicator.send(sent);
+        Envelope received = communicator.listen();
+        JoinGame jg2 = (JoinGame) received.getMessage();
+
+        assertEquals(jg1.getGameId(), jg2.getGameId());
+        assertEquals(jg1.getANumber(), jg2.getANumber());
+        assertEquals(jg1.getFirstName(), jg2.getFirstName());
+        assertEquals(jg1.getLastName(), jg2.getLastName());
+    }
 }

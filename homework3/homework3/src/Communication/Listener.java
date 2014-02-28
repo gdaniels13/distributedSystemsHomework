@@ -9,42 +9,39 @@ package Communication;
 public class Listener implements Runnable
 {
 
-	boolean shouldRun;
+    Communicator communicator;
+    EnvelopeQueue envelopeQueue;
 
-	public Listener(){
-		shouldRun = false;
+    @Override
+    public void run()
+    {
+        //once it starts always listen.
+        while(true){
+            Envelope t = communicator.listen();
+            if(t!=null){
+                envelopeQueue.push(t);
+            }
+        }
+    }
+
+    public Communicator getCommunicator() {
+        return communicator;
+    }
+
+    public void setCommunicator(Communicator communicator) {
+        this.communicator = communicator;
+    }
+
+    public EnvelopeQueue getEnvelopeQueue() {
+        return envelopeQueue;
+    }
+
+    public void setEnvelopeQueue(EnvelopeQueue envelopeQueue) {
+        this.envelopeQueue = envelopeQueue;
+    }
+
+    public Listener(Communicator communicator,EnvelopeQueue envelopeQueue){
+        this.communicator = communicator;
+        this.envelopeQueue = envelopeQueue;
 	}
-
-	@Override
-	public void run()
-	{
-		//once it starts always listen.
-		while(true){
-			while(shouldRun){
-				Envelope t = Communicator.receive();
-				if(t!=null){
-					RequestEnvelopeQueue.push(t);
-				}
-			}
-			while(!shouldRun){
-				try
-				{
-					Thread.currentThread().sleep(Config.listenTimeout);
-				}
-				catch(InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	public synchronized void stop(){
-		shouldRun = false;
-	}
-
-	public synchronized void start(){
-		shouldRun = true;
-	}
-
 }

@@ -9,54 +9,31 @@ import java.net.*;
  * Date: 2/19/14
  * Time: 4:30 PM
  */
-public class Communicator
-{
-
-	private static Communicator instance = null;
+public class Communicator{
 	private DatagramSocket socket;
-	private int port;
-	private int messageLength;
-	private byte[] receiveBuffer;
-  private DatagramPacket receivePacket;
+    private DatagramPacket receivePacket;
+    private int port;
+    private int messageLength;
+    private byte[] receiveBuffer;
 
 
-	private Communicator(){
-		port = Config.port;
-		messageLength = Config.messageLength;
+	public Communicator(Config config){
+		port = config.getPort();
+		messageLength = config.getMessageLength();
 		receiveBuffer = new byte[messageLength];
 		receivePacket = new DatagramPacket(receiveBuffer,messageLength);
 
-		try
-		{
+		try{
 			socket = new DatagramSocket(port);
 		}
-		catch(SocketException e)
-		{
+		catch(SocketException e){
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 		}
-//		catch(UnknownHostException e)
-//		{
-//			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//		}
 	}
 
-	private static void init(){
-		if(instance==null)
-		{
-			instance = new Communicator();
-		}
-	}
-
-	public static Envelope receive(){
-		init();
-		return instance.listen(Config.listenTimeout);
-	}
-
-	public Envelope listen(int listenTimeout)
-	{
+	public Envelope listen(){
 		try
 		{
-			socket.setSoTimeout(Config.listenTimeout);
 			socket.receive(receivePacket);
 		}
 		catch(SocketTimeoutException e){
@@ -69,12 +46,7 @@ public class Communicator
 		return new Envelope(receivePacket);
 	}
 
-	public static void send(Envelope e){
-		init();
-		instance.sender(e);
-	}
-
-	private void sender(Envelope envelope){
+	public void send(Envelope envelope){
 		try
 		{
 			DatagramPacket d = envelope.toDatagramPacket();
@@ -85,8 +57,4 @@ public class Communicator
 			e.printStackTrace();
 		}
 	}
-
-    public static void setPort(int port){
-
-    }
 }
