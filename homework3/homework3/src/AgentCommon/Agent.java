@@ -2,7 +2,6 @@ package AgentCommon;
 
 import Common.Tick;
 import Communication.Communicator;
-import Communication.Config;
 import Communication.EnvelopeQueue;
 import Communication.Listener;
 

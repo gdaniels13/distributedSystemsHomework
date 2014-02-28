@@ -1,5 +1,6 @@
 package CommunicationTester;
 
+import AgentCommon.Config;
 import Common.ComponentInfo;
 import Communication.*;
 import Messages.JoinGame;
@@ -25,7 +26,7 @@ public class ListenerTest {
         ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
         JoinGame jg1 = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
 
-        Envelope sent = new Envelope(jg1, InetAddress.getByName("localhost"),config.getPort());
+        Envelope sent = new Envelope(jg1, InetAddress.getByName("localhost"),config.getLocalPort());
 
         t.start(); // spin up the thread;
 

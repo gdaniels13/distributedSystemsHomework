@@ -10,9 +10,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * Created by gregor on 2/27/14.
  */
 public abstract class ExecutionStrategy implements Runnable{
-	private ConcurrentLinkedQueue<Envelope> queue;
-	private Endpoint recipient;
-	private ConcurrentHashMap<String, ExecutionStrategy> executableMap; // need this so we can remove it from the map when we are finished
+	protected ConcurrentLinkedQueue<Envelope> queue;
+	protected Endpoint recipient;
+	protected ConcurrentHashMap<String, ExecutionStrategy> executableMap; // need this so we can remove it from the map when we are finished
 
 	public ExecutionStrategy(){
 		queue = new ConcurrentLinkedQueue<>();
@@ -23,13 +23,7 @@ public abstract class ExecutionStrategy implements Runnable{
 		queue.add(cur);
 	}
 
-	public static ExecutionStrategy Create(Envelope cur)
-	{
-		//needs to detect the message type and create the Execution strategy;
-
-
-		return null;
-	}
+	public abstract ExecutionStrategy Create(Envelope cur);
 
 	public void setExecutableMap(ConcurrentHashMap<String, ExecutionStrategy> executableMap)
 	{

@@ -1,5 +1,7 @@
 package Communication;
 
+import AgentCommon.Config;
+
 import java.io.IOException;
 import java.net.*;
 
@@ -18,7 +20,7 @@ public class Communicator{
 
 
 	public Communicator(Config config){
-		port = config.getPort();
+		port = config.getLocalPort();
 		messageLength = config.getMessageLength();
 		receiveBuffer = new byte[messageLength];
 		receivePacket = new DatagramPacket(receiveBuffer,messageLength);

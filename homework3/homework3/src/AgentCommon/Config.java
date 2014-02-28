@@ -1,4 +1,4 @@
-package Communication;
+package AgentCommon;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,11 +9,13 @@ package Communication;
 
 public class Config
 {
-	private int port=9834;
+	private int localPort =9834;
+	private int serverPort;
 	private int messageLength = 1024;
 
-    public int getPort() {
-        return port;
+
+    public int getLocalPort() {
+        return localPort;
     }
 
     public int getMessageLength() {
@@ -24,7 +26,8 @@ public class Config
         this.messageLength = messageLength;
     }
 
-    public Config(int port) {
-        this.port = port;
+    public Config(int port,int serverPort) {
+        this.localPort = port;
+				this.serverPort = serverPort;
     }
 }

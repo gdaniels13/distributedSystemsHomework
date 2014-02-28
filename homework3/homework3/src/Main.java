@@ -19,7 +19,7 @@ public class Main {
 ////			Thread t = new Thread(listener);
 //////			listener.start();
 //////			t.start();
-//			ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
+//			ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.Agents.Agents);
 //			JoinGame jg = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
 ////
 //			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);

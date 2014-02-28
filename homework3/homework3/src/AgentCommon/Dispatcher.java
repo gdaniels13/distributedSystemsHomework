@@ -60,7 +60,7 @@ public class Dispatcher implements Runnable{
 
             if(req.getConversationId().Equals(req.getMessageNr())){
                 //new Conversation create Correct ExecutionStrategy object and put it in the map
-                es = ExecutionStrategy.Create(cur);
+              //  es = ExecutionStrategy.Create(cur);
                 es.setExecutableMap(esMap);
                 esMap.put(req.getConversationId().toString(), es);
                 threadPool.execute(es);
