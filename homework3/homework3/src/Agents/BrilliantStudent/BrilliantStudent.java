@@ -11,8 +11,13 @@ import AgentCommon.Config;
  */
 public class BrilliantStudent extends Agent
 {
-	protected BrilliantStudent(Config config)
+	public BrilliantStudent(Config config)
 	{
 		super(config);
 	}
+
+    @Override
+    public void run() {
+
+    }
 }

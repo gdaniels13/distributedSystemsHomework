@@ -11,8 +11,13 @@ import AgentCommon.Config;
  */
 public class ExcuseGenerator extends Agent
 {
-	protected ExcuseGenerator(Config config)
+	public ExcuseGenerator(Config config)
 	{
 		super(config);
 	}
+
+    @Override
+    public void run() {
+
+    }
 }

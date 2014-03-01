@@ -17,7 +17,7 @@ public class ListenerTest {
     @Test
     public void testRun() throws Exception {
         //setup
-        Config config = new Config(9874);
+        Config config = new Config(new String("WG thingsforreasons.com 9876 10005 A00798340 Greg Daniels").split(" "));
 
         EnvelopeQueue eq = new EnvelopeQueue();
         Communicator communicator = new Communicator(config);

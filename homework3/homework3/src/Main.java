@@ -1,38 +1,64 @@
-import Common.ComponentInfo;
-import Communication.Communicator;
-import Communication.Envelope;
-import Communication.Listener;
-import Messages.JoinGame;
-import Messages.Message;
+import AgentCommon.Agent;
+import AgentCommon.Config;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
 
-    public static void main(String[] args) throws UnknownHostException, InterruptedException
-		{
-//			Listener listener = new Listener();
-////			Thread t = new Thread(listener);
-//////			listener.start();
-//////			t.start();
-//			ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.Agents.Agents);
-//			JoinGame jg = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
-////
-//			Envelope e = new Envelope(jg ,InetAddress.getByName("162.248.11.179"),9876);
-//			communicator.send(e);
-//
-//
-//            Envelope ne = Communicator.receive();
-//			while(ne== null){
-//                ne = Communicator.receive();
-//
-//            }
-//
-//            System.out.println(ne.toString());
-//		}
+    public static void main(String[] args) throws FileNotFoundException {
+        if(args == null){
+            System.out.println("Must specify file with configuration parameters");
+            return;
         }
+        ArrayList<Config> configurations = getConfigs(args);
+        ArrayList<Agent> agents = getAgents(configurations);
+        generatAndStartThreads(agents);
+    }
+
+    private static void generatAndStartThreads(ArrayList<Agent> agents) {
+        ArrayList<Thread> threads = new ArrayList<>();
+        for(Agent t : agents)
+        {
+            Thread thread = new Thread(t);
+            thread.start();
+            threads.add(thread);
+        }
+    }
+
+    private static ArrayList<Agent> getAgents(ArrayList<Config> configurations) {
+        ArrayList<Agent> agents = new ArrayList<>();
+        for(Config t : configurations){
+            agents.add(Agent.Create(t));
+        }
+        return agents;
+    }
+
+    public static ArrayList<Config> getConfigs(String[] args) throws FileNotFoundException {
+        ArrayList<Config> configurations = new ArrayList<>();
+        Scanner reader;
+        String line;
+        for(int i = 0; i<args.length; ++i){
+            reader = new Scanner(new FileReader(args[i]));
+            while(reader.hasNext()){
+                line = reader.nextLine();
+                if(validateArgString(line)){
+                    configurations.add(new Config(line.split(" ")));
+                }
+            }
+        }
+        return configurations;
+    }
+
+    public static boolean validateArgString(String str){
+        if(str == null) return false;
+        if(str.compareTo("")==0) return false;
+        if(str.charAt(0)=='#') return false;
+        if(str.split(" ").length != 7) return false;
+        //could use a regex here to validate but this is just quick and dirty
+        return true;
+    }
 }

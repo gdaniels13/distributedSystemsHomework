@@ -21,7 +21,7 @@ public class CommunicatorTest
 	@org.junit.Test
 	public void testSendReceive() throws Exception
 	{
-        Config config = new Config(9876);
+        Config config = new Config(new String("WG thingsforreasons.com 9876 10005 A00798340 Greg Daniels").split(" "));
         Communicator communicator = new Communicator(config);
 
         ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
@@ -44,7 +44,7 @@ public class CommunicatorTest
     @org.junit.Test
     public void testSendReceiveRemote() throws Exception
     {
-        Config config = new Config(9875);
+        Config config = new Config(new String("WG thingsforreasons.com 9876 10005 A00798340 Greg Daniels").split(" "));
         Communicator communicator = new Communicator(config);
 
         ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);

@@ -11,8 +11,13 @@ import AgentCommon.Config;
  */
 public class TwineGenerator extends Agent
 {
-	protected TwineGenerator(Config config)
+	public TwineGenerator(Config config)
 	{
 		super(config);
 	}
+
+    @Override
+    public void run() {
+
+    }
 }

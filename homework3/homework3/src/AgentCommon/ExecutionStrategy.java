@@ -23,7 +23,9 @@ public abstract class ExecutionStrategy implements Runnable{
 		queue.add(cur);
 	}
 
-	public abstract ExecutionStrategy Create(Envelope cur);
+	public ExecutionStrategy Create(Envelope cur){
+        return null;
+    };
 
 	public void setExecutableMap(ConcurrentHashMap<String, ExecutionStrategy> executableMap)
 	{
