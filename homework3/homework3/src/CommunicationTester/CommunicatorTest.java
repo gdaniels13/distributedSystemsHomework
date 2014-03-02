@@ -21,7 +21,7 @@ public class CommunicatorTest
 	@org.junit.Test
 	public void testSendReceive() throws Exception
 	{
-        Config config = new Config(new String("WG thingsforreasons.com 9876 10005 A00798340 Greg Daniels").split(" "));
+        Config config = new Config(new String("WG localhost 9876 9876 A00798340 Greg Daniels").split(" "));
         Communicator communicator = new Communicator(config);
 
         ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
@@ -44,13 +44,13 @@ public class CommunicatorTest
     @org.junit.Test
     public void testSendReceiveRemote() throws Exception
     {
-        Config config = new Config(new String("WG thingsforreasons.com 9876 10005 A00798340 Greg Daniels").split(" "));
+        Config config = new Config(new String("WG thingsforreasons.com 9876 10000 A00798340 Greg Daniels").split(" "));
         Communicator communicator = new Communicator(config);
 
         ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
         JoinGame jg1 = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
 
-        Envelope sent = new Envelope(jg1, InetAddress.getByName("thingsforreasons.com"),9876);
+        Envelope sent = new Envelope(jg1, config.getServerAddress() ,config.getServerPort());
 
         communicator.send(sent);
         Envelope received = communicator.listen();

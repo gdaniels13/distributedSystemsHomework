@@ -38,9 +38,6 @@ public class Communicator{
 		{
 			socket.receive(receivePacket);
 		}
-		catch(SocketTimeoutException e){
-			return null;
-		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
