@@ -1,7 +1,7 @@
 package Agents.ExcuseGenerator;
 
-import AgentCommon.Agent;
-import AgentCommon.Config;
+import Agents.AgentCommon.Agent;
+import Agents.AgentCommon.Config;
 
 /**
  * Created with IntelliJ IDEA.

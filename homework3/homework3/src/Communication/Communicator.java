@@ -1,6 +1,6 @@
 package Communication;
 
-import AgentCommon.Config;
+import Agents.AgentCommon.Config;
 
 import java.io.IOException;
 import java.net.*;

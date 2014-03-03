@@ -1,4 +1,4 @@
-package AgentCommon;
+package Agents.AgentCommon;
 
 import Communication.Envelope;
 import Communication.EnvelopeQueue;
@@ -13,14 +13,16 @@ import java.util.concurrent.*;
 public class Dispatcher implements Runnable{
 
     private ConcurrentHashMap<String,ExecutionStrategy> esMap;
-    private ExecutorService threadPool;
     private EnvelopeQueue envelopeQueue;
+    private Agent agent;
+    private ExecutorService threadPool;
 
-    public Dispatcher(EnvelopeQueue envelopeQueue){
-			this.esMap = new ConcurrentHashMap<>();
-            this.envelopeQueue = envelopeQueue;
-			threadPool = Executors.newCachedThreadPool();
-		}
+    public Dispatcher(EnvelopeQueue envelopeQueue,Agent agent){
+        this.esMap = new ConcurrentHashMap<>();
+        this.envelopeQueue = envelopeQueue;
+        threadPool = Executors.newCachedThreadPool();
+        this.agent = agent;
+    }
 
     @Override
     public void run() {
@@ -31,6 +33,12 @@ public class Dispatcher implements Runnable{
             if(cur != null)
             {
                 dispatch(cur);
+            }
+
+            try {
+                Thread.currentThread().sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -60,11 +68,28 @@ public class Dispatcher implements Runnable{
 
             if(req.getConversationId().Equals(req.getMessageNr())){
                 //new Conversation create Correct ExecutionStrategy object and put it in the map
-              //  es = ExecutionStrategy.Create(cur);
+                es = ExecutionStrategy.Create(cur);
                 es.setExecutableMap(esMap);
                 esMap.put(req.getConversationId().toString(), es);
                 threadPool.execute(es);
             }
         }
+    }
+
+
+    public ConcurrentHashMap<String, ExecutionStrategy> getEsMap() {
+        return esMap;
+    }
+
+    public ExecutorService getThreadPool() {
+        return threadPool;
+    }
+
+    public EnvelopeQueue getEnvelopeQueue() {
+        return envelopeQueue;
+    }
+
+    public Agent getAgent() {
+        return agent;
     }
 }

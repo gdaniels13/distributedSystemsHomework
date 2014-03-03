@@ -1,4 +1,4 @@
-package AgentCommon;
+package Agents.AgentCommon;
 
 import Communication.Endpoint;
 import Communication.Envelope;
@@ -13,9 +13,12 @@ public abstract class ExecutionStrategy implements Runnable{
 	protected ConcurrentLinkedQueue<Envelope> queue;
 	protected Endpoint recipient;
 	protected ConcurrentHashMap<String, ExecutionStrategy> executableMap; // need this so we can remove it from the map when we are finished
+    protected Agent agent;
 
-	public ExecutionStrategy(){
+
+	public ExecutionStrategy(Agent agent){
 		queue = new ConcurrentLinkedQueue<>();
+        this.agent = agent;
 	}
 
 	//add an envelope to the queue of the execution strategy
@@ -23,7 +26,7 @@ public abstract class ExecutionStrategy implements Runnable{
 		queue.add(cur);
 	}
 
-	public ExecutionStrategy Create(Envelope cur){
+	public static ExecutionStrategy Create(Envelope cur){
         return null;
     };
 

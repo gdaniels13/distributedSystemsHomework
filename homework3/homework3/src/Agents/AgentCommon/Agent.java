@@ -1,4 +1,4 @@
-package AgentCommon;
+package Agents.AgentCommon;
 
 import Agents.BrilliantStudent.BrilliantStudent;
 import Agents.ExcuseGenerator.ExcuseGenerator;
@@ -39,7 +39,7 @@ public abstract class Agent implements Runnable {
         this.config = config;
         this.communicator = new Communicator(config);
         this.envelopeQueue = new EnvelopeQueue();
-        this.dispatcher = new Dispatcher(this.envelopeQueue);
+        this.dispatcher = new Dispatcher(this.envelopeQueue,this);
         this.listener = new Listener(this.communicator,this.envelopeQueue);
         tickQueue = new ConcurrentLinkedQueue<>();
 

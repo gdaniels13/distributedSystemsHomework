@@ -1,4 +1,4 @@
-package AgentCommon;
+package Agents.AgentCommon;
 
 import Common.Tick;
 import Communication.Envelope;

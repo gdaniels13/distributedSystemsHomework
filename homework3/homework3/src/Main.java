@@ -1,5 +1,5 @@
-import AgentCommon.Agent;
-import AgentCommon.Config;
+import Agents.AgentCommon.Agent;
+import Agents.AgentCommon.Config;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

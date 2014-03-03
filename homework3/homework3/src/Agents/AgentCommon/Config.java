@@ -1,4 +1,4 @@
-package AgentCommon;
+package Agents.AgentCommon;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

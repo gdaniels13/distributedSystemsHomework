@@ -2,7 +2,7 @@ package CommunicationTester;
 
 import Common.ComponentInfo;
 import Communication.Communicator;
-import AgentCommon.Config;
+import Agents.AgentCommon.Config;
 import Communication.Envelope;
 import Messages.JoinGame;
 
