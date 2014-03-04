@@ -1,7 +1,11 @@
 package Agents.BrilliantStudent;
 
-import Agents.AgentCommon.Agent;
-import Agents.AgentCommon.Config;
+import Agents.AgentCommon.*;
+import Communication.Envelope;
+import Messages.JoinGame;
+import Messages.Message;
+
+import static Messages.Message.MESSAGE_CLASS_IDS;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,6 +19,23 @@ public class BrilliantStudent extends Agent
 	{
 		super(config);
 	}
+
+    @Override
+    public ExecutionStrategy CreateExecutionStrategy(Envelope cur) {
+        Message message = cur.getMessage();
+        MESSAGE_CLASS_IDS messageType = message.MessageTypeId();
+
+
+        switch (messageType){
+            case JoinGame:
+                return new JoinGameExecutionStrategy(this,cur);
+            case TickDelivery:
+                return  new TickReceiptStrategy(this,cur);
+            default:
+                return null;
+                //do nothing drop the message on the floor
+        }
+    }
 
     @Override
     public void run() {

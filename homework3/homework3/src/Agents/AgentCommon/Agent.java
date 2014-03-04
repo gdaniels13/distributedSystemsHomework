@@ -5,6 +5,7 @@ import Agents.ExcuseGenerator.ExcuseGenerator;
 import Agents.TwineGenerator.TwineGenerator;
 import Common.Tick;
 import Communication.Communicator;
+import Communication.Envelope;
 import Communication.EnvelopeQueue;
 import Communication.Listener;
 
@@ -20,6 +21,30 @@ public abstract class Agent implements Runnable {
     EnvelopeQueue envelopeQueue;
     Config config;
     ConcurrentLinkedQueue<Tick> tickQueue;
+
+    public Communicator getCommunicator() {
+        return communicator;
+    }
+
+    public Dispatcher getDispatcher() {
+        return dispatcher;
+    }
+
+    public Listener getListener() {
+        return listener;
+    }
+
+    public EnvelopeQueue getEnvelopeQueue() {
+        return envelopeQueue;
+    }
+
+    public Config getConfig() {
+        return config;
+    }
+
+    public ConcurrentLinkedQueue<Tick> getTickQueue() {
+        return tickQueue;
+    }
 
     public static Agent Create(Config config){
         switch(config.getAgentType())
@@ -45,5 +70,7 @@ public abstract class Agent implements Runnable {
 
     }
 
+
+    public abstract ExecutionStrategy CreateExecutionStrategy(Envelope cur);
 
 }

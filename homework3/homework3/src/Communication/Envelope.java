@@ -80,13 +80,4 @@ public class Envelope
 	}
 
 
-//
-//	@Override
-//	public String toString()
-//	{
-//		return "Communication.Envelope{" +
-//						"message=" + message.toString() +
-//						"\n, address=" + address +
-//						'}';
-//	}
 }

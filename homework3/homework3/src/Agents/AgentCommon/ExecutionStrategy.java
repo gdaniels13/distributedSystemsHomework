@@ -14,11 +14,12 @@ public abstract class ExecutionStrategy implements Runnable{
 	protected Endpoint recipient;
 	protected ConcurrentHashMap<String, ExecutionStrategy> executableMap; // need this so we can remove it from the map when we are finished
     protected Agent agent;
+    protected Envelope first;
 
-
-	public ExecutionStrategy(Agent agent){
+	public ExecutionStrategy(Agent agent,Envelope envelope){
 		queue = new ConcurrentLinkedQueue<>();
         this.agent = agent;
+        this.first = envelope;
 	}
 
 	//add an envelope to the queue of the execution strategy
@@ -26,9 +27,6 @@ public abstract class ExecutionStrategy implements Runnable{
 		queue.add(cur);
 	}
 
-	public static ExecutionStrategy Create(Envelope cur){
-        return null;
-    };
 
 	public void setExecutableMap(ConcurrentHashMap<String, ExecutionStrategy> executableMap)
 	{

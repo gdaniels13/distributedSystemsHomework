@@ -15,9 +15,10 @@ public class TickReceiptStrategy extends ExecutionStrategy{
 
 
 
-	public TickReceiptStrategy(ConcurrentLinkedQueue<Tick> tickQueue)
+	public TickReceiptStrategy(Agent agent, Envelope cur)
 	{
-		this.tickQueue = tickQueue;
+        super(agent,cur);
+        this.tickQueue = agent.getTickQueue();
 	}
 
 

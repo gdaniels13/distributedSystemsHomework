@@ -2,6 +2,8 @@ package Agents.TwineGenerator;
 
 import Agents.AgentCommon.Agent;
 import Agents.AgentCommon.Config;
+import Agents.AgentCommon.ExecutionStrategy;
+import Communication.Envelope;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,6 +17,11 @@ public class TwineGenerator extends Agent
 	{
 		super(config);
 	}
+
+    @Override
+    public ExecutionStrategy CreateExecutionStrategy(Envelope cur) {
+        return null;
+    }
 
     @Override
     public void run() {

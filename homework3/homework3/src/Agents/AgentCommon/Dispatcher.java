@@ -43,9 +43,8 @@ public class Dispatcher implements Runnable{
         }
     }
 
-    public void dispatch(Envelope cur) {
+    public synchronized void dispatch(Envelope cur) {
         Message message = cur.getMessage();
-        int classId = message.getClassId();
         String conversationId = message.getConversationId().toString();
 
         //find the object that was handling that conversation
@@ -68,7 +67,8 @@ public class Dispatcher implements Runnable{
 
             if(req.getConversationId().Equals(req.getMessageNr())){
                 //new Conversation create Correct ExecutionStrategy object and put it in the map
-                es = ExecutionStrategy.Create(cur);
+                es = agent.CreateExecutionStrategy(cur);
+                if (es == null) return;
                 es.setExecutableMap(esMap);
                 esMap.put(req.getConversationId().toString(), es);
                 threadPool.execute(es);
