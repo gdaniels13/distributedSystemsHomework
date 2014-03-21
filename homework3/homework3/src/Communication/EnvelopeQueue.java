@@ -24,11 +24,11 @@ public class EnvelopeQueue {
         this.eQueue = new ConcurrentLinkedQueue<>();
     }
 
-    public void push(Envelope e) {
+    public synchronized void push(Envelope e) {
             eQueue.add(e);
     }
 
-    public Envelope pop(){
+    public synchronized Envelope pop(){
         return eQueue.poll();
     }
 }

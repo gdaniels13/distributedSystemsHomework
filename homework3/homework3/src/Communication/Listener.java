@@ -12,6 +12,11 @@ public class Listener implements Runnable
     Communicator communicator;
     EnvelopeQueue envelopeQueue;
 
+    public Listener(Communicator communicator,EnvelopeQueue envelopeQueue){
+        this.communicator = communicator;
+        this.envelopeQueue = envelopeQueue;
+    }
+
     @Override
     public void run()
     {
@@ -39,9 +44,4 @@ public class Listener implements Runnable
     public void setEnvelopeQueue(EnvelopeQueue envelopeQueue) {
         this.envelopeQueue = envelopeQueue;
     }
-
-    public Listener(Communicator communicator,EnvelopeQueue envelopeQueue){
-        this.communicator = communicator;
-        this.envelopeQueue = envelopeQueue;
-	}
 }

@@ -33,7 +33,7 @@ public class Communicator{
 		}
 	}
 
-	public Envelope listen(){
+	public synchronized Envelope listen(){
 		try
 		{
 			socket.receive(receivePacket);
@@ -45,7 +45,7 @@ public class Communicator{
 		return new Envelope(receivePacket);
 	}
 
-	public void send(Envelope envelope){
+	public synchronized void send(Envelope envelope){
 		try
 		{
 			DatagramPacket d = envelope.toDatagramPacket();

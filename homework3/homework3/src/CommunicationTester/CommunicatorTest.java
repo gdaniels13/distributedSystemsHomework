@@ -21,7 +21,7 @@ public class CommunicatorTest
 	@org.junit.Test
 	public void testSendReceive() throws Exception
 	{
-        Config config = new Config(new String("WG localhost 9876 9876 A00798340 Greg Daniels").split(" "));
+        Config config = new Config(new String("WG localhost 9877 9877 A00798340 Greg Daniels").split(" "));
         Communicator communicator = new Communicator(config);
 
         ComponentInfo agentInfo = new ComponentInfo((short) 1001, ComponentInfo.PossibleAgentType.BrilliantStudent);
