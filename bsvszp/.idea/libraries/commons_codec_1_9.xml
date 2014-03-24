@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="commons-codec-1.9">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/3d party/commons-codec-1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/3d party/commons-lang3-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/3d party/junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/3d party/org.hamcrest.core_1.3.0.v201303031735.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
