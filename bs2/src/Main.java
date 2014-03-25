@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, Exception {
         if(args == null){
             System.out.println("Must specify file with configuration parameters");
             return;
@@ -37,7 +37,7 @@ public class Main {
         return agents;
     }
 
-    public static ArrayList<Config> getConfigs(String[] args) throws FileNotFoundException {
+    public static ArrayList<Config> getConfigs(String[] args) throws FileNotFoundException, Exception {
         ArrayList<Config> configurations = new ArrayList<>();
         Scanner reader = null;
         String line;

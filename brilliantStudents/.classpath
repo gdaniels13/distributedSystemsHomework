@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="/home/gregor/git/brilliantStudents/3d party/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="/home/gregor/git/brilliantStudents/3d party/commons-lang3-3.2.1.jar"/>
-	<classpathentry kind="lib" path="/home/gregor/git/brilliantStudents/3d party/junit.jar"/>
-	<classpathentry kind="lib" path="/home/gregor/git/brilliantStudents/3d party/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+	<classpathentry kind="lib" path="/home/gregor/git/distributedSystemsHomework/brilliantStudents/3d party/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="/home/gregor/git/distributedSystemsHomework/brilliantStudents/3d party/commons-lang3-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/home/gregor/git/distributedSystemsHomework/brilliantStudents/3d party/junit.jar"/>
+	<classpathentry kind="lib" path="/home/gregor/git/distributedSystemsHomework/brilliantStudents/3d party/org.hamcrest.core_1.3.0.v201303031735.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
