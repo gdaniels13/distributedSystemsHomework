@@ -32,6 +32,7 @@ public class Dispatcher implements Runnable{
             cur = envelopeQueue.pop();
             if(cur != null)
             {
+                System.out.println("Hellooooo");
                 dispatch(cur);
             }
 

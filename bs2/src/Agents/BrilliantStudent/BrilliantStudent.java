@@ -1,10 +1,14 @@
 package Agents.BrilliantStudent;
 
 import Agents.AgentCommon.*;
+import Common.ComponentInfo;
 import Communication.Envelope;
+import Messages.JoinGame;
 import Messages.Message;
 
 import static Messages.Message.MESSAGE_CLASS_IDS;
+import java.net.Inet4Address;
+import registrarClient.GameInfo;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,10 +18,20 @@ import static Messages.Message.MESSAGE_CLASS_IDS;
  */
 public class BrilliantStudent extends Agent
 {
-	public BrilliantStudent(Config config)
-	{
-		super(config);
-	}
+    public BrilliantStudent(Config config)
+    {
+            super(config);
+            GameInfo gi = config.getGameInfo();
+            ComponentInfo ci = new ComponentInfo();
+            ci.setAgentType(ComponentInfo.PossibleAgentType.BrilliantStudent);
+            JoinGame jg = new JoinGame(gi.getId(),config.getaNumber(), config.getFirstName(),config.getLastName(), ci);
+            
+            Envelope env = new Envelope(jg, config.getServerAddress(), config.getServerPort());
+            
+            ExecutionStrategy ex = new JoinGameExecutionStrategy(this, env);
+            this.envelopeQueue.push(env);
+            new Thread(this.dispatcher).run();
+    }
 
     @Override
     public ExecutionStrategy CreateExecutionStrategy(Envelope cur) {

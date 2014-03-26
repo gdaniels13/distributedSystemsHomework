@@ -19,7 +19,7 @@
     <target name="wsimport-client-Registrar" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/Registrar"/>
         <property name="wsdl-Registrar" location="xml-resources/web-service-references/Registrar/wsdl/Registrar.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Registrar" destdir="${build.generated.dir}/jax-wsCache/Registrar" wsdl="${wsdl-Registrar}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="file:/home/gregor/git/distributedSystemsHomework/bsvszp/Registrar.wsdl" xnocompile="true" xendorsed="true" package="registrarClient">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Registrar" destdir="${build.generated.dir}/jax-wsCache/Registrar" wsdl="${wsdl-Registrar}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="file:/home/gregor/git/distributedSystemsHomework/bsvszp/Registrar.wsdl" xnocompile="true" xendorsed="true" package="registrarClient">
             <depends file="${wsdl-Registrar}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/Registrar"/>
         </wsimport>

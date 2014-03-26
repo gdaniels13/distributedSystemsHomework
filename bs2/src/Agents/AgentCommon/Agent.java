@@ -3,24 +3,25 @@ package Agents.AgentCommon;
 import Agents.BrilliantStudent.BrilliantStudent;
 import Agents.ExcuseGenerator.ExcuseGenerator;
 import Agents.TwineGenerator.TwineGenerator;
+import Common.ComponentInfo;
 import Common.Tick;
 import Communication.Communicator;
 import Communication.Envelope;
 import Communication.EnvelopeQueue;
 import Communication.Listener;
-
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by gregor on 2/28/14.
  */
 public abstract class Agent implements Runnable {
-    Communicator communicator;
-    Dispatcher dispatcher;
-    Listener listener;
-    EnvelopeQueue envelopeQueue;
-    Config config;
-    ConcurrentLinkedQueue<Tick> tickQueue;
+    protected Communicator communicator;
+    protected Listener listener;
+    protected Dispatcher dispatcher;
+    protected EnvelopeQueue envelopeQueue;
+    protected Config config;
+    protected ConcurrentLinkedQueue<Tick> tickQueue;
+    protected ComponentInfo componentInfo;
 
     public Communicator getCommunicator() {
         return communicator;
@@ -67,7 +68,10 @@ public abstract class Agent implements Runnable {
         this.dispatcher = new Dispatcher(this.envelopeQueue,this);
         this.listener = new Listener(this.communicator,this.envelopeQueue);
         tickQueue = new ConcurrentLinkedQueue<>();
+        
 
+        
+        
     }
 
 

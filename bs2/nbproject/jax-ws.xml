@@ -17,6 +17,10 @@
           <wsimport-option-value>true</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
+          <wsimport-option-name>fork</wsimport-option-name>
+          <wsimport-option-value>false</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
           <wsimport-option-value>file:/home/gregor/git/distributedSystemsHomework/bsvszp/Registrar.wsdl</wsimport-option-value>
         </wsimport-option>
