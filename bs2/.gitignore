@@ -1,7 +1,7 @@
-build.xml
-/build
-catalog.xml
-manifest.mf
-/nbproject
-/xml-resources
-/src/META-INF
+./build.xml
+./build
+./catalog.xml
+./manifest.mf
+./nbproject
+./xml-resources
+./src/META-INF
