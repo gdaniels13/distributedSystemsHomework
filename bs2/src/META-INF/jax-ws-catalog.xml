@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="file:/home/gregor/git/distributedSystemsHomework/bsvszp/Registrar.wsdl" uri="wsdl/Registrar.wsdl"/>
-    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd0" uri="wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd0.xsd"/>
-    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd1" uri="wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd1.xsd"/>
-    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd2" uri="wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd2.xsd"/>
+    <system systemId="file:/home/gregor/git/distributedSystemsHomework/bsvszp/Registrar.wsdl" uri="xml-resources/web-service-references/Registrar/wsdl/Registrar.wsdl"/>
+    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd0" uri="xml-resources/web-service-references/Registrar/wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd0.xsd"/>
+    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd1" uri="xml-resources/web-service-references/Registrar/wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd1.xsd"/>
+    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd2" uri="xml-resources/web-service-references/Registrar/wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd2.xsd"/>
 </catalog>
