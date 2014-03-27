@@ -3,10 +3,11 @@ package Agents.AgentCommon;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBElement;
-import javax.xml.ws.WebServiceClient;
 import registrarClient.EndPoint;
 import registrarClient.GameInfo;
 import registrarClient.GameInfoGameStatus;
@@ -26,43 +27,52 @@ public class Config {
     private String lastName;
     private String agentType;
     private GameInfo gameInfo;
+	private boolean autoSelect;
+	
 
-    public Config(int localPort, String aNumber, String firstName, String lastName) throws Exception {
-        this.localPort = localPort;
-        this.serverPort = serverPort;
-        this.aNumber = aNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        pickfirstGame();
-
-//        try {
-//            this.serverAddress = InetAddress.getByName(serverAddress);
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        }
-    }
+//    public Config(int localPort, String aNumber, String firstName, String lastName) throws Exception {
+//        this.localPort = localPort;
+//        this.serverPort = serverPort;
+//        this.aNumber = aNumber;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        pickfirstGame();
+//
+////        try {
+////            this.serverAddress = InetAddress.getByName(serverAddress);
+////        } catch (UnknownHostException e) {
+////            e.printStackTrace();
+////        }
+//    }
 
     public Config(String[] args) throws Exception {
         this.agentType = args[0];
-//        try {
-//            this.serverAddress = InetAddress.getByName(args[1]);
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        }
-//        this.serverPort = Integer.parseInt(args[2]);
-        this.localPort = Integer.parseInt(args[3]);
-        this.aNumber = args[4];
-        this.firstName = args[5];
-        this.lastName = args[6];
-        pickfirstGame();
+		if(args[1].compareTo("Y")==0){
+			autoSelect = true;
+			pickGame();
+		}
+		else{
+			autoSelect = false;
+		}
+		
+		this.aNumber = args[2];
+        this.firstName = args[3];
+        this.lastName = args[4];
     }
 
-    private void pickfirstGame() throws Exception {
+    private void pickGame() throws Exception {
         List<GameInfo> games = WebServerClient.getGames(GameInfoGameStatus.AVAILABLE).getGameInfo();
         if (games == null || games.size() == 0) {
             throw new Exception("No games found");
-        } else {
-            this.gameInfo = games.get(0);
+        } 
+		else {
+			if(!autoSelect){
+				//getGame(games);
+				return;
+			}
+			else{
+				this.gameInfo = games.get(0);
+			}
             JAXBElement<EndPoint> ep = gameInfo.getCommunicationEndPoint();
             EndPoint value = ep.getValue();
             byte [] bytes = BigInteger.valueOf(value.getAddress()).toByteArray();
@@ -70,6 +80,7 @@ public class Config {
             this.serverAddress = InetAddress.getByAddress(bytes);
             this.serverPort = value.getPort();
         }
+		
         System.out.println("picked game" + gameInfo.getLabel().getValue());
     }
 
@@ -85,6 +96,15 @@ public class Config {
         }
     }
     
+	private void getGame(List<GameInfo> games) {
+		for (int i = 0; i < games.size(); i++) {
+			System.out.println("" + i + ":" + games.get(i).getLabel().getValue());
+		}
+		Scanner in = new Scanner(System.in);
+		this.gameInfo = games.get(in.nextInt());
+	}
+	
+	
     public int getLocalPort() {
         return localPort;
     }
@@ -166,5 +186,16 @@ public class Config {
     public GameInfo getGameInfo() {
         return this.gameInfo;
     }
-
+	public void setGameInfo(GameInfo gameInfo){
+		try {
+			JAXBElement<EndPoint> ep = gameInfo.getCommunicationEndPoint();
+			  EndPoint value = ep.getValue();
+			  byte [] bytes = BigInteger.valueOf(value.getAddress()).toByteArray();
+			  reverseArray(bytes);
+			  this.serverAddress = InetAddress.getByAddress(bytes);
+			  this.serverPort = value.getPort();
+		} catch (UnknownHostException ex) {
+			Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }

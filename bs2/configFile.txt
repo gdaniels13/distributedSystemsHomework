@@ -4,9 +4,9 @@
 #"WG"-Whine generator
 #"EG"-excuse Generator
 # an example line looks like
-# EG 123.123.123.123 1234 1215 A1234 John Doe
+# EG A1234 John Doe
 
-BS thingsforreasons.com 9876 10000 A00798340 Greg Daniels
+BS Y A00798340 Greg Daniels
 #EG thingsforreasons.com 9876 10001 A00798340 Greg Daniels
 #WG thingsforreasons.com 9876 10002 A00798340 Greg Daniels
 #BS thingsforreasons.com 9876 10003 A00798340 Greg Daniels

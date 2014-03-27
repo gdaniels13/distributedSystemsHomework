@@ -10,11 +10,14 @@ import Communication.Envelope;
 import Communication.EnvelopeQueue;
 import Communication.Listener;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import registrarClient.GameInfo;
 
 /**
  * Created by gregor on 2/28/14.
  */
 public abstract class Agent implements Runnable {
+
+
     protected Communicator communicator;
     protected Listener listener;
     protected Dispatcher dispatcher;
@@ -22,7 +25,7 @@ public abstract class Agent implements Runnable {
     protected Config config;
     protected ConcurrentLinkedQueue<Tick> tickQueue;
     protected ComponentInfo componentInfo;
-
+	
     public Communicator getCommunicator() {
         return communicator;
     }
@@ -63,11 +66,7 @@ public abstract class Agent implements Runnable {
 
     public Agent(Config config) {
         this.config = config;
-        this.communicator = new Communicator(config);
-        this.envelopeQueue = new EnvelopeQueue();
-        this.dispatcher = new Dispatcher(this.envelopeQueue,this);
-        this.listener = new Listener(this.communicator,this.envelopeQueue);
-        tickQueue = new ConcurrentLinkedQueue<>();
+       
         
 
         
@@ -76,5 +75,14 @@ public abstract class Agent implements Runnable {
 
 
     public abstract ExecutionStrategy CreateExecutionStrategy(Envelope cur);
+
+	public void init() {
+		 this.communicator = new Communicator(config);
+        this.envelopeQueue = new EnvelopeQueue();
+        this.dispatcher = new Dispatcher(this.envelopeQueue,this);
+        this.listener = new Listener(this.communicator,this.envelopeQueue);
+        tickQueue = new ConcurrentLinkedQueue<>();
+		new Thread(dispatcher).start();
+	}
 
 }

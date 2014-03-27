@@ -51,8 +51,10 @@ public class Envelope
 		{
 			e.printStackTrace();
 		}
+		
+		
 		byte ba[] =  bl.ToBytes();
-		DatagramPacket p = new DatagramPacket(ba,	ba.length,address.getAddress(),  address.getPort());
+		DatagramPacket p = new DatagramPacket(ba, ba.length, address.getAddress(),address.getPort());
 		return p;
 	}
 
