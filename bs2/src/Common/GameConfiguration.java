@@ -2,16 +2,14 @@ package Common;
 
 import java.io.NotActiveException;
 //import java.lang.ref.*; reference number
+import java.net.UnknownHostException;
 
 import org.omg.CORBA.portable.ApplicationException;
 	
 public class GameConfiguration extends DistributableObject
 	{
-		
 	   private static short ClassId;
-	    
-	  
-	
+	    	
 	   private short PlayingFieldWidth; 
 	   private short PlayingFieldHeight; 
 	
@@ -51,6 +49,7 @@ public class GameConfiguration extends DistributableObject
 	   private float BombTwinePerSquareOfDistance;            // Number of twine pieces per unit of distance
 	   private float BombDamageDiffusionFactor;               // Percentage of remaining damage that can be spread to surround squares
 	
+	   public short TickInterval; 
 	   private short TickLifetime;                       // Number of seconds that a tick remains active
 	   private float TicksToStrengthRatio; 
 	
@@ -59,6 +58,52 @@ public class GameConfiguration extends DistributableObject
 	   
 	   public GameConfiguration() { ResetToDefaults(); }
        
+	   public GameConfiguration(GameConfiguration orig)
+       {
+           PlayingFieldWidth = orig.PlayingFieldWidth;
+           PlayingFieldHeight = orig.PlayingFieldHeight;
+
+           BrilliantStudentRegistrationMin = orig.BrilliantStudentRegistrationMin;
+           BrilliantStudentRegistrationMax = orig.BrilliantStudentRegistrationMax;
+           ExcuseGeneratorRegistrationMin = orig.ExcuseGeneratorRegistrationMin;
+           ExcuseGeneratorRegistrationMax = orig.ExcuseGeneratorRegistrationMax;
+           WhiningSpinnerRegistrationMin = orig.WhiningSpinnerRegistrationMin;
+           WhiningSpinnerRegistrationMax = orig.WhiningSpinnerRegistrationMax;
+
+           BrilliantStudentInitialStrength = orig.BrilliantStudentInitialStrength;
+           BrilliantStudentBaseSpeed = orig.BrilliantStudentBaseSpeed;
+           BrilliantStudentSidewalkSpeedMultiplier = orig.BrilliantStudentSidewalkSpeedMultiplier;
+           BrilliantStudentDeathToZombieDelay = orig.BrilliantStudentDeathToZombieDelay;
+
+           ExcuseGeneratorInitialStrength = orig.ExcuseGeneratorInitialStrength;
+           ExcuseCreationRate = orig.ExcuseCreationRate;
+           ExcuseCreationAcceleration = orig.ExcuseCreationAcceleration;
+
+           WhiningSpinnerInitialStrength = orig.WhiningSpinnerInitialStrength;
+           WhiningTwineCreationRate = orig.WhiningTwineCreationRate;
+           WhiningTwineCreationAcceleration = orig.WhiningTwineCreationAcceleration;
+
+           ZombieInitialStrengthMin = orig.ZombieInitialStrengthMin;
+           ZombieInitialStrengthMax = orig.ZombieInitialStrengthMax;
+           ZombieInitialSpeedMax = orig.ZombieInitialSpeedMax;
+           ZombieInitialSpeedMin = orig.ZombieInitialSpeedMin;
+           ZombieSidewalkSpeedMultiplier = orig.ZombieSidewalkSpeedMultiplier;
+           ZombieCreationRate = orig.ZombieCreationRate;
+           ZombieCreationAcceleration = orig.ZombieCreationAcceleration;
+           ZombieEatingRate = orig.ZombieEatingRate;
+           ZombieStrengthIncreaseForEatingStudent = orig.ZombieStrengthIncreaseForEatingStudent;
+           ZombieStrengthIncreaseForExcuseGenerator = orig.ZombieStrengthIncreaseForExcuseGenerator;
+           ZombieStrengthIncreaseForWhiningSpinner = orig.ZombieStrengthIncreaseForWhiningSpinner;
+
+           BombExcuseDamage = orig.BombExcuseDamage;
+           BombTwinePerSquareOfDistance = orig.BombTwinePerSquareOfDistance;
+           BombDamageDiffusionFactor = orig.BombDamageDiffusionFactor;
+
+           TickInterval = orig.TickInterval;
+           TickLifetime = orig.TickLifetime;
+           TicksToStrengthRatio = orig.TicksToStrengthRatio;
+
+       }
        //new
 	   public static GameConfiguration Create(ByteList bytes) throws ApplicationException, Exception
        {
@@ -361,7 +406,7 @@ public class GameConfiguration extends DistributableObject
 		public static int getMinimumEncodingLength() 
 		{
 			MinimumEncodingLength =  4              // Object header
-		            					+ 2 * 10       // Int16 properties
+		            					+ 2 * 11       // Int16 properties
 		            					+ 4 * 21;      // float properties
 			return MinimumEncodingLength;
 		}
@@ -434,14 +479,10 @@ public class GameConfiguration extends DistributableObject
 		{
             if (bytes == null || bytes.getRemainingToRead() < getMinimumEncodingLength())
 				throw new ApplicationException("Invalid byte array", null);
-			else 
-				{
-					short temp1 = getClassId();
-					short temp2 = bytes.PeekInt16();
-					if ( temp2 != temp1)
-						throw new ApplicationException("Invalid class id", null);
-					else
-					{
+			else if (bytes.PeekInt16() != getClassId())
+					throw new ApplicationException("Invalid class id", null);
+			else
+			{
 					    short objType = bytes.GetInt16();
 					    short objLength = bytes.GetInt16();
 					    bytes.SetNewReadLimit(objLength);
@@ -484,9 +525,7 @@ public class GameConfiguration extends DistributableObject
 					    TicksToStrengthRatio = bytes.GetFloat();
 	
 					    bytes.RestorePreviosReadLimit();
-					}
-				}
-				
+			}
 		}
 		
 		public void ResetToDefaults()

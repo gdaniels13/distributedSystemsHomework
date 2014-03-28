@@ -1,7 +1,8 @@
-package Common;
+package CommonTester;
 
 import static org.junit.Assert.*;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

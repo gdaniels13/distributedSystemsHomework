@@ -2,66 +2,27 @@ package Common;
 
 import java.net.UnknownHostException;
 import org.omg.CORBA.portable.ApplicationException;
+import Common.StateChange.StateChangeHandler;
 
 public class ComponentInfo extends DistributableObject
 {
 	private static short ClassId;
 	private short Id;
-    private PossibleAgentType AgentType;  
     private EndPoint CommmunicationEndPoint;
-    private StatusInfo Status;
     private static int MinimumEncodingLength;
+    public StateChangeHandler handler;
+  
+    public ComponentInfo() {}
     
-    public enum PossibleAgentType
-    { 
-    	BrilliantStudent(1),
-    	ExcuseGenerator(2),
-    	WhiningSpinner(3),
-    	ZombieProfessor(4);
-    	
-    	private int value;
-    	PossibleAgentType(int value)
-    	{
-    		this.value = value;
-    	}
-    	 public int getValue()
-         {
-         	return value;
-         }
-         
-         public static short getStringValueFromInt(int i) {
-             for (PossibleAgentType status : PossibleAgentType.values()) {
-                 if (status.getValue() == i) {
-                     return (short) status.value;
-                 }
-             }
-             // throw an IllegalArgumentException or return null
-             throw new IllegalArgumentException("the given number doesn't match any Status.");
-         }
-         public static PossibleAgentType convert(byte value) {
-             return PossibleAgentType.values()[value];
-         }    
-         public static PossibleAgentType fromByte(byte b) 
-         {
-        	 PossibleAgentType temp = null;
-             for(PossibleAgentType t : PossibleAgentType.values())
-             {
-                 if( t.value== (int)b)
-                     temp = t;
-             } 
-             return temp;  //or throw exception
-         }
-         
-         
-        
+    public ComponentInfo(short id)
+    {
+        Id = id;
     }
 
-    public ComponentInfo() {}
-
-    public ComponentInfo(short id, PossibleAgentType type)
+    public ComponentInfo(short id, EndPoint endPoint)
     {
-        setId(id);
-        setAgentType(type);
+        this(id);
+        setCommmunicationEndPoint(endPoint);
         printAll();
     }
 
@@ -82,17 +43,15 @@ public class ComponentInfo extends DistributableObject
     @Override
     public void Encode(ByteList bytes) throws UnknownHostException, Exception
     {
-        bytes.Add(ComponentInfo.getClassId());                             // Write out the class type
-
+        bytes.Add(ComponentInfo.ClassId);                             // Write out the class type
+        bytes.update();
         short lengthPos = bytes.getCurrentWritePosition();   // Get the current write position, so we
                                                         // can write the length here later
 
         bytes.Add((short) 0);                           // Write out a place holder for the length
-
-        bytes.AddObjects( (byte) AgentType.getValue(), getId());
-        bytes.Add(CommmunicationEndPoint);
-        bytes.Add(Status);
-		
+        bytes.update();
+        bytes.AddObjects( getId(), CommmunicationEndPoint); //bytes.AddObjects( (byte) AgentType.getValue(), getId());
+        bytes.update();
         short length = (short)(bytes.getCurrentWritePosition() - lengthPos - 2);
         bytes.WriteInt16To(lengthPos, length);          // Write out the length of this object        
     }
@@ -111,11 +70,11 @@ public class ComponentInfo extends DistributableObject
 				    	
 			bytes.SetNewReadLimit(objLength);
 				    
-			setAgentType((PossibleAgentType.fromByte(bytes.GetByte())));
 			setId((bytes.GetInt16()));
-			setCommmunicationEndPoint(((EndPoint) bytes.GetDistributableObject())); // EndPoint.Create(bytes);
-			setStatus((StatusInfo)bytes.GetDistributableObject()); //	StatusInfo.Create(bytes);
-
+			setCommmunicationEndPoint(((EndPoint) bytes.GetDistributableObject())); 
+		
+			RaiseChangedEvent();
+			
 		    bytes.RestorePreviosReadLimit();
 		}
     }
@@ -126,15 +85,8 @@ public class ComponentInfo extends DistributableObject
 
 	public void setId(short id) {
 		Id = id;
-//		System.out.println("ComponentInfo.Id " + Id);
-	}
-
-	public PossibleAgentType getAgentType() {
-		return AgentType;
-	}
-
-	public void setAgentType(PossibleAgentType agentType) {
-		AgentType = agentType;
+		RaiseChangedEvent();
+		System.out.println("ComponentInfo.Id " + Id);
 	}
 
 	public EndPoint getCommmunicationEndPoint() {
@@ -143,31 +95,31 @@ public class ComponentInfo extends DistributableObject
 
 	public void setCommmunicationEndPoint(EndPoint commmunicationEndPoint) {
 		CommmunicationEndPoint = commmunicationEndPoint;
-	}
-
-	public StatusInfo getStatus() {
-		return Status;
-	}
-
-	public void setStatus(StatusInfo status) {
-		Status = status;
+		RaiseChangedEvent();
 	}
 
 	public static int getMinimumEncodingLength() 
 	{
 		
-		MinimumEncodingLength =  4             			// Object header
+		MinimumEncodingLength =  4             				// Object header
                 					+ 2           		  	// Id
                 					+ 1          		  	// Agent Types
                 					+ 1 					//EndPoint.MinimumEncodingLength
                 					+ 1; 					//Tick.MinimumEncodingLength;
-//		System.out.println("ComponentInfo.MinimumEncodingLength =" + MinimumEncodingLength);
+		System.out.println("ComponentInfo.MinimumEncodingLength =" + MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 
-	public static short getClassId() {
+	public short getClassId() {
     	ClassId =  (short)DISTRIBUTABLE_CLASS_IDS.ComponentInfo.getValue();
-//    	System.out.println("ComponentInfo.ClassId " + ClassId);
+    	System.out.println("ComponentInfo.ClassId " + ClassId);
     	return ClassId;
 	}
+	
+	 protected void RaiseChangedEvent()
+     {
+		if ( handler != null)
+			handler.addStateChangeHandler();
+		 
+     }
 }

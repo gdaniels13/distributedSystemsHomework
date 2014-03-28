@@ -1,6 +1,7 @@
 package Common;
 
 import java.net.UnknownHostException;
+import java.util.Objects;
 
 import org.omg.CORBA.portable.ApplicationException;
 
@@ -54,7 +55,7 @@ public class MessageNumber extends  DistributableObject implements Comparable
     {
         return ProcessId + "." + SeqNumber;
     }
-
+        
    	public  boolean Equals(Object obj)
     {
         boolean tag = false;
@@ -209,20 +210,12 @@ public class MessageNumber extends  DistributableObject implements Comparable
 		objType = bytes.GetInt16();
 		objLength = bytes.GetInt16();
 		
-
         bytes.SetNewReadLimit(objLength);
 
-        try {
-			ProcessId = bytes.GetInt16();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        try {
-			SeqNumber = bytes.GetInt16();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+       	ProcessId = bytes.GetInt16();
+		
+       	SeqNumber = bytes.GetInt16();
+		
         bytes.RestorePreviosReadLimit();
 		
 	}

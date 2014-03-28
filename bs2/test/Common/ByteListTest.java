@@ -1,4 +1,4 @@
-package Common;
+package CommonTester;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -169,7 +169,7 @@ public class ByteListTest {
 
         // Case 11: Write out a string
         myBytes = new ByteList("abc");
-//        System.out.println(myBytes.getLength());
+        System.out.println(myBytes.getLength());
         assertEquals(2 + 2*3, myBytes.getLength());
         assertEquals((byte)0, myBytes.getByteValue(0));
         assertEquals((byte) (2 + 2*3), myBytes.getByteValue(1));

@@ -1,8 +1,12 @@
 package Agents.AgentCommon;
 
+import Common.AgentInfo;
+import Common.ComponentInfo;
 import Communication.Envelope;
 import Messages.AckNak;
+import Messages.JoinGame;
 import Messages.Reply;
+//import registrarClient.ComponentInfo;
 
 /**
  * Created by gregor on 3/3/14.
@@ -10,9 +14,23 @@ import Messages.Reply;
 public class JoinGameExecutionStrategy extends ExecutionStrategy {
     
     private boolean sentRequest;
-    public JoinGameExecutionStrategy(Agent agent, Envelope envelope) {
-        super(agent,envelope);
+    public JoinGameExecutionStrategy(Agent agent) {
+        super(agent,null);
         sentRequest = false;
+        AgentInfo agentInfo = new AgentInfo();
+        agentInfo.setAgentType(AgentInfo.PossibleAgentType.BrilliantStudent);
+        JoinGame jg = new JoinGame(
+                agent.config.getGameInfo().getId(), 
+                agent.config.getaNumber(), 
+                agent.config.getFirstName(),
+                agent.config.getLastName(),
+                agentInfo );
+        
+        
+        first = new Envelope(jg, agent.config.getServerAddress(), agent.config.getServerPort());
+        this.agent.communicator.send(first);
+//        first = this.agent.communicator.listen();
+        System.out.println("i got something back");
     }
     
    

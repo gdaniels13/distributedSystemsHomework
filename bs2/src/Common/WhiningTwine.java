@@ -9,9 +9,9 @@ import org.omg.CORBA.portable.ApplicationException;
 public class WhiningTwine extends DistributableObject
 {
 	private static short ClassId;
-    public short CreatorId;
-    public ArrayList<Tick> Ticks;
-    public Tick RequestTick;
+    private short CreatorId;
+    private ArrayList<Tick> Ticks;
+    private Tick RequestTick;
     private static int MinimumEncodingLength;
    
     public WhiningTwine()
@@ -22,8 +22,8 @@ public class WhiningTwine extends DistributableObject
     public WhiningTwine(short creatorId, ArrayList<Tick> ticks, Tick requestTick)
     {
         setCreatorId(creatorId);
-        Ticks = ticks;
-        RequestTick = requestTick;
+        setTicks(ticks);
+        setRequestTick(requestTick);
     }
 
     //new 
@@ -84,8 +84,9 @@ public class WhiningTwine extends DistributableObject
          bytes.Add(CreatorId);                           // Write out Creator's Id
 
          if (Ticks == null) Ticks = new ArrayList<Tick>();    // Write out the ticks that made up this whining twine
-         Integer temp = Ticks.size();
-         bytes.Add(temp.shortValue());
+         
+         bytes.Add((short)Ticks.size());
+         
          for (Tick tick : Ticks)
              bytes.Add(tick);
 

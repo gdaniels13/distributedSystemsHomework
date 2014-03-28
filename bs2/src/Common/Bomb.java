@@ -96,15 +96,14 @@ public class Bomb extends DistributableObject
          if (Excuses == null) Excuses = new ArrayList<Excuse>();
          bytes.Add((short)(Excuses.size()));
          for (Excuse excuse : Excuses)
-             excuse.Encode(bytes);
+             bytes.Add(excuse);      //excuse.Encode(bytes);
 
          if (Twine == null) Twine = new ArrayList<WhiningTwine>();
          bytes.Add((short)(Twine.size()));
          for (WhiningTwine twine : Twine)
-             twine.Encode(bytes);
+             bytes.Add(twine);      //twine.Encode(bytes);
 
-         if (BuiltOnTick == null) BuiltOnTick = new Tick(0, 0);
-         BuiltOnTick.Encode(bytes);
+         bytes.Add(BuiltOnTick);
 
          short length = (short) (bytes.getCurrentWritePosition() - lengthPos - 2);
          
@@ -132,14 +131,14 @@ public class Bomb extends DistributableObject
 				    Excuses = new ArrayList<Excuse>();
 				    int count = bytes.GetInt16();
 				    for (int i = 0; i < count; i++)
-				        Excuses.add(Excuse.Create(bytes));
+				        Excuses.add((Excuse)bytes.GetDistributableObject());   //Excuse.Create(bytes));
 
 				    Twine = new ArrayList<WhiningTwine>();
 				    count = bytes.GetInt16();
 				    for (int i = 0; i < count; i++)
-				        Twine.add(WhiningTwine.Create(bytes));
+				        Twine.add((WhiningTwine)bytes.GetDistributableObject());   //WhiningTwine.Create(bytes));
 
-				    BuiltOnTick = (Tick) Tick.Create(bytes);
+				    BuiltOnTick = (Tick)bytes.GetDistributableObject();    //(Tick) Tick.Create(bytes);
 
 				    bytes.RestorePreviosReadLimit();
 				}

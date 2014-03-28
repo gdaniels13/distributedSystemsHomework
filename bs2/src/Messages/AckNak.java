@@ -7,6 +7,7 @@ import org.omg.CORBA.portable.ApplicationException;
 
 import Common.ByteList;
 import Common.DistributableObject;
+import Messages.Message;
 
 public class AckNak extends Reply
 {
@@ -66,7 +67,7 @@ public class AckNak extends Reply
          else
          {
              result = new AckNak();
-           
+            // messageBytes.update();
              result.Decode(messageBytes);
          }
 
@@ -101,7 +102,7 @@ public class AckNak extends Reply
          short objLength = bytes.GetInt16();
 
          bytes.SetNewReadLimit(objLength);
-       
+         //bytes.update();
          super.Decode(bytes);
 
          IntResult = bytes.GetInt32();

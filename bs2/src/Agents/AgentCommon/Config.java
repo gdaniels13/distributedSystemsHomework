@@ -194,6 +194,7 @@ public class Config {
 			  reverseArray(bytes);
 			  this.serverAddress = InetAddress.getByAddress(bytes);
 			  this.serverPort = value.getPort();
+                          this.gameInfo = gameInfo;
 		} catch (UnknownHostException ex) {
 			Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
 		}

@@ -3,6 +3,7 @@ package Common;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+
 import org.omg.CORBA.portable.ApplicationException;
 
 public class PlayingFieldLayout extends DistributableObject
@@ -93,11 +94,8 @@ public class PlayingFieldLayout extends DistributableObject
                 bytes.Add(loc);
 
         short length = (short)(bytes.getCurrentWritePosition() - lengthPos - 2);
-        try {
-			bytes.WriteInt16To(lengthPos, length);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}          // Write out the length of this object        
+       	bytes.WriteInt16To(lengthPos, length);
+       						// Write out the length of this object        
 		
 	}
 

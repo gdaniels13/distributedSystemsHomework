@@ -1,7 +1,8 @@
 
 import Agents.AgentCommon.Agent;
 import Agents.AgentCommon.Config;
-import Gui.Gui;
+import Gui.SelectGame;
+import Gui.MainGui;
 
 /*
  * To change this template, choose Tools | Templates
@@ -20,13 +21,12 @@ public class Main2 {
 	}
 
 	Agent currentAgent = Agent.Create(new Config(args));
-	Gui gui = new Gui();
-		gui.setAgent(currentAgent);
-	
-		
-		gui.setVisible(true);
+        MainGui t = new MainGui(currentAgent);
+//	mainGui gui = new mainGui(currentAgent);
+//	
+//		gui.setVisible(true);
 //		new Thread(currentAgent).run();
-
+            t.setVisible(true);
 	}
 
 }

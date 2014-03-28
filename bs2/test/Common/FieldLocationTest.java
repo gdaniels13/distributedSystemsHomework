@@ -1,4 +1,4 @@
-package Common;
+package CommonTester;
 
 import static org.junit.Assert.*;
 

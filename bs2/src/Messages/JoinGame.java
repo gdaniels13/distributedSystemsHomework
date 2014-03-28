@@ -1,5 +1,8 @@
 package Messages;
 
+import java.io.NotActiveException;
+import java.net.UnknownHostException;
+
 import org.omg.CORBA.portable.ApplicationException;
 
 import Common.ByteList;
@@ -139,14 +142,14 @@ public class JoinGame extends Request
                 				+ 2              // FirstName
                 				+ 2              // LastName
                 				+ 1;
-//		System.out.println("JoinGame.MinimumEncodingLength: " + MinimumEncodingLength);
+		System.out.println("JoinGame.MinimumEncodingLength: " + MinimumEncodingLength);
 		return MinimumEncodingLength;
  
 	}
 
 	public short getClassId() {
 		ClassId =  (short) MESSAGE_CLASS_IDS.JoinGame.getValue();
-//		System.out.println("JoinGame.ClassId: " + ClassId);
+		System.out.println("JoinGame.ClassId: " + ClassId);
 		return ClassId;
 	}
 

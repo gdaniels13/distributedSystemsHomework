@@ -1,25 +1,28 @@
 package Common;
 
 import java.net.UnknownHostException;
-
 import org.omg.CORBA.portable.ApplicationException;
 
-public abstract class DistributableObject
+
+
+public  class DistributableObject
 {
 	public enum DISTRIBUTABLE_CLASS_IDS
     {
 		MessageNumber(1000),
-		GameConfiguration(1001),
-        EndPoint(1002), 
-        PlayingFieldLayout(1004),
-        FieldLocation(1006),
-        ComponentInfo(1010),
-        ComponentList(1012),
-        StatusInfo(1014),
-        Tick(1020),
-        Excuse(1022),
-        WhiningTwine(1024),
-        Bomb(1026);
+	    GameConfiguration(1001),
+	    EndPoint(1002), 
+	    PlayingFieldLayout(1004),
+	    FieldLocation(1006),
+	    AgentInfo(1008),
+	    ComponentInfo(1010),
+	    GameInfo(1011),
+	    AgentList(1012),
+	    StatusInfo(1014),
+	    Tick(1020),
+	    Excuse(1022),
+	    WhiningTwine(1024),
+	    Bomb(1026);
         
         private int value;
         DISTRIBUTABLE_CLASS_IDS(int value)
@@ -37,7 +40,6 @@ public abstract class DistributableObject
                     return (short) status.value;
                 }
             }
-            // throw an IllegalArgumentException or return null
             throw new IllegalArgumentException("the given number doesn't match any Status.");
         }
         public static DISTRIBUTABLE_CLASS_IDS getByValue(int i )
@@ -59,7 +61,7 @@ public abstract class DistributableObject
                 if( t.value== b)
                     temp = t;
             } 
-            return temp;  //or throw exception
+            return temp;  
         }
     };
     
@@ -81,11 +83,11 @@ public abstract class DistributableObject
         	case Bomb:
                 result = Bomb.Create(bytes);
                 break;
-            case ComponentInfo:
-                result = ComponentInfo.Create(bytes);
+            case AgentInfo:
+                result = AgentInfo.Create(bytes);
                 break;
-            case ComponentList:
-                result = ComponentList.Create(bytes);
+            case AgentList:
+                result = AgentList.Create(bytes);
                 break;
             case EndPoint:
                 result = EndPoint.Create(bytes);
@@ -102,9 +104,6 @@ public abstract class DistributableObject
             case PlayingFieldLayout:
                 result = PlayingFieldLayout.Create(bytes);
                 break;
-            case StatusInfo:
-                result = StatusInfo.Create(bytes);
-                break;
             case Tick:
                 result = Tick.Create(bytes);
                 break;
@@ -112,17 +111,16 @@ public abstract class DistributableObject
                 result = WhiningTwine.Create(bytes);
                 break;
             default:
-			try {
 				throw new ApplicationException("Invalid Class IDs", null);
-			} catch (ApplicationException e) {
-				e.printStackTrace();
-			}
+			
         }
         return result;
     }
 
-    abstract public void Encode(ByteList bytes) throws UnknownHostException, Exception; 
+    public void Encode(ByteList bytes) throws UnknownHostException, Exception
+    {}
     
-    abstract protected void Decode(ByteList bytes) throws ApplicationException, Exception;
+    protected void Decode(ByteList bytes) throws ApplicationException, Exception
+    {}
 }
 

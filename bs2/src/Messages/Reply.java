@@ -5,7 +5,10 @@ import java.net.UnknownHostException;
 
 import org.omg.CORBA.portable.ApplicationException;
 
+import Common.BitConverter;
 import Common.ByteList;
+import Common.DistributableObject.DISTRIBUTABLE_CLASS_IDS;
+import Messages.Message.MESSAGE_CLASS_IDS;
 
 public abstract class Reply extends Message
 {
@@ -134,7 +137,7 @@ public abstract class Reply extends Message
         super.Encode(messageBytes);                              // Encode stuff from base class
 
         messageBytes.Add((byte)ReplyType.getValue());            // Write out a place holder for the length
-      
+        //messageBytes.update();
         
         messageBytes.Add((byte)Status.getValue());               // Write out a place holder for the length
         messageBytes.update();
@@ -154,16 +157,15 @@ public abstract class Reply extends Message
 
         bytes.SetNewReadLimit(objLength);
      
-        bytes.update();
         
         super.Decode(bytes);
-    
+        //bytes.update();
         int  tempa = (int) bytes.GetByte();
+        
         ReplyType = PossibleTypes.convert(tempa);
-     
-        tempa = (int) bytes.GetByte();
+        //bytes.update();
         Status = PossibleStatus.convert(tempa);
-    
+        //bytes.update();
         Note = bytes.GetString();
 
         bytes.RestorePreviosReadLimit();

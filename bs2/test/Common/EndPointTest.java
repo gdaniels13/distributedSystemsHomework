@@ -1,8 +1,9 @@
-package Common;
+package CommonTester;
 
 import static org.junit.Assert.*;
 
 import java.io.NotActiveException;
+import java.net.UnknownHostException;
 
 import org.junit.Test;
 import org.omg.CORBA.portable.ApplicationException;

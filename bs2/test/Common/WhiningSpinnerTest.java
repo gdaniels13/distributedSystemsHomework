@@ -1,4 +1,4 @@
-package Common;
+package CommonTester;
 
 import static org.junit.Assert.*;
 
@@ -21,10 +21,10 @@ public class WhiningSpinnerTest {
 	public void WhiningSpinner_CheckConstructors()
     {
         WhiningTwine e = new WhiningTwine();
-        assertEquals(0, e.CreatorId);
-        assertNotNull(e.Ticks);
-        assertEquals(0, e.Ticks.size());
-        assertNull(e.RequestTick);
+        assertEquals(0, e.getCreatorId());
+        assertNotNull(e.getTicks());
+        assertEquals(0, e.getTicks().size());
+        assertNull(e.getRequestTick());
 
         Tick t1 = new Tick();
         Tick t2 = new Tick();
@@ -32,13 +32,13 @@ public class WhiningSpinnerTest {
         Tick t4 = new Tick();
         ArrayList<Tick> ticks = new ArrayList<Tick>( Arrays.asList(t1, t2, t3));
         e = new WhiningTwine((short) 10, ticks, t4);
-        assertEquals(10, e.CreatorId);
-        assertNotNull(e.Ticks);
-        assertEquals(3, e.Ticks.size());
-        assertSame(t1, e.Ticks.get(0));
-        assertSame(t2, e.Ticks.get(1));
-        assertSame(t3, e.Ticks.get(2));
-        assertSame(t4, e.RequestTick);
+        assertEquals(10, e.getCreatorId());
+        assertNotNull(e.getTicks());
+        assertEquals(3, e.getTicks().size());
+        assertSame(t1, e.getTicks().get(0));
+        assertSame(t2, e.getTicks().get(1));
+        assertSame(t3, e.getTicks().get(2));
+        assertSame(t4, e.getRequestTick());
     }
 
 	@Test
@@ -50,30 +50,30 @@ public class WhiningSpinnerTest {
         Tick t4 = new Tick();
         ArrayList<Tick> ticks = new ArrayList<Tick>(Arrays.asList(t1, t2, t3));
         WhiningTwine e = new WhiningTwine((short) 10, ticks, t4);
-        assertEquals(10, e.CreatorId);
-        assertNotNull(e.Ticks);
-        assertEquals(3, e.Ticks.size());
-        assertSame(t1, e.Ticks.get(0));
-        assertSame(t2, e.Ticks.get(1));
-        assertSame(t3, e.Ticks.get(2));
-        assertSame(t4, e.RequestTick);
+        assertEquals(10, e.getCreatorId());
+        assertNotNull(e.getTicks());
+        assertEquals(3, e.getTicks().size());
+        assertSame(t1, e.getTicks().get(0));
+        assertSame(t2, e.getTicks().get(1));
+        assertSame(t3, e.getTicks().get(2));
+        assertSame(t4, e.getRequestTick());
 
-        e.CreatorId = 135;
-        assertEquals(135, e.CreatorId);
-        e.CreatorId = 0;
-        assertEquals(0, e.CreatorId);
-        e.CreatorId = Short.MAX_VALUE;
-        assertEquals(Short.MAX_VALUE, e.CreatorId);
+        e.setCreatorId((short) 135);
+        assertEquals(135, e.getCreatorId());
+        e.setCreatorId((short) 0);
+        assertEquals(0, e.getCreatorId());
+        e.setCreatorId( Short.MAX_VALUE);
+        assertEquals(Short.MAX_VALUE, e.getCreatorId());
 
-        e.Ticks = null;
-        assertNull(e.Ticks);
-        e.Ticks = ticks;
-        assertSame(ticks, e.Ticks);
+        e.setTicks(null);
+        assertNull(e.getTicks());
+        e.setTicks(ticks);
+        assertSame(ticks, e.getTicks());
 
-        e.RequestTick = null;
-        assertNull(e.RequestTick);
-        e.RequestTick = t4;
-        assertSame(t4, e.RequestTick);
+        e.setRequestTick(null);
+        assertNull(e.getRequestTick());
+        e.setRequestTick(t4);
+        assertSame(t4, e.getRequestTick());
     }
 	
 	
@@ -86,27 +86,27 @@ public class WhiningSpinnerTest {
         Tick t4 = new Tick();
         ArrayList<Tick> ticks = new ArrayList<Tick>(Arrays.asList(t1, t2, t3 ));
         WhiningTwine e1 = new WhiningTwine((short)10, ticks, t4);
-        assertEquals(10, e1.CreatorId);
-        assertNotNull(e1.Ticks);
-        assertEquals(3, e1.Ticks.size());
-        assertSame(t1, e1.Ticks.get(0));
-        assertSame(t2, e1.Ticks.get(1));
-        assertSame(t3, e1.Ticks.get(2));
-        assertSame(t4, e1.RequestTick);
+        assertEquals(10, e1.getCreatorId());
+        assertNotNull(e1.getTicks());
+        assertEquals(3, e1.getTicks().size());
+        assertSame(t1, e1.getTicks().get(0));
+        assertSame(t2, e1.getTicks().get(1));
+        assertSame(t3, e1.getTicks().get(2));
+        assertSame(t4, e1.getRequestTick());
 
         ByteList bytes = new ByteList();
         e1.Encode(bytes);
         WhiningTwine e2 = WhiningTwine.Create(bytes);
-        assertEquals(e1.CreatorId, e2.CreatorId);
-        assertEquals(e1.Ticks.size(), e2.Ticks.size());
-        assertEquals(e1.Ticks.get(0).getLogicalClock(), e2.Ticks.get(0).getLogicalClock());
-        assertEquals(e1.Ticks.get(0).getHashCode(), e2.Ticks.get(0).getHashCode());
-        assertEquals(e1.Ticks.get(1).getLogicalClock(), e2.Ticks.get(1).getLogicalClock());
-        assertEquals(e1.Ticks.get(1).getHashCode(), e2.Ticks.get(1).getHashCode());
-        assertEquals(e1.Ticks.get(2).getLogicalClock(), e2.Ticks.get(2).getLogicalClock());
-        assertEquals(e1.Ticks.get(2).getHashCode(), e2.Ticks.get(2).getHashCode());
-        assertEquals(e1.RequestTick.getLogicalClock(), e2.RequestTick.getLogicalClock());
-        assertEquals(e1.RequestTick.getHashCode(), e2.RequestTick.getHashCode());
+        assertEquals(e1.getCreatorId(), e2.getCreatorId());
+        assertEquals(e1.getTicks().size(), e2.getTicks().size());
+        assertEquals(e1.getTicks().get(0).getLogicalClock(), e2.getTicks().get(0).getLogicalClock());
+        assertEquals(e1.getTicks().get(0).getHashCode(), e2.getTicks().get(0).getHashCode());
+        assertEquals(e1.getTicks().get(1).getLogicalClock(), e2.getTicks().get(1).getLogicalClock());
+        assertEquals(e1.getTicks().get(1).getHashCode(), e2.getTicks().get(1).getHashCode());
+        assertEquals(e1.getTicks().get(2).getLogicalClock(), e2.getTicks().get(2).getLogicalClock());
+        assertEquals(e1.getTicks().get(2).getHashCode(), e2.getTicks().get(2).getHashCode());
+        assertEquals(e1.getRequestTick().getLogicalClock(), e2.getRequestTick().getLogicalClock());
+        assertEquals(e1.getRequestTick().getHashCode(), e2.getRequestTick().getHashCode());
 
         bytes.Clear();
         e1.Encode(bytes);

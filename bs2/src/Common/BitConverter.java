@@ -1,8 +1,8 @@
 package Common;
 import java.lang.Exception;
 
-//This method is because Java has no bitConverter method.
-// downloaded from http://www.nextgenupdate.com/forums/computer-programming/394645-java-bitconverter-c.html
+// This class is because Java has no bitConverter class.
+// http://www.nextgenupdate.com/forums/computer-programming/394645-java-bitconverter-c.html
 
 public class BitConverter
 {

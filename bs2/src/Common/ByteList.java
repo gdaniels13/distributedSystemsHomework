@@ -1,11 +1,22 @@
 package Common;
 import java.io.NotActiveException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.awt.Window.Type;
+import java.sql.Ref;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import junit.framework.Assert;
@@ -21,14 +32,12 @@ public class ByteList
 	private short _addCurrentSection = (short) 0;
 	private short _addCurrentOffset = (short)0;
 	private short _readCurrentPosition = (short)0;
-
-	
 	private Stack<Short> _readLimitStack = new Stack<Short>();
-	
 	private int RemainingToRead;
 	private short CurrentWritePosition;
     private static final int SECTION_SIZE = 1024;
     private ArrayList<byte[]> _sections = new ArrayList<byte[]>();
+    
     
     public ArrayList<byte[]> get_sections() {
 		return _sections;
@@ -48,7 +57,7 @@ public class ByteList
        
     public void WriteInt16To(int writePosition, short value) throws UnknownHostException
     {
-        if (writePosition >= 0 && writePosition < getLength() - 2)
+        if (writePosition >= 0 && writePosition < (getLength() - 2))
         {
             int sectionIdx = writePosition / SECTION_SIZE;
             int sectionOffset = writePosition - sectionIdx * SECTION_SIZE;
@@ -228,6 +237,7 @@ public class ByteList
         else
         {
             Add(true);
+            this.update();
             obj.Encode(this);
         }
     }
@@ -268,7 +278,7 @@ public class ByteList
     {
        	short result = BitConverter.toInt16(GetBytes(2), 0);
        	short temp = (short) (this.get_readCurrentPosition() - 2);
-    	this.set_readCurrentPosition (temp);   // Move the current read position back two bytes
+    	this.set_readCurrentPosition(temp);   // Move the current read position back two bytes
         return result;
     }
 
@@ -318,16 +328,16 @@ public class ByteList
         	result = new String(bytes, "UTF-16");
         }
         	
-//       System.out.println("result from ByteList.GetString() is: " + result );
+       System.out.println("result from ByteList.GetString() is: " + result );
        return result;
     }
     
     public int getRemainingToRead() 
     {
     	int tmpMax = (this._readLimitStack.size() == 0) ? this.getLength() : this._readLimitStack.peek();
-    	this.RemainingToRead =  (this.get_readCurrentPosition() >= tmpMax) ? 0 : tmpMax - this.get_readCurrentPosition();
-//    	System.out.println("ByteList.RemainingToRead:" + this.RemainingToRead);
-    	return this.RemainingToRead;
+    	RemainingToRead =  (this.get_readCurrentPosition() >= tmpMax) ? 0 : tmpMax - this.get_readCurrentPosition();
+    	System.out.println("ByteList.RemainingToRead:" +RemainingToRead);
+    	return RemainingToRead;
 	}
     
     public byte[] GetBytes(int length) throws ApplicationException
@@ -492,7 +502,7 @@ public class ByteList
     public short getCurrentWritePosition() 
     {
     	this.CurrentWritePosition = (short) (this.get_addCurrentSection() * SECTION_SIZE + this.get_addCurrentOffset());
-//    	System.out.println("ByteList.CurrentWritePosition: "+ this.CurrentWritePosition);
+    	System.out.println("ByteList.CurrentWritePosition: "+ this.CurrentWritePosition);
     	return this.CurrentWritePosition;
 	}
 	public short get_readCurrentPosition() {
@@ -524,13 +534,13 @@ public class ByteList
 
     public void update()
     {
-    	//System.out.println("=============================");
-//    	System.out.println("ByteList.update() Method>>>");
-//    	System.out.println("_addCurrentSection() = " + this.get_addCurrentSection());
-//    	System.out.println("CurrentWritePosition() = " + this.getCurrentWritePosition());
-//    	System.out.println("Length() = " + this.getLength());
-//    	System.out.println("RemainingToRead() = " + this.getRemainingToRead());
-//    	System.out.println("_readCurrentPosition = " + this.get_readCurrentPosition());
-//    	System.out.println("=============================");
+    	System.out.println("=============================");
+    	System.out.println("ByteList.update() Method>>>");
+    	System.out.println("_addCurrentSection() = " + this.get_addCurrentSection());
+    	System.out.println("CurrentWritePosition() = " + this.getCurrentWritePosition());
+    	System.out.println("Length() = " + this.getLength());
+    	System.out.println("RemainingToRead() = " + this.getRemainingToRead());
+    	System.out.println("_readCurrentPosition = " + this.get_readCurrentPosition());
+    	System.out.println("=============================");
     }
 }

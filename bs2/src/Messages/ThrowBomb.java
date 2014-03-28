@@ -1,4 +1,6 @@
 package Messages;
+import java.io.NotActiveException;
+import java.net.UnknownHostException;
 
 import org.omg.CORBA.portable.ApplicationException;
 
