@@ -34,6 +34,14 @@ public class MainGui extends JFrame{
         add(gameStatus);
         validate();
         repaint();
-        new Thread(agent).start();
+//        new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+                agent.init();
+                new Thread(agent).start();
+//            }
+//        });
+
     }
 }

@@ -24,10 +24,11 @@ public class JoinGameTest {
         AgentInfo agentInfo = new AgentInfo((short) 1001, AgentInfo.PossibleAgentType.BrilliantStudent);
         agentInfo.setFirstName("Joe");
         agentInfo.setLastName("Jones");
-        agentInfo.setANumber("A00123");
+        agentInfo.setANumber("A00001");
         agentInfo.setAgentStatus(PossibleAgentStatus.InGame);
         
         jg = new JoinGame((short) 10, agentInfo);
+        
         
         assertEquals(10, jg.getGameId());
         assertSame(agentInfo, jg.getAgentInfo());
@@ -36,6 +37,9 @@ public class JoinGameTest {
         ByteList bytes = new ByteList();
         
         jg.Encode(bytes);
+        byte[] b = bytes.GetBytes(bytes.getLength());
+        for(int i =0; i<b.length; ++i)
+            System.out.print(b[i]+"**");
         
         Message msg = Message.Create(bytes);
         
