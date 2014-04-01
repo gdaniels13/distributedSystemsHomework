@@ -11,21 +11,21 @@ public abstract class Request extends Message
 	private short ClassId;
 	public enum PossibleTypes
     {
-		GameAnnouncement(1),
-        JoinGame(2),
-        AddComponent(3),
-        RemoveComponent(4),
-        StartGame(5),
-        EndGame(6),
-        GetResource(7),
-        TickDelivery(8),
-        ValidateTick(9),
-        Move(10),
-        ThrowBomb(11),
-        Eat(12),
-        ChangeStrength(13),
-        Collaborate(14),
-        GetStatus(15);
+		JoinGame(2),
+	    AddComponent(3),
+	    RemoveComponent(4),
+	    StartGame(5),
+	    EndGame(6),
+	    GetResource(7),
+	    TickDelivery(8),
+	    ValidateTick(9),
+	    Move(10),
+	    ThrowBomb(11),
+	    Eat(12),
+	    ChangeStrength(13),
+	    Collaborate(14),
+	    GetStatus(15),
+	    ExitGame(16);
      
         private int value;
          
@@ -69,10 +69,8 @@ public abstract class Request extends Message
             throw new ApplicationException("Invalid message byte array", null);
 
         short msgType = bytes.PeekInt16();
-        
-        if (msgType == (short) MESSAGE_CLASS_IDS.GameAnnouncement.getValue())
-        	result = GameAnnouncement.Create(bytes);
-        else if (msgType == (short) MESSAGE_CLASS_IDS.JoinGame.getValue())
+                
+        if (msgType == (short) MESSAGE_CLASS_IDS.JoinGame.getValue())
         	result = JoinGame.Create(bytes);
         else if (msgType == (short) MESSAGE_CLASS_IDS.AddComponent.getValue())
         	result = AddComponent.Create(bytes);
@@ -106,20 +104,21 @@ public abstract class Request extends Message
     }
 	
 	@Override 
-    public void Encode(ByteList messageBytes) throws NotActiveException, UnknownHostException, Exception
+    public void Encode(ByteList bytes) throws NotActiveException, UnknownHostException, Exception
     {
-        messageBytes.Add(getClassId());                           // Write out this class id first
-
-        short lengthPos = messageBytes.getCurrentWritePosition();   // Get the current write position, so we
+        bytes.Add(getClassId());                           // Write out this class id first
+       // messageBytes.update();
+        short lengthPos = bytes.getCurrentWritePosition();   // Get the current write position, so we
                                                                // can write the length here later
-        messageBytes.Add((short) 0);                           // Write out a place holder for the length
-        messageBytes.getRemainingToRead();
-        super.Encode(messageBytes);                             // Encode stuff from base class
-
-        messageBytes.Add((byte)RequestType.getValue());         // Write out a place holder for the length
-       
-        short length = (short) (messageBytes.getCurrentWritePosition() - lengthPos - 2);
-        messageBytes.WriteInt16To(lengthPos, length);          // Write out the length of this object        
+        bytes.Add((short) 0);                           // Write out a place holder for the length
+       // messageBytes.update();
+        bytes.getRemainingToRead();
+        super.Encode(bytes);                             // Encode stuff from base class
+       // messageBytes.update();
+        bytes.Add((byte)RequestType.getValue());         // Write out a place holder for the length
+        //messageBytes.update();
+        short length = (short) (bytes.getCurrentWritePosition() - lengthPos - 2);
+        bytes.WriteInt16To(lengthPos, length);          // Write out the length of this object        
     }
 
 	@Override 

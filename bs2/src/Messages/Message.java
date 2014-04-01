@@ -7,6 +7,7 @@ import org.omg.CORBA.portable.ApplicationException;
 
 import Common.ByteList;
 import Common.MessageNumber;
+import Common.DistributableObject.DISTRIBUTABLE_CLASS_IDS;
 
 public abstract class Message implements Comparable 
 {
@@ -17,27 +18,33 @@ public abstract class Message implements Comparable
 	public abstract MESSAGE_CLASS_IDS MessageTypeId();
 	public enum MESSAGE_CLASS_IDS
 	{
-		Message(1),
-		MessageNumber(2),
-		Request(100), 
-		GameAnnouncement(101),
-		JoinGame(102), 
-		AddComponent(103), 
-		RemoveComponent(104), 
-		StartGame(105), 
-		EndGame(106), 
-		GetResource(107), 
-		TickDelivery(108), 
-		ValidateTick(109), 
-		Move(110), 
-		ThrowBomb(111), 
-		Eat(112), 
-		ChangeStrength(113), 
-		Collaborate(114), 
-		GetStatus(115), 
-		Reply(200), 
-		AckNak(201), 
-		MaxMessageClassId(299);
+		 Message(1),
+		 MessageNumber(2),
+		 Request(100),
+		 JoinGame(102),
+		 AddComponent(103),
+		 RemoveComponent(104),
+		 StartGame(105),
+		 EndGame(106),
+		 GetResource(107),
+		 TickDelivery(108),
+		 ValidateTick(109),
+		 Move(110),
+		 ThrowBomb(111),
+		 Eat(112),
+		 ChangeStrength(113),
+		 Collaborate(114),
+		 GetStatus(115),
+		 ExitGame(118),
+		 Reply(200),
+		 AckNak(201),
+		 ReadyReply(205),
+		 ResourceReply(210),
+		 ConfigurationReply(215),
+		 PlayingFieldReply(220),
+		 AgentListReply(225),
+		 StatusReply(230),
+		 MaxMessageClassId(299);
 
 		private int value;
 
@@ -58,7 +65,16 @@ public abstract class Message implements Comparable
 			// throw an IllegalArgumentException or return null
 			throw new IllegalArgumentException("the given number doesn't match any Status.");
 		}
-
+		
+		public static MESSAGE_CLASS_IDS fromShort(short i)
+		{
+			MESSAGE_CLASS_IDS temp = null;
+			for (MESSAGE_CLASS_IDS status: MESSAGE_CLASS_IDS.values())
+					if (status.value == i)
+						temp = status;
+			return temp;
+		}
+		 
 	}
 
 	protected Message() {
@@ -87,15 +103,15 @@ public abstract class Message implements Comparable
 	public void Encode(ByteList bytes) throws UnknownHostException,	NotActiveException, Exception 
 	{
 		bytes.Add(getClassId()); // Write out the class type
-		bytes.update();
+		//bytes.update();
 		
 		short lengthPos = bytes.getCurrentWritePosition(); // Get the current write position, so we
 														// can write the length here later
 		bytes.Add((short) 0); 			// Write out a place holder for the length
-		bytes.update();
+		//bytes.update();
 		
 		bytes.AddObjects(getMessageNr(), getConversationId());
-		bytes.update();
+		//bytes.update();
 		short length = (short)(bytes.getCurrentWritePosition() - lengthPos - 2);
 		bytes.WriteInt16To(lengthPos, length); // Write out the length of this object
 	}

@@ -1,4 +1,4 @@
-package MessagesTester;
+package Messages;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import org.junit.Test;
 import Common.*;
 import Messages.*;
 
-public class MessageTestre {
+public class MessageTest {
 
 	@Test
 	public void TestClassId()

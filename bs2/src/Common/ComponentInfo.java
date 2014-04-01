@@ -32,18 +32,18 @@ public class ComponentInfo extends DistributableObject
 		
 	}
 
-	// new
+	/*// new
     public static ComponentInfo Create(ByteList bytes) throws ApplicationException, Exception
     {
         ComponentInfo result = new ComponentInfo();
         result.Decode(bytes);
         return result;
     }
-    
+    */
     @Override
     public void Encode(ByteList bytes) throws UnknownHostException, Exception
     {
-        bytes.Add(ComponentInfo.ClassId);                             // Write out the class type
+        bytes.Add(getClassId());                             // Write out the class type
         bytes.update();
         short lengthPos = bytes.getCurrentWritePosition();   // Get the current write position, so we
                                                         // can write the length here later
@@ -59,7 +59,7 @@ public class ComponentInfo extends DistributableObject
 	@Override
 	protected void Decode(ByteList bytes) throws ApplicationException, Exception
     {
-    	if (bytes == null || bytes.getRemainingToRead() < ComponentInfo.getMinimumEncodingLength())
+    	if (bytes == null || bytes.getRemainingToRead() < getMinimumEncodingLength())
     		throw new ApplicationException("Invalid byte array", null);
 		else if (bytes.PeekInt16() != getClassId())
 				throw new ApplicationException("Invalid class id", null);
@@ -67,15 +67,15 @@ public class ComponentInfo extends DistributableObject
 		{
 			short objType = bytes.GetInt16();
 			short objLength= bytes.GetInt16();
-				    	
-			bytes.SetNewReadLimit(objLength);
-				    
-			setId((bytes.GetInt16()));
-			setCommmunicationEndPoint(((EndPoint) bytes.GetDistributableObject())); 
+			   bytes.update();    	
+			bytes.SetNewReadLimit(objLength);    bytes.update();
+				     
+			setId((bytes.GetInt16()));    bytes.update();
+			setCommmunicationEndPoint(((EndPoint) bytes.GetDistributableObject()));     bytes.update();
 		
 			RaiseChangedEvent();
 			
-		    bytes.RestorePreviosReadLimit();
+		    bytes.RestorePreviosReadLimit();    bytes.update();
 		}
     }
 	
@@ -89,7 +89,7 @@ public class ComponentInfo extends DistributableObject
 		System.out.println("ComponentInfo.Id " + Id);
 	}
 
-	public EndPoint getCommmunicationEndPoint() {
+	public EndPoint getCommunicationEndPoint() {
 		return CommmunicationEndPoint;
 	}
 
@@ -103,10 +103,11 @@ public class ComponentInfo extends DistributableObject
 		
 		MinimumEncodingLength =  4             				// Object header
                 					+ 2           		  	// Id
-                					+ 1          		  	// Agent Types
+                					+ 1;   					// CommunicationEndPoint
+                				/*	+ 1          		  	// Agent Types
                 					+ 1 					//EndPoint.MinimumEncodingLength
                 					+ 1; 					//Tick.MinimumEncodingLength;
-		System.out.println("ComponentInfo.MinimumEncodingLength =" + MinimumEncodingLength);
+*/		System.out.println("ComponentInfo.MinimumEncodingLength =" + MinimumEncodingLength);
 		return MinimumEncodingLength;
 	}
 
@@ -120,6 +121,5 @@ public class ComponentInfo extends DistributableObject
      {
 		if ( handler != null)
 			handler.addStateChangeHandler();
-		 
-     }
+	 }
 }

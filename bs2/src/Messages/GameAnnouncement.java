@@ -8,9 +8,9 @@ import org.omg.CORBA.portable.ApplicationException;
 import Common.ByteList;
 import Common.EndPoint;
 
-public class GameAnnouncement extends Request
+public class GameAnnouncement // extends Request
 {
-	private static short ClassId;
+	/*private static short ClassId;
 	private static  int MinimumEncodingLength;
 	public short GameId;
     public EndPoint GameSeverEP;
@@ -123,5 +123,5 @@ public class GameAnnouncement extends Request
 	public MESSAGE_CLASS_IDS MessageTypeId() {
 			return Message.MESSAGE_CLASS_IDS.GameAnnouncement;
 	}
-
+*/
 }

@@ -1,4 +1,4 @@
-package MessagesTester;
+package Messages;
 
 import static org.junit.Assert.*;
 
@@ -6,73 +6,75 @@ import org.junit.Test;
 import org.omg.CORBA.portable.ApplicationException;
 
 import Common.AgentInfo;
+import Common.AgentInfo.PossibleAgentStatus;
 import Common.ByteList;
 import Common.ComponentInfo;
 import Messages.JoinGame;
 import Messages.Message;
 
-public class JoinGameTester {
+public class JoinGameTest {
 
 	@Test
-	 public void JoinGame_TestConstructorsAndFactories()
+	 public void JoinGame_TestConstructorsAndFactories() throws Exception
     {
         JoinGame jg = new JoinGame();
         assertEquals(0, jg.getGameId());
-        assertNull(jg.getANumber());
-        assertNull(jg.getFirstName());
-        assertNull(jg.getLastName());
         assertNull(jg.getAgentInfo());
 
         AgentInfo agentInfo = new AgentInfo((short) 1001, AgentInfo.PossibleAgentType.BrilliantStudent);
-        jg = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+        agentInfo.setFirstName("Joe");
+        agentInfo.setLastName("Jones");
+        agentInfo.setANumber("A00123");
+        agentInfo.setAgentStatus(PossibleAgentStatus.InGame);
+        
+        jg = new JoinGame((short) 10, agentInfo);
+        
         assertEquals(10, jg.getGameId());
-        assertEquals("A00123", jg.getANumber());
-        assertEquals("Joe", jg.getFirstName());
-        assertEquals("Jones", jg.getLastName());
+        assertSame(agentInfo, jg.getAgentInfo());
         assertSame(agentInfo, jg.getAgentInfo());
 
+        ByteList bytes = new ByteList();
+        
+        jg.Encode(bytes);
+        
+        Message msg = Message.Create(bytes);
+        
+        assertNotNull(msg);
+        
+        
+        JoinGame jg2 = (JoinGame) msg ;
+        
+        assertEquals(jg.getGameId(), jg2.getGameId());
     }
 
 	@Test
 	public void JoinGame_Properties()
     {
 		AgentInfo agentInfo = new AgentInfo((short) 1001, AgentInfo.PossibleAgentType.BrilliantStudent);
-        JoinGame jg = new JoinGame((short)10, "A00123", "Joe", "Jones", agentInfo);
+		agentInfo.setFirstName("Joe");
+	    agentInfo.setLastName("Jones");
+	    agentInfo.setANumber("A00123");
+	    agentInfo.setAgentStatus(PossibleAgentStatus.InGame);
+	    
+        JoinGame jg = new JoinGame((short)10, agentInfo);
+        
         assertEquals(10, jg.getGameId());
-        assertEquals("A00123", jg.getANumber());
-        assertEquals("Joe", jg.getFirstName());
-        assertEquals("Jones", jg.getLastName());
+        assertEquals("A00123", jg.getAgentInfo().getANumber());
+        assertEquals("Jones", jg.getAgentInfo().getLastName());
+        assertEquals("Joe", jg.getAgentInfo().getFirstName());
         assertSame(agentInfo, jg.getAgentInfo());
 
         jg.setGameId((short) 20);
         assertEquals(20, jg.getGameId());
 
-        jg.setANumber("A12345");
-        assertEquals("A12345", jg.getANumber());
-        jg.setANumber(null);
-        assertNull(jg.getANumber());
-        jg.setANumber("A00001");
-        assertEquals("A00001", jg.getANumber());
-
-        jg.setFirstName("Sue");
-        assertEquals("Sue", jg.getFirstName());
-        jg.setFirstName(null);
-        assertNull(jg.getFirstName());
-        jg.setFirstName("James");
-        assertEquals("James", jg.getFirstName());
-
-        jg.setLastName("Hanks");
-        assertEquals("Hanks", jg.getLastName());
-        jg.setLastName(null);
-        assertNull(jg.getLastName());
-        jg.setLastName("Blitzer");
-        assertEquals("Blitzer", jg.getLastName());
-
         jg.setAgentInfo(null);
         assertNull(jg.getAgentInfo());
+        
         jg.setAgentInfo(agentInfo);
         assertSame(agentInfo, jg.getAgentInfo());
-
+        
+        
+        assertEquals(Message.MESSAGE_CLASS_IDS.JoinGame.getValue(), jg.MessageTypeId().getValue());
         assertEquals(Message.MESSAGE_CLASS_IDS.JoinGame, jg.MessageTypeId());
     }
    
@@ -80,14 +82,16 @@ public class JoinGameTester {
 	 public void JoinGame_EncodingAndDecoding() throws ApplicationException, Exception
     {
         AgentInfo agentInfo = new AgentInfo((short) 1001, AgentInfo.PossibleAgentType.BrilliantStudent);
-        JoinGame jg1 = new JoinGame((short) 10, "A00123", "Joe", "Jones", agentInfo);
+        agentInfo.setFirstName("Joe");
+        agentInfo.setLastName("Jones");
+        agentInfo.setANumber("A00123");
+        agentInfo.setAgentStatus(PossibleAgentStatus.InGame);
+        
+        JoinGame jg1 = new JoinGame((short) 10, agentInfo);
         
         assertEquals(10, jg1.getGameId());
-        assertEquals("A00123", jg1.getANumber());
-        assertEquals("Joe", jg1.getFirstName());
-        assertEquals("Jones", jg1.getLastName());
         assertSame(agentInfo, jg1.getAgentInfo());
-
+        
         ByteList bytes = new ByteList();
        
         jg1.Encode(bytes);
@@ -95,21 +99,9 @@ public class JoinGameTester {
     	
 		JoinGame jg2 = JoinGame.Create(bytes);
 		
-		System.out.println("jg1.getGameId() @@@" + jg1.getGameId());
-        System.out.println("jg1.getANumber() @@@" + jg1.getANumber());
-        System.out.println("jg1.getFirstName() @@@" + jg1.getFirstName());
-        System.out.println("jg1.getLastName() @@@" + jg1.getLastName());
-        				
-        System.out.println("jg2.getGameId() @@@" + jg2.getGameId());
-        System.out.println("jg2.getANumber() @@@" + jg2.getANumber());
-        System.out.println("jg2.getFirstName() @@@" + jg2.getFirstName());
-        System.out.println("jg2.getLastName() @@@" + jg2.getLastName());
-        		
+		        		
         assertEquals(jg1.getGameId(), jg2.getGameId());
-        assertEquals(jg1.getANumber(), jg2.getANumber());
-        assertEquals(jg1.getFirstName(), jg2.getFirstName());
-        assertEquals(jg1.getLastName(), jg2.getLastName());
-
+      
         bytes.Clear();
         jg1.Encode(bytes);
         bytes.GetByte();            // Read one byte, which will throw the length off

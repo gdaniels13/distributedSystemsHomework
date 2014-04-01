@@ -18,18 +18,24 @@ public class JoinGameExecutionStrategy extends ExecutionStrategy {
         super(agent,null);
         sentRequest = false;
         AgentInfo agentInfo = new AgentInfo();
+//        JoinGame jg = new JoinGame(
+//                agent.config.getGameInfo().getId(), 
+//                agent.config.getaNumber(), 
+//                agent.config.getFirstName(),
+//                agent.config.getLastName(),
+//                agentInfo );
+//       
         agentInfo.setAgentType(AgentInfo.PossibleAgentType.BrilliantStudent);
-        JoinGame jg = new JoinGame(
-                agent.config.getGameInfo().getId(), 
-                agent.config.getaNumber(), 
-                agent.config.getFirstName(),
-                agent.config.getLastName(),
-                agentInfo );
-        
+//        agentInfo.setAgentStatus(AgentInfo.PossibleAgentStatus.NotInGame);
+        agentInfo.setANumber(agent.config.getaNumber());
+        agentInfo.setLastName(agent.config.getLastName());
+        agentInfo.setFirstName(agent.config.getFirstName());
+
+        JoinGame jg= new JoinGame(agent.config.getGameInfo().getId(), agentInfo);
         
         first = new Envelope(jg, agent.config.getServerAddress(), agent.config.getServerPort());
         this.agent.communicator.send(first);
-//        first = this.agent.communicator.listen();
+        first = this.agent.communicator.listen();
         System.out.println("i got something back");
     }
     

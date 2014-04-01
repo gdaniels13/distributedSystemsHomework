@@ -1,4 +1,4 @@
-package MessagesTester;
+package Messages;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +14,7 @@ import Messages.AckNak;
 import Messages.Message;
 import Messages.Reply;
 
-public class AckNakTester {
+public class AckNakTest {
 
 	@Test
 	public void test() {

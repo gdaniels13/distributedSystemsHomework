@@ -29,14 +29,18 @@ import org.omg.CORBA.portable.ApplicationException;
 public class ByteList
 {
 	private static final Logger log = Logger.getLogger(ByteList.class.getName()); 
-	private short _addCurrentSection = (short) 0;
+    private static final int SECTION_SIZE = 1024;
+    
+    private ArrayList<byte[]> _sections = new ArrayList<byte[]>();
+    private short _addCurrentSection = (short) 0;
 	private short _addCurrentOffset = (short)0;
 	private short _readCurrentPosition = (short)0;
 	private Stack<Short> _readLimitStack = new Stack<Short>();
+	
 	private int RemainingToRead;
 	private short CurrentWritePosition;
-    private static final int SECTION_SIZE = 1024;
-    private ArrayList<byte[]> _sections = new ArrayList<byte[]>();
+
+    
     
     
     public ArrayList<byte[]> get_sections() {
@@ -63,9 +67,9 @@ public class ByteList
             int sectionOffset = writePosition - sectionIdx * SECTION_SIZE;
                                    
             byte[] bytes = BitConverter.getBytes(value);
-            System.arraycopy(bytes, 0,                               // Source
-            				_sections.get(sectionIdx), sectionOffset,   				 // Destination
-            				bytes.length );                    	     // Length Short.SIZE
+            System.arraycopy(bytes, 0,                                // Source
+            				_sections.get(sectionIdx), sectionOffset, // Destination
+            				bytes.length );                    	      // Length Short.SIZE
          }
     }
     
@@ -75,7 +79,7 @@ public class ByteList
         Add(bytes);
     }
 
-    public void AddObjects(Object... items) throws NotActiveException, UnknownHostException, Exception
+    public void AddObjects(Object...items) throws NotActiveException, UnknownHostException, Exception
     {
         for (Object item :items)
             AddObject(item);
@@ -208,23 +212,23 @@ public class ByteList
     {
         if (value != null)
         {
-            int additionalBytesNeeded = this.get_addCurrentOffset() + this.getLength() - SECTION_SIZE;
+            int additionalBytesNeeded = get_addCurrentOffset() + getLength() - SECTION_SIZE;
             Grow(additionalBytesNeeded);
 
             int cnt = 0;
             while (cnt < length)
             {
-                short blockSize = (short) Math.min(SECTION_SIZE - this.get_addCurrentOffset(), length - cnt);
-                System.arraycopy(value, offset + cnt, this._sections.get(get_addCurrentSection()), this.get_addCurrentOffset(), blockSize);
+                short blockSize = (short) Math.min(SECTION_SIZE - get_addCurrentOffset(), length - cnt);
+                System.arraycopy(value, offset + cnt, _sections.get(get_addCurrentSection()), get_addCurrentOffset(), blockSize);
 
                 cnt += blockSize;
-                short temp1 = (short) (this.get_addCurrentOffset() + blockSize);
-                this.set_addCurrentOffset(temp1);
+                short temp1 = (short) (get_addCurrentOffset() + blockSize);
+                set_addCurrentOffset(temp1);
                 if (this.get_addCurrentOffset() == SECTION_SIZE)
                 {
-                    this.set_addCurrentOffset((short)0);
-                    short temp = (short) (this.get_addCurrentSection() + (short)1);
-                    this.set_addCurrentSection(temp);
+                    set_addCurrentOffset((short)0);
+                    short temp = (short) (get_addCurrentSection() + (short)1);
+                    set_addCurrentSection(temp);
                 }
             }
         }
@@ -282,7 +286,7 @@ public class ByteList
         return result;
     }
 
-    public Integer GetInt32() throws Exception
+    public int GetInt32() throws Exception
     {
         return BitConverter.toInt32(GetBytes(4), 0);
     }
@@ -335,7 +339,7 @@ public class ByteList
     public int getRemainingToRead() 
     {
     	int tmpMax = (this._readLimitStack.size() == 0) ? this.getLength() : this._readLimitStack.peek();
-    	RemainingToRead =  (this.get_readCurrentPosition() >= tmpMax) ? 0 : tmpMax - this.get_readCurrentPosition();
+    	RemainingToRead =  (this.get_readCurrentPosition() >= tmpMax) ? 0 : tmpMax - (this.get_readCurrentPosition());
     	System.out.println("ByteList.RemainingToRead:" +RemainingToRead);
     	return RemainingToRead;
 	}
@@ -383,11 +387,11 @@ public class ByteList
         int bytesRead = 0;
         byte[] bytes = new byte[getLength()];
 
-        for (int i = 0; i <= this.get_addCurrentSection(); i++)
+        for (int i = 0; i <= get_addCurrentSection(); i++)
         {
             int sectionBytes = SECTION_SIZE;
-            if (i == this.get_addCurrentSection())
-                sectionBytes = this.get_addCurrentOffset();
+            if (i == get_addCurrentSection())
+                sectionBytes = get_addCurrentOffset();
             System.arraycopy(_sections.get(i), 0, bytes, bytesRead, sectionBytes);
             bytesRead += sectionBytes;
         }
@@ -397,27 +401,27 @@ public class ByteList
   
     public void SetNewReadLimit(short length)
     {
-    	this._readLimitStack.push((short) (this.get_readCurrentPosition() + length));
+    	_readLimitStack.push((short) (this.get_readCurrentPosition() + length));
     }
 
     public void RestorePreviosReadLimit()
     {
-        if (this._readLimitStack.size() > 0)
-            this._readLimitStack.pop();
+        if (_readLimitStack.size() > 0)
+            _readLimitStack.pop();
     }
 
     public void ClearMaxReadPosition()
     {
-        this._readLimitStack.clear();
+        _readLimitStack.clear();
     }
 
     public void Clear()
     {
-        this._sections.clear();
-        this._readLimitStack.clear();
-        this.set_addCurrentSection((short)0);
-        this.set_addCurrentOffset((short)0);
-        this.set_readCurrentPosition((short) 0);
+        _sections.clear();
+        _readLimitStack.clear();
+        set_addCurrentSection((short)0);
+        set_addCurrentOffset((short)0);
+        set_readCurrentPosition((short) 0);
     }
     
     public byte getByteValue(int index) throws Exception
@@ -501,9 +505,9 @@ public class ByteList
    
     public short getCurrentWritePosition() 
     {
-    	this.CurrentWritePosition = (short) (this.get_addCurrentSection() * SECTION_SIZE + this.get_addCurrentOffset());
-    	System.out.println("ByteList.CurrentWritePosition: "+ this.CurrentWritePosition);
-    	return this.CurrentWritePosition;
+    	CurrentWritePosition = (short) (get_addCurrentSection() * SECTION_SIZE + get_addCurrentOffset());
+    	System.out.println("ByteList.CurrentWritePosition: "+ CurrentWritePosition);
+    	return CurrentWritePosition;
 	}
 	public short get_readCurrentPosition() {
 		return _readCurrentPosition;

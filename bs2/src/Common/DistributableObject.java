@@ -117,10 +117,7 @@ public  class DistributableObject
         return result;
     }
 
-    public void Encode(ByteList bytes) throws UnknownHostException, Exception
-    {}
-    
-    protected void Decode(ByteList bytes) throws ApplicationException, Exception
-    {}
+    public void Encode(ByteList bytes) throws UnknownHostException, Exception  {}
+    protected void Decode(ByteList bytes) throws ApplicationException, Exception  {}
 }
 

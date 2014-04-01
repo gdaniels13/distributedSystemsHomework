@@ -10,24 +10,37 @@ import Common.DistributableObject.DISTRIBUTABLE_CLASS_IDS;
 
 public class AgentInfo extends ComponentInfo
 {
-	  private static short ClassId;
-	  private String ANumber;
-      private String FirstName;
-      private String LastName;
-      private Double Strength; 
-      private Double Speed;
-      private FieldLocation Location;
-      private PossibleAgentType AgentType;
-      private PossibleAgentStatus AgentStatus;
-      public PossibleAgentStatus getAgentStatus() {
+	private static short ClassId;
+	private String ANumber;
+    private String FirstName;
+    private String LastName;
+    private Double Strength; 
+    private Double Speed;
+    private Double Points;
+    private FieldLocation Location;
+    private PossibleAgentType AgentType;
+    private PossibleAgentStatus AgentStatus;
+    private static int MinimumEncodingLength;
+      
+    public PossibleAgentStatus getAgentStatus() {
 		return AgentStatus;
+	}
+
+	public Double getPoints() {
+		return Points;
+	}
+
+	public void setPoints(Double points) {
+		Points = points;
+		RaiseChangedEvent();
 	}
 
 	public void setAgentStatus(PossibleAgentStatus agentStatus) {
 		AgentStatus = agentStatus;
+		 RaiseChangedEvent();
 	}
 
-	private static /*new*/ int MinimumEncodingLength;
+	
       
       public String getANumber() {
     	  return ANumber;
@@ -162,6 +175,7 @@ public class AgentInfo extends ComponentInfo
                  					+ 2              // LastName
                  					+ 8              // Strength
                  					+ 8              // Speed
+                 				//	+ 8 			 // Points
                  					+ 1;             // Location
     	 return MinimumEncodingLength;
 	}
@@ -169,6 +183,7 @@ public class AgentInfo extends ComponentInfo
       public AgentInfo() {
     	  setStrength(0.0);
     	  setSpeed(0.0);
+    	  setPoints(0.0);
       }
 
       public AgentInfo(short id, PossibleAgentType type)
@@ -176,6 +191,7 @@ public class AgentInfo extends ComponentInfo
     	  super(id);  
     	  setStrength(0.0);
     	  setSpeed(0.0);
+    	  setPoints(0.0);
     	  AgentType = type ;
      }
 
@@ -184,6 +200,7 @@ public class AgentInfo extends ComponentInfo
     	 super(id, ep);
     	 setStrength(0.0);
    	  	 setSpeed(0.0);
+   	  	 setPoints(0.0);
     	 AgentType = type ;
       }
    
@@ -213,8 +230,11 @@ public class AgentInfo extends ComponentInfo
              setFirstName("");
          if (getLastName() == null)
              setLastName("");
-
-         bytes.AddObjects((byte)AgentType.getValue());
+        
+         
+         bytes.AddObjects((byte) getAgentType().getValue());
+         bytes.update();
+         bytes.AddObjects((byte) getAgentStatus().getValue());
          bytes.update();
          bytes.AddObjects(getANumber());
          bytes.update();
@@ -225,6 +245,8 @@ public class AgentInfo extends ComponentInfo
          bytes.AddObjects(getStrength());
          bytes.update();
          bytes.AddObjects(getSpeed());
+         bytes.update();
+         bytes.AddObjects(getPoints());
          bytes.update();
          bytes.AddObjects(getLocation());
          bytes.update();
@@ -246,18 +268,22 @@ public class AgentInfo extends ComponentInfo
              short objLength = bytes.GetInt16();
 
              bytes.SetNewReadLimit(objLength);
-
+             bytes.update();
+             
              super.Decode(bytes);
-
+             
+             bytes.update();
+            
              AgentType = PossibleAgentType.fromByte(bytes.GetByte());
              AgentStatus = PossibleAgentStatus.fromByte(bytes.GetByte());
              
-             ANumber = bytes.GetString();
-             FirstName = bytes.GetString();
-             LastName = bytes.GetString();
-             Strength = bytes.GetDouble();
-             Speed = bytes.GetDouble();
-             Location = (FieldLocation) bytes.GetDistributableObject();
+             ANumber = bytes.GetString();   bytes.update();
+             FirstName = bytes.GetString();   bytes.update();
+             LastName = bytes.GetString();   bytes.update();
+             Strength = bytes.GetDouble();   bytes.update();
+             Speed = bytes.GetDouble();   bytes.update();
+             Points = bytes.GetDouble();   bytes.update();
+             Location = (FieldLocation) bytes.GetDistributableObject();   bytes.update();
 
              bytes.RestorePreviosReadLimit();
          }

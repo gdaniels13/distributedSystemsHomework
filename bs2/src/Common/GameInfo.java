@@ -90,7 +90,7 @@ public class GameInfo extends ComponentInfo
 	public void setLabel(String label) {
 		Label = label;
 	}
-	public EndPoint getCommmunicationEndPoint() {
+	public EndPoint getCommunicationEndPoint() {
 		return CommmunicationEndPoint;
 	}
 	public void setCommmunicationEndPoint(EndPoint commmunicationEndPoint) {

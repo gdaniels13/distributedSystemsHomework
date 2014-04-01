@@ -1,4 +1,4 @@
-package MessagesTester;
+package Messages;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import org.junit.Test;
 import Messages.Request;
 import Messages.StartGame;
 
-public class StartGameTester {
+public class StartGameTest {
 
 	@Test
 	public void test() {

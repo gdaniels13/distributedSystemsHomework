@@ -3,6 +3,7 @@ package Common;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
+//import java.util.concurrent.locks.Lock;
 
 import org.omg.CORBA.portable.ApplicationException;
 
@@ -12,7 +13,7 @@ public class AgentList extends DistributableObject implements Iterable<AgentInfo
    	private ArrayList<AgentInfo> agents = new ArrayList<AgentInfo>();
     private Object myLock = new Object();
     private static int MinimumEncodingLength;
-   
+    private Lock lock = new Lock();
     public short getClassId() {
 		ClassId = (short) DISTRIBUTABLE_CLASS_IDS.AgentList.getValue();
 		return ClassId;
@@ -106,7 +107,7 @@ public class AgentList extends DistributableObject implements Iterable<AgentInfo
 
          bytes.Add((short) 0);                           // Write out a place holder for the length
          bytes.update();
-         synchronized (myLock)
+         lock.lock();
          {
              bytes.Add((short)(agents.size()));
              bytes.update();
@@ -116,6 +117,7 @@ public class AgentList extends DistributableObject implements Iterable<AgentInfo
             	 bytes.update();
              }
          }
+         lock.unlock();
          short  length = (short)(bytes.getCurrentWritePosition() - lengthPos - 2);
          bytes.WriteInt16To(lengthPos, length);          // Write out the length of this object    
 		

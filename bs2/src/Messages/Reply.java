@@ -14,8 +14,15 @@ public abstract class Reply extends Message
 {
 	public enum PossibleTypes
     {
-        AckNak(1);
-        private int value;
+		AckNak(1),
+	    ReadyReply(2),
+	    ResourceReply(3),
+	    ConfigurationReply(4),
+	    PlayingFieldReply(5),
+	    AgentListReply(6),
+	    StatusReply(7);
+        
+	    private int value;
          
         PossibleTypes(int value)
         {
@@ -51,12 +58,6 @@ public abstract class Reply extends Message
 	public enum PossibleStatus
     {
         Success(1),
-        InvalidUsername(2),
-        InvalidPassword(3),
-        AlreadyLoggedIn(4),
-        InvalidSessionId(5),
-        UserNameAlreadyExists(6),
-        OtherError(9),
         Failure(2);
         
         private int value;
@@ -105,7 +106,7 @@ public abstract class Reply extends Message
         Status = status;
         Note = note;
     }
-
+ 
     public  static Reply Create(ByteList messageBytes) throws Exception
     {
         Reply result = null;
@@ -117,9 +118,14 @@ public abstract class Reply extends Message
         
         if (msgType == (short) MESSAGE_CLASS_IDS.AckNak.getValue())
           	 result = AckNak.Create(messageBytes);
-        else
-        	 throw new ApplicationException("Invalid Message Class Id", null);
-
+        else if (msgType == (short) MESSAGE_CLASS_IDS.ReadyReply.getValue()) ;
+        else if (msgType == (short) MESSAGE_CLASS_IDS.ResourceReply.getValue()) ;
+        else if (msgType == (short) MESSAGE_CLASS_IDS.ConfigurationReply.getValue()) ;
+        else if (msgType == (short) MESSAGE_CLASS_IDS.PlayingFieldReply.getValue()) ;
+        else if (msgType == (short) MESSAGE_CLASS_IDS.AgentListReply.getValue()) ; 
+        else if (msgType == (short) MESSAGE_CLASS_IDS.StatusReply.getValue()) ; 
+        else  
+        	throw new ApplicationException("Invalid Message Class Id", null);
         return result;
     }
 	

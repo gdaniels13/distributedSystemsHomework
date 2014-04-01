@@ -1,169 +1,133 @@
 package Messages;
 
-import java.io.NotActiveException;
-import java.net.UnknownHostException;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import org.omg.CORBA.portable.ApplicationException;
 
+import Common.AgentInfo;
 import Common.ByteList;
 import Common.ComponentInfo;
 
-public class JoinGame extends Request
-{
-	 private static short ClassId;
-	 private short GameId; 
-     private String ANumber; 
-     private String FirstName;
-     private String LastName; 
-     private ComponentInfo AgentInfo;
-     private static  int MinimumEncodingLength;
-     
-     public JoinGame()
-     {
-    	 super(PossibleTypes.JoinGame);
-     }
+public class JoinGame extends Request {
 
-     public JoinGame(short gameId, String aNumber, String firstName, String lastName, ComponentInfo agentInfo)
-     {
-    	 super(PossibleTypes.JoinGame);
-    	 setGameId(gameId);
-         setANumber(aNumber);
+    private static final Logger log = Logger.getLogger(JoinGame.class.getName());
+    private static short ClassId;
+    private short GameId;
+    private AgentInfo AgentInfo;
+    private static int MinimumEncodingLength;
+
+    public JoinGame() {
+        super(PossibleTypes.JoinGame);
+    }
+
+    public JoinGame(short gameId, AgentInfo agentInfo) //String aNumber, String firstName, String lastName, ComponentInfo agentInfo)
+    {
+        super(PossibleTypes.JoinGame);
+        setGameId(gameId);
+        setAgentInfo(agentInfo);
+        /*setANumber(aNumber);
          setFirstName(firstName);
          setLastName(lastName);
-         setAgentInfo(agentInfo);
-         getClassId();
-         getMinimumEncodingLength();
-     }
+         setAgentInfo(agentInfo);*/
+        getClassId();
+        getMinimumEncodingLength();
+    }
 
-     //new 
-     public static JoinGame Create(ByteList messageBytes) throws ApplicationException, Exception
-     {
-         JoinGame result = null;
+    //new 
+    public static JoinGame Create(ByteList messageBytes) throws ApplicationException, Exception {
+        JoinGame result = null;
 
-         if (messageBytes == null || messageBytes.getRemainingToRead() < JoinGame.getMinimumEncodingLength())
-             throw new ApplicationException("Invalid message byte array", null);
-         else if (messageBytes.PeekInt16() != JoinGame.ClassId)
-             throw new ApplicationException("Invalid message class id", null);
-         else
-         {
-             result = new JoinGame();
-             result.Decode(messageBytes);
-         }
+        if (messageBytes == null || messageBytes.getRemainingToRead() < getMinimumEncodingLength()) {
+            throw new ApplicationException("Invalid message byte array", null);
+        } else if (messageBytes.PeekInt16() != JoinGame.ClassId) {
+            throw new ApplicationException("Invalid message class id", null);
+        } else {
+            result = new JoinGame();
+            result.Decode(messageBytes);
+        }
 
-         return result;
-     }      
-	
-     @Override
-     public void Encode(ByteList bytes) throws Exception
-     {
-         bytes.Add(getClassId());                              // Write out this class id first
+        return result;
+    }
 
-         short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
-                                                                 // can write the length here later
-         bytes.Add((short)0);                             // Write out a place holder for the length
-         bytes.getRemainingToRead();
-         super.Encode(bytes);                              // Encode the part of the object defined
-                                                                 // by the base class
-         if (getANumber() == null)
-             ANumber = "";
-         if (getFirstName() == null)
-             FirstName = "";
-         if (getLastName() == null)
-             LastName = "";
+    @Override
+    public void Encode(ByteList bytes) throws Exception {
+        bytes.Add(getClassId());                              // Write out this class id first
 
-         bytes.AddObjects(this.getGameId(), this.getANumber(), this.getFirstName(), this.getLastName(), this.getAgentInfo());  
+        short lengthPos = bytes.getCurrentWritePosition();    // Get the current write position, so we
+        // can write the length here later
+        bytes.Add((short) 0);        //bytes.update();                      // Write out a place holder for the length
+        bytes.update();
+        super.Encode(bytes);        //bytes.update();       // Encode the part of the object defined
+        // by the base class
 
-         short length = (short)(bytes.getCurrentWritePosition() - lengthPos - 2);
-         bytes.WriteInt16To(lengthPos, length);           // Write out the length of this object        
-     }
+        bytes.AddObjects(getGameId(), getAgentInfo());
 
-    @Override 
-     public void Decode(ByteList bytes) throws Exception
-     {
-         short objType = bytes.GetInt16();
-         short objLength = bytes.GetInt16();
-         
-         bytes.SetNewReadLimit(objLength);
-         bytes.getRemainingToRead();
-         super.Decode(bytes);
-         bytes.getRemainingToRead();
-         GameId = (bytes.GetInt16());
-         ANumber = (bytes.GetString());
-         FirstName = (bytes.GetString());
-         LastName = (bytes.GetString());
-         AgentInfo = ((ComponentInfo) bytes.GetDistributableObject());
-         
-         bytes.RestorePreviosReadLimit();
-     }
-	
-	public short getGameId() {
-		return GameId;
-	}
+        short length = (short) (bytes.getCurrentWritePosition() - lengthPos - 2);
+        bytes.WriteInt16To(lengthPos, length);           // Write out the length of this object        
+        bytes.update();
+    }
 
-	public void setGameId(short gameId) {
-		GameId = gameId;
-	}
+    @Override
+    public void Decode(ByteList bytes) throws Exception {
+        short objType = bytes.GetInt16();
+        short objLength = bytes.GetInt16();
 
-	public String getANumber() {
-		return ANumber;
-	}
+        bytes.SetNewReadLimit(objLength);
 
-	public void setANumber(String aNumber) {
-		ANumber = aNumber;
-	}
+        super.Decode(bytes);
 
-	public String getFirstName() {
-		return FirstName;
-	}
+        GameId = (bytes.GetInt16());
 
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
-	}
+        AgentInfo = ((AgentInfo) bytes.GetDistributableObject());
 
-	public String getLastName() {
-		return LastName;
-	}
+        bytes.RestorePreviosReadLimit();
+    }
 
-	public void setLastName(String lastName) {
-		LastName = lastName;
-	}
+    public short getGameId() {
+        return GameId;
+    }
 
-	public ComponentInfo getAgentInfo() {
-		return AgentInfo;
-	}
+    public void setGameId(short gameId) {
+        GameId = gameId;
+    }
 
-	public void setAgentInfo(ComponentInfo agentInfo) {
-		AgentInfo = agentInfo;
-	}
+    public AgentInfo getAgentInfo() {
+        return AgentInfo;
+    }
 
-	public static int getMinimumEncodingLength() {
-		MinimumEncodingLength =  4                // Object header
-                				+ 2              // ANumber
-                				+ 2              // FirstName
-                				+ 2              // LastName
-                				+ 1;
-		System.out.println("JoinGame.MinimumEncodingLength: " + MinimumEncodingLength);
-		return MinimumEncodingLength;
- 
-	}
+    public void setAgentInfo(AgentInfo agentInfo) {
+        AgentInfo = agentInfo;
+    }
 
-	public short getClassId() {
-		ClassId =  (short) MESSAGE_CLASS_IDS.JoinGame.getValue();
-		System.out.println("JoinGame.ClassId: " + ClassId);
-		return ClassId;
-	}
+    public static int getMinimumEncodingLength() {
+        MinimumEncodingLength = 4 // Object header
+                + 2 // ANumber
+                + 2 // FirstName
+                + 2 // LastName
+                + 1;
+        System.out.println("JoinGame.MinimumEncodingLength: " + MinimumEncodingLength);
+        return MinimumEncodingLength;
 
-	protected JoinGame(PossibleTypes type) {
-		super(type);
-	}
+    }
 
-	@Override
-	public int compareTo(Object o) {
-			return 0;
-	}
+    public short getClassId() {
+        ClassId = (short) MESSAGE_CLASS_IDS.JoinGame.getValue();
+        System.out.println("JoinGame.ClassId: " + ClassId);
+        return ClassId;
+    }
 
-	@Override
-	public MESSAGE_CLASS_IDS MessageTypeId() {
-		return Message.MESSAGE_CLASS_IDS.JoinGame;
-	}
+    protected JoinGame(PossibleTypes type) {
+        super(type);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    @Override
+    public MESSAGE_CLASS_IDS MessageTypeId() {
+        return Message.MESSAGE_CLASS_IDS.fromShort(ClassId);
+    }
 }
