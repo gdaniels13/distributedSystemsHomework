@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Gui;
 
 import Agents.AgentCommon.Agent;
@@ -25,10 +24,11 @@ import registrarClient.GameInfoGameStatus;
  * @author gregor
  */
 public class SelectGame extends javax.swing.JPanel {
-    
+
     private Agent agent;
     private List<GameInfo> games;
     private MainGui window;
+
     /**
      * Creates new form gameStatus
      */
@@ -36,7 +36,7 @@ public class SelectGame extends javax.swing.JPanel {
         initComponents();
     }
 
-    public  SelectGame(MainGui aThis) {
+    public SelectGame(MainGui aThis) {
         initComponents();
         this.window = aThis;
     }
@@ -134,8 +134,9 @@ public class SelectGame extends javax.swing.JPanel {
 
     private void selectGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectGameActionPerformed
         int selected = availableGames.getSelectedIndex();
-        if (selected == -1)
+        if (selected == -1) {
             return;
+        }
         GameInfo gi = games.get(selected);
         agent.getConfig().setGameInfo(gi);
         this.agent.init();
@@ -153,50 +154,52 @@ public class SelectGame extends javax.swing.JPanel {
     private javax.swing.JTextPane selectedGameInfo;
     // End of variables declaration//GEN-END:variables
 
-    
-    	private void initializeGameList() {
-		 games = WebServerClient.getGames(GameInfoGameStatus.AVAILABLE).getGameInfo();
-		this.availableGames.removeAll();
-                if(games.size()==0){
+    private void initializeGameList() {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                games = WebServerClient.getGames(GameInfoGameStatus.AVAILABLE).getGameInfo();
+                availableGames.removeAll();
+                if (games.size() == 0) {
                     selectedGameInfo.setText("NO GAMES AVAILABLE");
-                  
-                }
-                else{
-                    for(GameInfo gi : games){
-                            this.availableGames.add(gi.getLabel().getValue());
+
+                } else {
+                    for (GameInfo gi : games) {
+                        availableGames.add(gi.getLabel().getValue());
                     }
                 }
-                 
-	}
+            }
+        }).start();
+
+    }
 
     private void displayGameInfo() {
         GameInfo gi = games.get(availableGames.getSelectedIndex());
         selectedGameInfo.removeAll();
         EndPoint ep = gi.getCommunicationEndPoint().getValue();
-          byte [] bytes = BigInteger.valueOf(ep.getAddress()).toByteArray();
-            reverseArray(bytes);
-            try {
-                selectedGameInfo.setText("Name:" + gi.getLabel().getValue() + "\n" +
-                        "ID:" + gi.getId() + "\n" +
-                        "Location: " +InetAddress.getByAddress(bytes).toString() + ":" + ep.getPort()
-                );  } 
-            catch (UnknownHostException ex) {
-                selectedGameInfo.setText("CRAPPY ENDPOINT DETECTED:\n"+Arrays.toString(ex.getStackTrace()));
-                Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        
+        byte[] bytes = BigInteger.valueOf(ep.getAddress()).toByteArray();
+        reverseArray(bytes);
+        try {
+            selectedGameInfo.setText("Name:" + gi.getLabel().getValue() + "\n"
+                    + "ID:" + gi.getId() + "\n"
+                    + "Location: " + InetAddress.getByAddress(bytes).toString() + ":" + ep.getPort()
+            );
+        } catch (UnknownHostException ex) {
+            selectedGameInfo.setText("CRAPPY ENDPOINT DETECTED:\n" + Arrays.toString(ex.getStackTrace()));
+            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void setAgent(Agent agent) {
         this.agent = agent;
     }
-    
-    
-      public void reverseArray(byte[] bytes){
+
+    public void reverseArray(byte[] bytes) {
         int begin = 0;
-        int end = bytes.length-1;
-        while(begin<end){
+        int end = bytes.length - 1;
+        while (begin < end) {
             byte temp = bytes[begin];
             bytes[begin] = bytes[end];
             bytes[end] = temp;
@@ -204,7 +207,5 @@ public class SelectGame extends javax.swing.JPanel {
             begin++;
         }
     }
-
-
 
 }

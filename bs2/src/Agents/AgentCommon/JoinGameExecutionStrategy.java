@@ -26,7 +26,7 @@ public class JoinGameExecutionStrategy extends ExecutionStrategy {
 //                agentInfo );
 //       
         agentInfo.setAgentType(AgentInfo.PossibleAgentType.BrilliantStudent);
-//        agentInfo.setAgentStatus(AgentInfo.PossibleAgentStatus.NotInGame);
+        agentInfo.setAgentStatus(AgentInfo.PossibleAgentStatus.NotInGame);
         agentInfo.setANumber(agent.config.getaNumber());
         agentInfo.setLastName(agent.config.getLastName());
         agentInfo.setFirstName(agent.config.getFirstName());
@@ -35,7 +35,7 @@ public class JoinGameExecutionStrategy extends ExecutionStrategy {
         
         first = new Envelope(jg, agent.config.getServerAddress(), agent.config.getServerPort());
         this.agent.communicator.send(first);
-        first = this.agent.communicator.listen();
+//        first = this.agent.communicator.listen();
         System.out.println("i got something back");
     }
     
