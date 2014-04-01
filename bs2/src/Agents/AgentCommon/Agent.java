@@ -99,7 +99,8 @@ public abstract class Agent extends Observable implements Runnable {
         this.dispatcher = new Dispatcher(this.envelopeQueue,this);
         this.listener = new Listener(this.communicator,this.envelopeQueue);
         this.tickQueue = new ConcurrentLinkedQueue<>();
-        new Thread(dispatcher).start();
         joinGame();
+        new Thread(dispatcher).start();
+        
     }
 }

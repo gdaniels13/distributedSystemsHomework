@@ -11,6 +11,8 @@ import registrarClient.GameInfo;
  * Created by gregor on 3/3/14.
  */
 public class MainTest {
+    
+       
 //    @Test
 //    public void testGetConfigs() throws Exception {
 //        ArrayList<Config> configs= Main.getConfigs(new String[]{"configFile.txt"});

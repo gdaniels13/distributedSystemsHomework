@@ -139,7 +139,6 @@ public class SelectGame extends javax.swing.JPanel {
         }
         GameInfo gi = games.get(selected);
         agent.getConfig().setGameInfo(gi);
-        this.agent.init();
         System.out.println(gi.getLabel().getValue());
         window.nextWindow();
 
