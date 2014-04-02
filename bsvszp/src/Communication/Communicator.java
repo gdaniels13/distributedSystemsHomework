@@ -26,7 +26,8 @@ public class Communicator{
 		receivePacket = new DatagramPacket(receiveBuffer,messageLength);
 
 		try{
-			socket = new DatagramSocket(port);
+                    socket = new DatagramSocket();	
+                    config.setLocalPort(socket.getLocalPort());
 		}
 		catch(SocketException e){
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

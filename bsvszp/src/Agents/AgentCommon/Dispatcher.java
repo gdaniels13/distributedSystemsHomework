@@ -32,6 +32,7 @@ public class Dispatcher implements Runnable{
             cur = envelopeQueue.pop();
             if(cur != null)
             {
+                System.out.println("Hellooooo");
                 dispatch(cur);
             }
 
@@ -43,6 +44,14 @@ public class Dispatcher implements Runnable{
         }
     }
 
+    public synchronized void startConversation(Envelope cur){
+        ExecutionStrategy es = agent.CreateExecutionStrategy(cur);
+        es.setExecutableMap(esMap);
+        esMap.put(cur.getMessage().getConversationId().toString(), es);
+        threadPool.execute(es);
+    }
+    
+    
     public synchronized void dispatch(Envelope cur) {
         Message message = cur.getMessage();
         String conversationId = message.getConversationId().toString();

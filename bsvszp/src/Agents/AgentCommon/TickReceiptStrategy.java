@@ -31,6 +31,4 @@ public class TickReceiptStrategy extends ExecutionStrategy{
 			tickQueue.add(t);
 		}
 	}
-
-
 }
