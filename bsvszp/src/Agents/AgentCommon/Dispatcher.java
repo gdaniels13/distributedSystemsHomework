@@ -63,7 +63,7 @@ public class Dispatcher implements Runnable{
         if(es != null){ // conversation exists put the envelope on that objects queue and execute it
             //add code here to add things new execution strategies based on the
             es.put(cur);
-            threadPool.execute(es);
+//            threadPool.execute(es);
         }
         else // no conversation of that ID it should be a request
         {

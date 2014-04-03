@@ -1,5 +1,7 @@
 package Communication;
 
+import Agents.AgentCommon.Agent;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Greg Daniels A00798340
@@ -25,6 +27,7 @@ public class Listener implements Runnable
             Envelope t = communicator.listen();
             if(t!=null){
                 envelopeQueue.push(t);
+                if(Agent.DEBUG) System.out.println("got an envelope");
             }
         }
     }

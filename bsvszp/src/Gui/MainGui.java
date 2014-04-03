@@ -22,8 +22,9 @@ public class MainGui extends JFrame{
         selectGame = new SelectGame(this);
         selectGame.setAgent(agent);
         setLayout(new BorderLayout(1,1));
-        setSize(400,300);
+        setSize(selectGame.getMinimumSize());
         add(selectGame);
+        validate(); repaint();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

@@ -47,8 +47,8 @@ public class BrilliantStudent extends Agent
     @Override
     public void run() {
         while(true){
-            sethealth(this.health +1);
-            System.out.println(health);
+            
+//            System.out.println(health);
             try {
                 sleep(500);
             } catch (InterruptedException ex) {

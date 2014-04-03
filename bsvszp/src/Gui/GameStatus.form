@@ -23,11 +23,11 @@
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="twineCount5" pref="220" max="32767" attributes="0"/>
-                  <Component id="twineCount4" alignment="0" max="32767" attributes="0"/>
-                  <Component id="twineCount3" alignment="0" max="32767" attributes="0"/>
-                  <Component id="twineCount2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="twineCount1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="twineCount" alignment="0" max="32767" attributes="0"/>
+                  <Component id="scoreLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="positionLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ExcuseLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="AgentStatus" alignment="0" max="32767" attributes="0"/>
+                  <Component id="twineLabel" alignment="0" max="32767" attributes="0"/>
                   <Component id="ticksLabel" alignment="0" max="32767" attributes="0"/>
                   <Component id="healthLabel" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -43,15 +43,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="ticksLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="twineCount" min="-2" max="-2" attributes="0"/>
+              <Component id="twineLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="twineCount1" min="-2" max="-2" attributes="0"/>
+              <Component id="AgentStatus" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="twineCount2" min="-2" max="-2" attributes="0"/>
+              <Component id="ExcuseLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="twineCount3" min="-2" max="-2" attributes="0"/>
+              <Component id="positionLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="twineCount4" min="-2" max="-2" attributes="0"/>
+              <Component id="scoreLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="twineCount5" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -74,54 +74,54 @@
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="twineCount">
+    <Component class="javax.swing.JTextField" name="twineLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Whining Twine Count:"/>
         <Property name="autoscrolls" type="boolean" value="false"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twineCountActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twineLabelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="twineCount1">
+    <Component class="javax.swing.JTextField" name="AgentStatus">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excuse Count:"/>
         <Property name="autoscrolls" type="boolean" value="false"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twineCount1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AgentStatusActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="twineCount2">
+    <Component class="javax.swing.JTextField" name="ExcuseLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Bomb Count:"/>
         <Property name="autoscrolls" type="boolean" value="false"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twineCount2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExcuseLabelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="twineCount3">
+    <Component class="javax.swing.JTextField" name="positionLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kill Count:"/>
         <Property name="autoscrolls" type="boolean" value="false"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twineCount3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="positionLabelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="twineCount4">
+    <Component class="javax.swing.JTextField" name="scoreLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Twine Generator Count:"/>
         <Property name="autoscrolls" type="boolean" value="false"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twineCount4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scoreLabelActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="twineCount5">

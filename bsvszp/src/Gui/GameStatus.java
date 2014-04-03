@@ -7,6 +7,7 @@
 package Gui;
 
 import Agents.AgentCommon.Agent;
+import Common.AgentInfo;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -40,11 +41,11 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
 
         ticksLabel = new javax.swing.JTextField();
         healthLabel = new javax.swing.JTextField();
-        twineCount = new javax.swing.JTextField();
-        twineCount1 = new javax.swing.JTextField();
-        twineCount2 = new javax.swing.JTextField();
-        twineCount3 = new javax.swing.JTextField();
-        twineCount4 = new javax.swing.JTextField();
+        twineLabel = new javax.swing.JTextField();
+        AgentStatus = new javax.swing.JTextField();
+        ExcuseLabel = new javax.swing.JTextField();
+        positionLabel = new javax.swing.JTextField();
+        scoreLabel = new javax.swing.JTextField();
         twineCount5 = new javax.swing.JTextField();
 
         setFocusable(false);
@@ -57,48 +58,48 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
         healthLabel.setAutoscrolls(false);
         healthLabel.setFocusable(false);
 
-        twineCount.setText("Whining Twine Count:");
-        twineCount.setAutoscrolls(false);
-        twineCount.setFocusable(false);
-        twineCount.addActionListener(new java.awt.event.ActionListener() {
+        twineLabel.setText("Whining Twine Count:");
+        twineLabel.setAutoscrolls(false);
+        twineLabel.setFocusable(false);
+        twineLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                twineCountActionPerformed(evt);
+                twineLabelActionPerformed(evt);
             }
         });
 
-        twineCount1.setText("Excuse Count:");
-        twineCount1.setAutoscrolls(false);
-        twineCount1.setFocusable(false);
-        twineCount1.addActionListener(new java.awt.event.ActionListener() {
+        AgentStatus.setText("Excuse Count:");
+        AgentStatus.setAutoscrolls(false);
+        AgentStatus.setFocusable(false);
+        AgentStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                twineCount1ActionPerformed(evt);
+                AgentStatusActionPerformed(evt);
             }
         });
 
-        twineCount2.setText("Bomb Count:");
-        twineCount2.setAutoscrolls(false);
-        twineCount2.setFocusable(false);
-        twineCount2.addActionListener(new java.awt.event.ActionListener() {
+        ExcuseLabel.setText("Bomb Count:");
+        ExcuseLabel.setAutoscrolls(false);
+        ExcuseLabel.setFocusable(false);
+        ExcuseLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                twineCount2ActionPerformed(evt);
+                ExcuseLabelActionPerformed(evt);
             }
         });
 
-        twineCount3.setText("Kill Count:");
-        twineCount3.setAutoscrolls(false);
-        twineCount3.setFocusable(false);
-        twineCount3.addActionListener(new java.awt.event.ActionListener() {
+        positionLabel.setText("Kill Count:");
+        positionLabel.setAutoscrolls(false);
+        positionLabel.setFocusable(false);
+        positionLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                twineCount3ActionPerformed(evt);
+                positionLabelActionPerformed(evt);
             }
         });
 
-        twineCount4.setText("Twine Generator Count:");
-        twineCount4.setAutoscrolls(false);
-        twineCount4.setFocusable(false);
-        twineCount4.addActionListener(new java.awt.event.ActionListener() {
+        scoreLabel.setText("Twine Generator Count:");
+        scoreLabel.setAutoscrolls(false);
+        scoreLabel.setFocusable(false);
+        scoreLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                twineCount4ActionPerformed(evt);
+                scoreLabelActionPerformed(evt);
             }
         });
 
@@ -119,11 +120,11 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(twineCount5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(twineCount4)
-                    .addComponent(twineCount3)
-                    .addComponent(twineCount2)
-                    .addComponent(twineCount1)
-                    .addComponent(twineCount)
+                    .addComponent(scoreLabel)
+                    .addComponent(positionLabel)
+                    .addComponent(ExcuseLabel)
+                    .addComponent(AgentStatus)
+                    .addComponent(twineLabel)
                     .addComponent(ticksLabel)
                     .addComponent(healthLabel))
                 .addContainerGap(156, Short.MAX_VALUE))
@@ -136,40 +137,40 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ticksLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(twineCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(twineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(twineCount1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AgentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(twineCount2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ExcuseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(twineCount3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(positionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(twineCount4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(twineCount5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void twineCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineCountActionPerformed
+    private void twineLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_twineCountActionPerformed
+    }//GEN-LAST:event_twineLabelActionPerformed
 
-    private void twineCount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineCount1ActionPerformed
+    private void AgentStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgentStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_twineCount1ActionPerformed
+    }//GEN-LAST:event_AgentStatusActionPerformed
 
-    private void twineCount2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineCount2ActionPerformed
+    private void ExcuseLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcuseLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_twineCount2ActionPerformed
+    }//GEN-LAST:event_ExcuseLabelActionPerformed
 
-    private void twineCount3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineCount3ActionPerformed
+    private void positionLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_twineCount3ActionPerformed
+    }//GEN-LAST:event_positionLabelActionPerformed
 
-    private void twineCount4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineCount4ActionPerformed
+    private void scoreLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreLabelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_twineCount4ActionPerformed
+    }//GEN-LAST:event_scoreLabelActionPerformed
 
     private void twineCount5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineCount5ActionPerformed
         // TODO add your handling code here:
@@ -177,20 +178,36 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AgentStatus;
+    private javax.swing.JTextField ExcuseLabel;
     private javax.swing.JTextField healthLabel;
+    private javax.swing.JTextField positionLabel;
+    private javax.swing.JTextField scoreLabel;
     private javax.swing.JTextField ticksLabel;
-    private javax.swing.JTextField twineCount;
-    private javax.swing.JTextField twineCount1;
-    private javax.swing.JTextField twineCount2;
-    private javax.swing.JTextField twineCount3;
-    private javax.swing.JTextField twineCount4;
     private javax.swing.JTextField twineCount5;
+    private javax.swing.JTextField twineLabel;
     // End of variables declaration//GEN-END:variables
-    private org.jdesktop.beansbinding.BindingGroup myBindings;
 
+    public void updateAgentInfo(){
+        AgentInfo a = agent.getAgentInfo();
+        healthLabel.setText("Health: " + Double.toString(a.getStrength()));
+        ticksLabel.setText("Ticks: " + Integer.toString(agent.getTickQueue().size()));
+        twineLabel.setText("Twine: " + Integer.toString(agent.getTwineQueue().size()));
+        AgentStatus.setText("Status: " + a.getAgentStatus().toString());
+        ExcuseLabel.setText("Excuses: " + Integer.toString(agent.getExcuseQueue().size()));
+        positionLabel.setText("Agent Position: " + "x: " +a.getLocation().getX() + " y: " + a.getLocation().getY());
+        scoreLabel.setText("Score: " + Double.toString(a.getPoints()));
+        twineCount5.setText("Speed: " + Double.toString(a.getSpeed()));
+        
+        
+        
+    }
     @Override
     public void update(Observable o, Object arg) {
-        healthLabel.setText("Health : " + this.agent.gethealth());
+        updateAgentInfo();
+        
+        
+        
         repaint();
         validate();
     }
