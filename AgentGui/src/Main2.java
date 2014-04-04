@@ -2,8 +2,9 @@
 import AgentCommon.Agent;
 import Communication.Config;
 import Gui.MainGui;
-import Gui.SelectGame;
 import brillianstudent.BrilliantStudent;
+import excusegenerator.ExcuseGenerator;
+import twinegenerator.TwineGenerator;
 
 /*
  * To change this template, choose Tools | Templates
@@ -15,7 +16,7 @@ import brillianstudent.BrilliantStudent;
 public class Main2 {
 
     public static void main(String[] args) throws Exception {
-        if (args.length == 0) {
+        if (args.length < 5) {
             args = "BS N A00798340 Greg Daniels\n".split(" ");
         }
 
@@ -31,11 +32,11 @@ public class Main2 {
     public static Agent Create(Config config) {
         switch (config.getAgentType()) {
             case "WG":
-//                return new TwineGenerator(config);
+                return new TwineGenerator(config);
             case "BS":
                 return new BrilliantStudent(config);
             case "EG":
-//                return new ExcuseGenerator(config);
+                return new ExcuseGenerator(config);
             default:
                 throw new IllegalArgumentException(config.getAgentType() + "is not a valid agent Type");
         }

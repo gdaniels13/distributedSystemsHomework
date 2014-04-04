@@ -33,20 +33,8 @@ public class Config {
 	private boolean autoSelect;
 	
 
-//    public Config(int localPort, String aNumber, String firstName, String lastName) throws Exception {
-//        this.localPort = localPort;
-//        this.serverPort = serverPort;
-//        this.aNumber = aNumber;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        pickfirstGame();
-//
-////        try {
-////            this.serverAddress = InetAddress.getByName(serverAddress);
-////        } catch (UnknownHostException e) {
-////            e.printStackTrace();
-////        }
-//    }
+    public Config() throws Exception {
+    }
 
     public Config(String[] args) throws Exception {
         this.agentType = args[0];

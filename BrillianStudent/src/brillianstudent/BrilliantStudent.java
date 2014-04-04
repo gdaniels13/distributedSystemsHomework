@@ -7,6 +7,7 @@ import ExecutionStrategies.TickReceiptStrategy;
 import Common.ComponentInfo;
 import Communication.Config;
 import Communication.Envelope;
+import ExecutionStrategies.GetResourceExecutionStrategy;
 import Messages.JoinGame;
 import Messages.Message;
 import Messages.Message.MESSAGE_CLASS_IDS;
@@ -41,6 +42,8 @@ public class BrilliantStudent extends Agent
                 return new StartGameExecutionStrategy(this, cur);
             case TickDelivery:
                 return  new TickReceiptStrategy(this,cur);
+            case GetResource:
+                return new GetResourceExecutionStrategy(this, cur);
             default:
                 return null;
 

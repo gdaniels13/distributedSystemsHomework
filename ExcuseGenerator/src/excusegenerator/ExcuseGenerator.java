@@ -6,17 +6,42 @@
 
 package excusegenerator;
 
+import AgentCommon.Agent;
+import Communication.Config;
+import ExecutionStrategies.ExecutionStrategy;
+import ExecutionStrategies.StartGameExecutionStrategy;
+import Messages.Request;
+
 /**
  *
  * @author gregor
  */
-public class ExcuseGenerator {
+public class ExcuseGenerator extends Agent{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public ExcuseGenerator(Config config) {
+        super(config);
+        
+    }
+
+
+    @Override
+    public ExecutionStrategy CreateExecutionStrategy(Communication.Envelope cur) {
+        Request r = (Request) cur.getMessage();
+        if(r == null) return null;
+        switch(r.RequestType){
+            case StartGame:
+                return new StartGameExecutionStrategy(this, cur);
+            case GetResource:
+                return new ExcuseRequestExecutionStrategy(this, cur);
+            default:
+                return null;
+        }
+        
+    }
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

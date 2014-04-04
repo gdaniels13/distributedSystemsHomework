@@ -27,3 +27,7 @@
 /BrillianStudent/build/
 /ExcuseGenerator/build/
 /AgentGui/build/
+/agentCommon/dist/
+/BrillianStudent/dist/
+/ExcuseGenerator/dist/
+/AgentGui/dist/
