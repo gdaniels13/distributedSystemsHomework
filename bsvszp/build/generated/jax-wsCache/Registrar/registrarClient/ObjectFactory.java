@@ -57,15 +57,15 @@ public class ObjectFactory {
     private final static QName _Duration_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "duration");
     private final static QName _String_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "string");
     private final static QName _UnsignedLong_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "unsignedLong");
-    private final static QName _RegisterGameResponseRegisterGameResult_QNAME = new QName("http://tempuri.org/", "RegisterGameResult");
-    private final static QName _ComponentInfoCommunicationEndPoint_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "CommunicationEndPoint");
-    private final static QName _GetGamesAltResponseGetGamesAltResult_QNAME = new QName("http://tempuri.org/", "GetGamesAltResult");
+    private final static QName _GameInfoAltLabel_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "Label");
+    private final static QName _GameInfoAltAliveTimestamp_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "AliveTimestamp");
+    private final static QName _GameInfoAltCommunicationEndPoint_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "CommunicationEndPoint");
+    private final static QName _GameInfoAltStatus_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "Status");
     private final static QName _RegisterGamePublicEP_QNAME = new QName("http://tempuri.org/", "publicEP");
     private final static QName _RegisterGameLabel_QNAME = new QName("http://tempuri.org/", "label");
-    private final static QName _GameInfoLabel_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "Label");
-    private final static QName _GameInfoAltAliveTimestamp_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "AliveTimestamp");
-    private final static QName _GameInfoAltStatus_QNAME = new QName("http://schemas.datacontract.org/2004/07/Common", "Status");
     private final static QName _GetGamesResponseGetGamesResult_QNAME = new QName("http://tempuri.org/", "GetGamesResult");
+    private final static QName _RegisterGameResponseRegisterGameResult_QNAME = new QName("http://tempuri.org/", "RegisterGameResult");
+    private final static QName _GetGamesAltResponseGetGamesAltResult_QNAME = new QName("http://tempuri.org/", "GetGamesAltResult");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: registrarClient
@@ -472,30 +472,39 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GameInfo }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "RegisterGameResult", scope = RegisterGameResponse.class)
-    public JAXBElement<GameInfo> createRegisterGameResponseRegisterGameResult(GameInfo value) {
-        return new JAXBElement<GameInfo>(_RegisterGameResponseRegisterGameResult_QNAME, GameInfo.class, RegisterGameResponse.class, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "Label", scope = GameInfoAlt.class)
+    public JAXBElement<String> createGameInfoAltLabel(String value) {
+        return new JAXBElement<String>(_GameInfoAltLabel_QNAME, String.class, GameInfoAlt.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link EndPoint }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "CommunicationEndPoint", scope = ComponentInfo.class)
-    public JAXBElement<EndPoint> createComponentInfoCommunicationEndPoint(EndPoint value) {
-        return new JAXBElement<EndPoint>(_ComponentInfoCommunicationEndPoint_QNAME, EndPoint.class, ComponentInfo.class, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "AliveTimestamp", scope = GameInfoAlt.class)
+    public JAXBElement<String> createGameInfoAltAliveTimestamp(String value) {
+        return new JAXBElement<String>(_GameInfoAltAliveTimestamp_QNAME, String.class, GameInfoAlt.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfGameInfoAlt }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetGamesAltResult", scope = GetGamesAltResponse.class)
-    public JAXBElement<ArrayOfGameInfoAlt> createGetGamesAltResponseGetGamesAltResult(ArrayOfGameInfoAlt value) {
-        return new JAXBElement<ArrayOfGameInfoAlt>(_GetGamesAltResponseGetGamesAltResult_QNAME, ArrayOfGameInfoAlt.class, GetGamesAltResponse.class, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "CommunicationEndPoint", scope = GameInfoAlt.class)
+    public JAXBElement<String> createGameInfoAltCommunicationEndPoint(String value) {
+        return new JAXBElement<String>(_GameInfoAltCommunicationEndPoint_QNAME, String.class, GameInfoAlt.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "Status", scope = GameInfoAlt.class)
+    public JAXBElement<String> createGameInfoAltStatus(String value) {
+        return new JAXBElement<String>(_GameInfoAltStatus_QNAME, String.class, GameInfoAlt.class, value);
     }
 
     /**
@@ -517,57 +526,48 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "Label", scope = GameInfo.class)
-    public JAXBElement<String> createGameInfoLabel(String value) {
-        return new JAXBElement<String>(_GameInfoLabel_QNAME, String.class, GameInfo.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "Label", scope = GameInfoAlt.class)
-    public JAXBElement<String> createGameInfoAltLabel(String value) {
-        return new JAXBElement<String>(_GameInfoLabel_QNAME, String.class, GameInfoAlt.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "AliveTimestamp", scope = GameInfoAlt.class)
-    public JAXBElement<String> createGameInfoAltAliveTimestamp(String value) {
-        return new JAXBElement<String>(_GameInfoAltAliveTimestamp_QNAME, String.class, GameInfoAlt.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "CommunicationEndPoint", scope = GameInfoAlt.class)
-    public JAXBElement<String> createGameInfoAltCommunicationEndPoint(String value) {
-        return new JAXBElement<String>(_ComponentInfoCommunicationEndPoint_QNAME, String.class, GameInfoAlt.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "Status", scope = GameInfoAlt.class)
-    public JAXBElement<String> createGameInfoAltStatus(String value) {
-        return new JAXBElement<String>(_GameInfoAltStatus_QNAME, String.class, GameInfoAlt.class, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfGameInfo }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetGamesResult", scope = GetGamesResponse.class)
     public JAXBElement<ArrayOfGameInfo> createGetGamesResponseGetGamesResult(ArrayOfGameInfo value) {
         return new JAXBElement<ArrayOfGameInfo>(_GetGamesResponseGetGamesResult_QNAME, ArrayOfGameInfo.class, GetGamesResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link EndPoint }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "CommunicationEndPoint", scope = ComponentInfo.class)
+    public JAXBElement<EndPoint> createComponentInfoCommunicationEndPoint(EndPoint value) {
+        return new JAXBElement<EndPoint>(_GameInfoAltCommunicationEndPoint_QNAME, EndPoint.class, ComponentInfo.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GameInfo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "RegisterGameResult", scope = RegisterGameResponse.class)
+    public JAXBElement<GameInfo> createRegisterGameResponseRegisterGameResult(GameInfo value) {
+        return new JAXBElement<GameInfo>(_RegisterGameResponseRegisterGameResult_QNAME, GameInfo.class, RegisterGameResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/Common", name = "Label", scope = GameInfo.class)
+    public JAXBElement<String> createGameInfoLabel(String value) {
+        return new JAXBElement<String>(_GameInfoAltLabel_QNAME, String.class, GameInfo.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfGameInfoAlt }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetGamesAltResult", scope = GetGamesAltResponse.class)
+    public JAXBElement<ArrayOfGameInfoAlt> createGetGamesAltResponseGetGamesAltResult(ArrayOfGameInfoAlt value) {
+        return new JAXBElement<ArrayOfGameInfoAlt>(_GetGamesAltResponseGetGamesAltResult_QNAME, ArrayOfGameInfoAlt.class, GetGamesAltResponse.class, value);
     }
 
 }

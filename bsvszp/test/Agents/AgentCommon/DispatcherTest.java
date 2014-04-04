@@ -1,7 +1,5 @@
 package Agents.AgentCommon;
 
-import Agents.AgentCommon.*;
-import Agents.BrilliantStudent.BrilliantStudent;
 import Common.ComponentInfo;
 import Communication.Envelope;
 import Messages.JoinGame;

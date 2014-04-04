@@ -1,0 +1,66 @@
+package ExecutionStrategies;
+
+import AgentCommon.Agent;
+import Common.AgentInfo;
+import Communication.Envelope;
+import Messages.AckNak;
+import Messages.JoinGame;
+
+/**
+ * Created by gregor on 3/3/14.
+ */
+public class JoinGameExecutionStrategy extends ExecutionStrategy {
+    
+    private boolean sentRequest;
+    public JoinGameExecutionStrategy(final Agent agent) {
+        super(agent,null);
+        sentRequest = false;
+        AgentInfo agentInfo = new AgentInfo();
+        
+        agentInfo.setAgentType(AgentInfo.PossibleAgentType.BrilliantStudent);
+        agentInfo.setAgentStatus(AgentInfo.PossibleAgentStatus.NotInGame);
+        agentInfo.setANumber(agent.getConfig().getaNumber());
+        agentInfo.setLastName(agent.getConfig().getLastName());
+        agentInfo.setFirstName(agent.getConfig().getFirstName());
+
+        JoinGame jg= new JoinGame(agent.getConfig().getGameInfo().getId(), agentInfo);
+        
+        first = new Envelope(jg, agent.getConfig().getServerAddress(), agent.getConfig().getServerPort());
+
+        new Thread(new Runnable() {
+            @Override
+            public synchronized void run() {
+                Envelope e;
+                e = agent.getCommunicator().listen();
+                put(e);
+            }
+        }).start();
+        first = reliableSendReceive(first);
+        if(first != null){
+            AckNak ack = (AckNak)first.getMessage();
+            if(ack == null)
+            {
+                agent.setError("result is not an ack");
+            }
+            else{
+                if(((AgentInfo)ack.getObjResult())!=null){
+                    agent.setAgentInfo((AgentInfo)ack.getObjResult());
+                }
+                else{
+                    agent.setError("unable to join game objresult was null");
+                }
+                
+            }
+        }
+        else{
+            agent.setError("Result was null");         
+        }
+    }
+    
+   
+    
+    @Override
+    public void run() {}
+
+
+}
