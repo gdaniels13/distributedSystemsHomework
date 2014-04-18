@@ -3,53 +3,55 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Gui;
 
 import AgentCommon.Agent;
-import Communication.Config;
-import brillianstudent.BrilliantStudent;
-import excusegenerator.ExcuseGenerator;
 import java.awt.BorderLayout;
+import java.awt.HeadlessException;
 import javax.swing.JFrame;
-//import twinegenerator.TwineGenerator;
 
-public class MainGui extends JFrame{
-   
+public class MainGui extends JFrame {
+
     private SelectGame selectGame;
     private GameStatus gameStatus;
     private Agent agent;
-    
-    public MainGui(Agent agent){
-        super("Brilliant Student");
+
+    public MainGui(Agent agent, String title) throws HeadlessException {
+        super(title);
         this.agent = agent;
+        setSize(266, 311);
+
+        nextWindow();
+    }
+
+    public MainGui() {
+        super("Select your agent");
+        
         selectGame = new SelectGame(this);
-        selectGame.setAgent(agent);
-        setLayout(new BorderLayout(1,1));
+        setLayout(new BorderLayout(1, 1));
         setSize(selectGame.getMinimumSize());
         add(selectGame);
-        validate(); repaint();
+        validate();
+        repaint();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    void nextWindow() {
+    public void nextWindow() {
         gameStatus = new GameStatus(agent);
-        
-        remove(selectGame);
+        if(selectGame !=null){
+            remove(selectGame);
+        }
+        setSize(gameStatus.getPreferredSize());
         add(gameStatus);
         validate();
         repaint();
-//        new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-                agent.init();
-                new Thread(agent).start();
-//            }
-//        });
-
+         
+        agent.init();
+        new Thread(agent).start();
     }
-    
 
-    
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
 }

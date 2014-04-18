@@ -6,17 +6,16 @@
 package Gui;
 
 import AgentCommon.Agent;
-import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
+import Communication.Config;
+import Communication.RegistryClient;
+import brillianstudent.BrilliantStudent;
+import excusegenerator.ExcuseGenerator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import registry.EndPoint;
-import registry.GameInfo;
-import registry.GameInfoGameStatus;
+import twinegenerator.TwineGenerator;
+import webService.GameInfoAlt;
+import webService.GameInfoGameStatus;
 
 /**
  *
@@ -25,7 +24,7 @@ import registry.GameInfoGameStatus;
 public class SelectGame extends javax.swing.JPanel {
 
     private Agent agent;
-    private List<GameInfo> games;
+    private List<GameInfoAlt> games;
     private MainGui window;
 
     /**
@@ -50,7 +49,7 @@ public class SelectGame extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        agentTypeSelector = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
@@ -59,9 +58,9 @@ public class SelectGame extends javax.swing.JPanel {
         selectGame = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         selectedGameInfo = new javax.swing.JTextPane();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        bsRadio = new javax.swing.JRadioButton();
+        wRadio = new javax.swing.JRadioButton();
+        eRadio = new javax.swing.JRadioButton();
 
         setToolTipText("");
         setMinimumSize(new java.awt.Dimension(266, 311));
@@ -72,10 +71,10 @@ public class SelectGame extends javax.swing.JPanel {
             }
         });
         availableGames.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 availableGamesCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -96,15 +95,15 @@ public class SelectGame extends javax.swing.JPanel {
         selectedGameInfo.setFocusable(false);
         jScrollPane1.setViewportView(selectedGameInfo);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Brilliant Student");
+        agentTypeSelector.add(bsRadio);
+        bsRadio.setSelected(true);
+        bsRadio.setText("Brilliant Student");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Whiner");
+        agentTypeSelector.add(wRadio);
+        wRadio.setText("Whiner");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Excuser");
+        agentTypeSelector.add(eRadio);
+        eRadio.setText("Excuser");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,9 +118,9 @@ public class SelectGame extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(selectGame, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
+                    .addComponent(bsRadio)
+                    .addComponent(wRadio)
+                    .addComponent(eRadio)
                     .addComponent(availableGames, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -129,11 +128,11 @@ public class SelectGame extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jRadioButton1)
+                .addComponent(bsRadio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(wRadio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3)
+                .addComponent(eRadio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(availableGames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,7 +146,6 @@ public class SelectGame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void availableGamesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_availableGamesItemStateChanged
-        // TODO add your handling code here:
         displayGameInfo();
     }//GEN-LAST:event_availableGamesItemStateChanged
 
@@ -165,8 +163,24 @@ public class SelectGame extends javax.swing.JPanel {
         if (selected == -1) {
             return;
         }
-        GameInfo gi = games.get(selected);
+            //"BS N A00798340 Greg Daniels\n"
+
+        try {
+            if (bsRadio.isSelected()) {
+                this.agent = new BrilliantStudent(new Config("BS N A00798340 Greg Daniels".split(" ")));
+            }
+            else if(wRadio.isSelected()){
+                this.agent = new TwineGenerator(new Config("WG N A00798340 Greg Daniels".split(" ")));
+            }
+            else{
+                this.agent = new ExcuseGenerator(new Config("EG N A00798340 Greg Daniels".split(" ")));
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        GameInfoAlt gi = games.get(selected);
         agent.getConfig().setGameInfo(gi);
+        window.setAgent(agent);
         System.out.println(gi.getLabel().getValue());
         window.nextWindow();
 
@@ -174,18 +188,18 @@ public class SelectGame extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup agentTypeSelector;
     private java.awt.List availableGames;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton bsRadio;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton eRadio;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshButtion;
     private javax.swing.JButton selectGame;
     private javax.swing.JTextPane selectedGameInfo;
+    private javax.swing.JRadioButton wRadio;
     // End of variables declaration//GEN-END:variables
 
     private void initializeGameList() {
@@ -193,13 +207,13 @@ public class SelectGame extends javax.swing.JPanel {
 
             @Override
             public void run() {
-                games = reg.RegistryClient.getGames(GameInfoGameStatus.AVAILABLE).getGameInfo();
+                games = RegistryClient.getGames(GameInfoGameStatus.AVAILABLE).getGameInfoAlt();
                 availableGames.removeAll();
                 if (games.size() == 0) {
                     selectedGameInfo.setText("NO GAMES AVAILABLE");
 
                 } else {
-                    for (GameInfo gi : games) {
+                    for (GameInfoAlt gi : games) {
                         availableGames.add(gi.getLabel().getValue());
                     }
                 }
@@ -208,20 +222,20 @@ public class SelectGame extends javax.swing.JPanel {
     }
 
     private void displayGameInfo() {
-        GameInfo gi = games.get(availableGames.getSelectedIndex());
+        GameInfoAlt gi = games.get(availableGames.getSelectedIndex());
         selectedGameInfo.removeAll();
-        EndPoint ep = gi.getCommunicationEndPoint().getValue();
-        byte[] bytes = BigInteger.valueOf(ep.getAddress()).toByteArray();
-        reverseArray(bytes);
-        try {
-            selectedGameInfo.setText("Name:" + gi.getLabel().getValue() + "\n"
-                    + "ID:" + gi.getId() + "\n"
-                    + "Location: " + InetAddress.getByAddress(bytes).toString() + ":" + ep.getPort()
-            );
-        } catch (UnknownHostException ex) {
-            selectedGameInfo.setText("CRAPPY ENDPOINT DETECTED:\n" + Arrays.toString(ex.getStackTrace()));
-            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        EndPoint ep = gi.getCommunicationEndPoint().getValue();
+//        byte[] bytes = BigInteger.valueOf(ep.getAddress()).toByteArray();
+//        reverseArray(bytes);
+//        try {
+//            selectedGameInfo.setText("Name:" + gi.getLabel().getValue() + "\n"
+//                    + "ID:" + gi.getId() + "\n"
+//                    + "Location: " + InetAddress.getByAddress(bytes).toString() + ":" + ep.getPort()
+//            );
+//        } catch (UnknownHostException ex) {
+//            selectedGameInfo.setText("CRAPPY ENDPOINT DETECTED:\n" + Arrays.toString(ex.getStackTrace()));
+//            Logger.getLogger(SelectGame.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 
