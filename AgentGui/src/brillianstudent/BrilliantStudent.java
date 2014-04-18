@@ -1,16 +1,13 @@
 package brillianstudent;
 
 import AgentCommon.Agent;
-import Common.GameConfiguration;
 import ExecutionStrategies.ExecutionStrategy;
 import ExecutionStrategies.StartGameExecutionStrategy;
 import ExecutionStrategies.TickReceiptStrategy;
 import Communication.Config;
 import Communication.Envelope;
 import ExecutionStrategies.EndGameExecutionStrategy;
-import ExecutionStrategies.GetResourceExecutionStrategy;
 import Gui.GameStatus;
-import Messages.GetResource;
 import Messages.Message;
 import static Messages.Message.MESSAGE_CLASS_IDS;
 import static java.lang.Thread.sleep;
@@ -51,9 +48,7 @@ public class BrilliantStudent extends Agent
 
     @Override
     public void run() {
-        int count = 0;
         while(!go){
-                count++;
              //   GameStatus.updateLog("waiting for start of game: "+count);
             try {
                 sleep(1000);
@@ -61,7 +56,7 @@ public class BrilliantStudent extends Agent
                 Logger.getLogger(BrilliantStudent.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        requestGameConfiguration();
+//        requestGameConfiguration();
         
         while(go){
             try {

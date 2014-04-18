@@ -30,6 +30,7 @@ public class GetResourceExecutionStrategy extends ExecutionStrategy {
     public GetResourceExecutionStrategy(Agent agent,GetResource.PossibleResourceType requestType,Endpoint serverEndpoint ) {
         super(agent, null);
         GetResource gr = new GetResource((short)10, requestType, new Tick());
+        
         first = new Envelope(gr, serverEndpoint);
 //        gr = new GetResource
         this.conversationId = gr.getConversationId();

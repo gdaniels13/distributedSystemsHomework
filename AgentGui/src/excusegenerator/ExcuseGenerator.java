@@ -10,7 +10,14 @@ import AgentCommon.Agent;
 import Communication.Config;
 import ExecutionStrategies.ExecutionStrategy;
 import ExecutionStrategies.StartGameExecutionStrategy;
+import ExecutionStrategies.TickReceiptStrategy;
+import Gui.GameStatus;
+import Messages.Message;
+import Messages.Message.MESSAGE_CLASS_IDS;
 import Messages.Request;
+import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,13 +33,16 @@ public class ExcuseGenerator extends Agent{
 
     @Override
     public ExecutionStrategy CreateExecutionStrategy(Communication.Envelope cur) {
-        Request r = (Request) cur.getMessage();
-        if(r == null) return null;
-        switch(r.RequestType){
+        Message message = cur.getMessage();
+        MESSAGE_CLASS_IDS messageType = message.MessageTypeId();
+
+        switch(messageType){
             case StartGame:
                 return new StartGameExecutionStrategy(this, cur);
             case GetResource:
                 return new ExcuseRequestExecutionStrategy(this, cur);
+            case TickDelivery:
+                return new TickReceiptStrategy(this, cur);
             default:
                 return null;
         }
@@ -41,7 +51,17 @@ public class ExcuseGenerator extends Agent{
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //requestGameConfiguration();
+        
+        while(true){
+            try {
+                sleep(5000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ExcuseGenerator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            GameStatus.updateLog("I'm still alive");
+        }
+    
     }
     
 }

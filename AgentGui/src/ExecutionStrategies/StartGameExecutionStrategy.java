@@ -6,7 +6,6 @@
 
 package ExecutionStrategies;
 
-import Messages.AckNak;
 import Messages.ReadyReply;
 import Messages.Reply;
 import AgentCommon.Agent;
