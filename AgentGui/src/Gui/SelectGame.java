@@ -167,7 +167,7 @@ public class SelectGame extends javax.swing.JPanel {
 
         try {
             if (bsRadio.isSelected()) {
-                this.agent = new BrilliantStudent(new Config("BS N A00798340 Greg if_you_want_an_uptodateversionofthejavalibrariesemailmeat_gdaniels13@gmail.com_andIwillsendyoualink".split(" ")));
+                this.agent = new BrilliantStudent(new Config("BS N A00798340 Greg Daniels".split(" ")));
             }
             else if(wRadio.isSelected()){
                 this.agent = new TwineGenerator(new Config("WG N A00798340 Greg Daniels".split(" ")));

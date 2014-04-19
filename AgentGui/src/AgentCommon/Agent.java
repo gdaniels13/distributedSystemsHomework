@@ -19,16 +19,9 @@ import ExecutionStrategies.GetResourceExecutionStrategy;
 import ExecutionStrategies.JoinGameExecutionStrategy;
 import Gui.GameStatus;
 import Messages.GetResource;
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.util.Observable;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by gregor on 2/28/14.
@@ -49,20 +42,35 @@ public abstract class Agent extends Observable implements Runnable {
     protected ConcurrentLinkedQueue<DistributableObject> newResources;
     private String error;
     protected short pid;
-//    public static Agent Create(Config config){
-//        switch(config.getAgentType())
-//        {
-//            case "WG":
-//                return new TwineGenerator(config);
-//            case "BS":
-//                return new BrilliantStudent(config);
-//            case "EG":
-//                return new ExcuseGenerator(config);
-//            default:
-//                throw new IllegalArgumentException(config.getAgentType() + "is not a valid agent Type");
-//        }
-//    }
+    protected boolean go;
+    protected GameConfiguration gameConfiguration;
+    protected AgentInfo agentInfo;
+    protected PlayingFieldLayout fieldLayout;
+    protected AgentList brilliantStudentList;
+    protected AgentList excuseGeneratorList;
+    protected AgentList whiningSpinnerList;
+    protected AgentList zombieList;
 
+    public PlayingFieldLayout getFieldLayout() {
+        return fieldLayout;
+    }
+
+    public AgentList getBrilliantStudentList() {
+        return brilliantStudentList;
+    }
+
+    public AgentList getExcuseGeneratorList() {
+        return excuseGeneratorList;
+    }
+
+    public AgentList getWhiningSpinnerList() {
+        return whiningSpinnerList;
+    }
+
+    public AgentList getZombieList() {
+        return zombieList;
+    }
+    
     public short getPid() {
         return pid;
     }
@@ -71,9 +79,7 @@ public abstract class Agent extends Observable implements Runnable {
         this.pid = pid;
     }
 
-    protected boolean go;
-    protected GameConfiguration gameConfiguration;
-    protected AgentInfo agentInfo;
+
 
     public Agent(Config config) {
         this.config = config;
@@ -187,23 +193,33 @@ public abstract class Agent extends Observable implements Runnable {
     }
 
     public void setPlayingField(PlayingFieldLayout layout) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.fieldLayout = layout;
+                notifyGui();
+
     }
 
     public void setBrilliantStudentList(AgentList list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.brilliantStudentList = list;
+                notifyGui();
+
     }
 
     public void setExcuseGeneratorList(AgentList list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.excuseGeneratorList = list;
+                notifyGui();
+
     }
 
     public void setWhiningSpinnerList(AgentList list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.whiningSpinnerList = list;
+                notifyGui();
+
     }
 
     public void setZombieProfessorList(AgentList list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.zombieList = list;
+                notifyGui();
+
     }
 
     public boolean verifyServer(Envelope env) {

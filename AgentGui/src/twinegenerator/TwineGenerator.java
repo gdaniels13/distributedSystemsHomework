@@ -15,6 +15,7 @@ import Gui.GameStatus;
 import Messages.Request;
 import excusegenerator.ExcuseGenerator;
 import static java.lang.Thread.sleep;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,8 +25,14 @@ import java.util.logging.Logger;
  */
 public class TwineGenerator extends AgentCommon.Agent{
 
+    private ConcurrentLinkedQueue<ExecutionStrategy> requestQueue;
     public TwineGenerator(Config config) {
         super(config);
+        requestQueue = new ConcurrentLinkedQueue<>();
+    }
+
+    public ConcurrentLinkedQueue<ExecutionStrategy> getRequests() {
+        return requestQueue;
     }
 
     @Override
@@ -48,12 +55,13 @@ public class TwineGenerator extends AgentCommon.Agent{
     
     @Override
     public void run() {
-        while(true){
+        while(requestQueue.size()<gameConfiguration.getNumberOfTicksRequiredToBuildAnExcuse()){
             try {
-                sleep(5000);
+                wait(5000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ExcuseGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             GameStatus.updateLog("I'm still alive");
         }
     }
