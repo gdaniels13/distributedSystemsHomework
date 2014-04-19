@@ -8,6 +8,7 @@ package Gui;
 
 import AgentCommon.Agent;
 import Common.AgentInfo;
+import Messages.GetResource;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -50,6 +51,7 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
         twineCount5 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         logTA = new javax.swing.JTextArea();
+        getConfigurationButton = new javax.swing.JButton();
 
         setFocusable(false);
 
@@ -121,31 +123,43 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
         logTA.setToolTipText("");
         jScrollPane1.setViewportView(logTA);
 
+        getConfigurationButton.setText("Get Configuration");
+        getConfigurationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getConfigurationButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(twineCount5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(scoreLabel)
-                    .addComponent(positionLabel)
-                    .addComponent(ExcuseLabel)
-                    .addComponent(AgentStatus)
-                    .addComponent(twineLabel)
-                    .addComponent(ticksLabel)
-                    .addComponent(healthLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(getConfigurationButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(twineCount5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(scoreLabel)
+                            .addComponent(positionLabel)
+                            .addComponent(ExcuseLabel)
+                            .addComponent(AgentStatus)
+                            .addComponent(twineLabel)
+                            .addComponent(ticksLabel)
+                            .addComponent(healthLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(healthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,7 +176,9 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
                         .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(twineCount5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(getConfigurationButton)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -190,10 +206,15 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
         // TODO add your handling code here:
     }//GEN-LAST:event_twineCount5ActionPerformed
 
+    private void getConfigurationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButtonActionPerformed
+        agent.requestResourceFromServer(GetResource.PossibleResourceType.GameConfiguration);
+    }//GEN-LAST:event_getConfigurationButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AgentStatus;
     private javax.swing.JTextField ExcuseLabel;
+    private javax.swing.JButton getConfigurationButton;
     private javax.swing.JTextField healthLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea logTA;

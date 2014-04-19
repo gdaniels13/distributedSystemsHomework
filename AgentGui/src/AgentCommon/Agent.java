@@ -19,9 +19,16 @@ import ExecutionStrategies.GetResourceExecutionStrategy;
 import ExecutionStrategies.JoinGameExecutionStrategy;
 import Gui.GameStatus;
 import Messages.GetResource;
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.util.Observable;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by gregor on 2/28/14.
@@ -167,7 +174,33 @@ public abstract class Agent extends Observable implements Runnable {
     }
 
     public void setSetConfiguration(GameConfiguration configuration) {
-        this.gameConfiguration = configuration;
+        try {
+            this.gameConfiguration = configuration;
+            BeanInfo beanInfo = Introspector.getBeanInfo(GameConfiguration.class);
+            for (PropertyDescriptor propertyDesc : beanInfo.getPropertyDescriptors()) {
+                String propertyName = propertyDesc.getName();
+                Object value = propertyDesc.getReadMethod().invoke(configuration);
+                
+                 if(value instanceof Float){
+                    propertyName +=" " + (float) value;
+                }
+                else if(value instanceof Byte){
+                    propertyName +=" " + (byte) value;
+                }
+                else if(value instanceof Short){
+                    propertyName +=" " + (short) value;
+                }
+                 GameStatus.updateLog(propertyName);
+            }
+        } catch (IntrospectionException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public GameConfiguration getGameConfiguration() {
@@ -210,8 +243,8 @@ public abstract class Agent extends Observable implements Runnable {
         return false;
     }
 
-    public void requestGameConfiguration() {
-        GetResourceExecutionStrategy es = new GetResourceExecutionStrategy(this, GetResource.PossibleResourceType.GameConfiguration, config.getServerEndpoint());
+    public void requestResourceFromServer(GetResource.PossibleResourceType type) {
+        GetResourceExecutionStrategy es = new GetResourceExecutionStrategy(this, type, config.getServerEndpoint());
         this.dispatcher.startConversation(es);
     }
 

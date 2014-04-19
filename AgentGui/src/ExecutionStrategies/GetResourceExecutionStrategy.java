@@ -54,12 +54,16 @@ public class GetResourceExecutionStrategy extends ExecutionStrategy {
             switch (m.getReplyType()) {
                 case ResourceReply:
                     routeResource(((ResourceReply) m).getResource());
+                    break;
                 case ConfigurationReply:
                     agent.setSetConfiguration(((ConfigurationReply) m).getConfiguration());
+                    break;
                 case PlayingFieldReply:
                     agent.setPlayingField(((PlayingFieldReply) m).getLayout());
+                    break;
                 case AgentListReply:
                     routeAgentLists(((AgentListReply) m).getAgents());
+                    break;
                 case StatusReply:
                     break;
                 default:
@@ -95,12 +99,16 @@ public class GetResourceExecutionStrategy extends ExecutionStrategy {
         switch (getListType()) {
             case BrillianStudentList:
                 agent.setBrilliantStudentList(list);
+                break;
             case ExcuseGeneratorList:
                 agent.setExcuseGeneratorList(list);
+                break;
             case WhiningSpinnerList:
                 agent.setWhiningSpinnerList(list);
+                break;
             case ZombieProfessorList:
                 agent.setZombieProfessorList(list);
+                break;
         }
     }
 }
