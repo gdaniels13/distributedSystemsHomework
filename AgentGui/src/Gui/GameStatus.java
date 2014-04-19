@@ -8,9 +8,23 @@ package Gui;
 
 import AgentCommon.Agent;
 import Common.AgentInfo;
+import Common.GameConfiguration;
 import Messages.GetResource;
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 
 /**
  *
@@ -23,14 +37,17 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
      */
     private Agent agent;
     private static GameStatus instance;
+    
+     DefaultMutableTreeNode treeRootNode,gcNode ;
+     JTree dataTree;
     public GameStatus(Agent agent) {
         initComponents();
         this.agent = agent;
         this.agent.addObserver(this);
         this.instance = this;
         
-        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,11 +64,17 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
         AgentStatus = new javax.swing.JTextField();
         ExcuseLabel = new javax.swing.JTextField();
         positionLabel = new javax.swing.JTextField();
-        scoreLabel = new javax.swing.JTextField();
-        twineCount5 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         logTA = new javax.swing.JTextArea();
         getConfigurationButton = new javax.swing.JButton();
+        getConfigurationButton1 = new javax.swing.JButton();
+        getConfigurationButton2 = new javax.swing.JButton();
+        getConfigurationButton3 = new javax.swing.JButton();
+        getConfigurationButton4 = new javax.swing.JButton();
+        getConfigurationButton5 = new javax.swing.JButton();
+        getConfigurationButton6 = new javax.swing.JButton();
+        treeScrollPane = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
 
         setFocusable(false);
 
@@ -99,36 +122,63 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
             }
         });
 
-        scoreLabel.setText("Twine Generator Count:");
-        scoreLabel.setAutoscrolls(false);
-        scoreLabel.setFocusable(false);
-        scoreLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scoreLabelActionPerformed(evt);
-            }
-        });
-
-        twineCount5.setText("Excuese Generator Count:");
-        twineCount5.setAutoscrolls(false);
-        twineCount5.setFocusable(false);
-        twineCount5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                twineCount5ActionPerformed(evt);
-            }
-        });
-
         logTA.setColumns(20);
         logTA.setLineWrap(true);
         logTA.setRows(5);
         logTA.setToolTipText("");
         jScrollPane1.setViewportView(logTA);
 
-        getConfigurationButton.setText("Get Configuration");
+        getConfigurationButton.setText("Get Game Configuration");
         getConfigurationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 getConfigurationButtonActionPerformed(evt);
             }
         });
+
+        getConfigurationButton1.setText("Get ZombieList");
+        getConfigurationButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getConfigurationButton1ActionPerformed(evt);
+            }
+        });
+
+        getConfigurationButton2.setText("Get TwineGeneratorList");
+        getConfigurationButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getConfigurationButton2ActionPerformed(evt);
+            }
+        });
+
+        getConfigurationButton3.setText("Get Twine");
+        getConfigurationButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getConfigurationButton3ActionPerformed(evt);
+            }
+        });
+
+        getConfigurationButton4.setText("Get ExcuseGeneratorList");
+        getConfigurationButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getConfigurationButton4ActionPerformed(evt);
+            }
+        });
+
+        getConfigurationButton5.setText("Get Excuse");
+        getConfigurationButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getConfigurationButton5ActionPerformed(evt);
+            }
+        });
+
+        getConfigurationButton6.setText("Increase Health");
+        getConfigurationButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getConfigurationButton6ActionPerformed(evt);
+            }
+        });
+
+        jTree1.setModel(getModel());
+        treeScrollPane.setViewportView(jTree1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,21 +187,25 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(getConfigurationButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(twineCount5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(scoreLabel)
-                            .addComponent(positionLabel)
-                            .addComponent(ExcuseLabel)
-                            .addComponent(AgentStatus)
-                            .addComponent(twineLabel)
-                            .addComponent(ticksLabel)
-                            .addComponent(healthLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(getConfigurationButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(getConfigurationButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(positionLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ExcuseLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(AgentStatus, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(twineLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ticksLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(healthLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(getConfigurationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(getConfigurationButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                .addComponent(getConfigurationButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(getConfigurationButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(getConfigurationButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(treeScrollPane)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -159,7 +213,6 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(healthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,17 +221,28 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
                         .addComponent(twineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AgentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(11, 11, 11)
                         .addComponent(ExcuseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(positionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(getConfigurationButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(twineCount5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(getConfigurationButton)
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(getConfigurationButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getConfigurationButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getConfigurationButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getConfigurationButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getConfigurationButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getConfigurationButton6))
+                    .addComponent(treeScrollPane))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -198,30 +262,52 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
         // TODO add your handling code here:
     }//GEN-LAST:event_positionLabelActionPerformed
 
-    private void scoreLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_scoreLabelActionPerformed
-
-    private void twineCount5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twineCount5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_twineCount5ActionPerformed
-
     private void getConfigurationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButtonActionPerformed
         agent.requestResourceFromServer(GetResource.PossibleResourceType.GameConfiguration);
     }//GEN-LAST:event_getConfigurationButtonActionPerformed
+
+    private void getConfigurationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getConfigurationButton1ActionPerformed
+
+    private void getConfigurationButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getConfigurationButton2ActionPerformed
+
+    private void getConfigurationButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getConfigurationButton3ActionPerformed
+
+    private void getConfigurationButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getConfigurationButton4ActionPerformed
+
+    private void getConfigurationButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getConfigurationButton5ActionPerformed
+
+    private void getConfigurationButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getConfigurationButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getConfigurationButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AgentStatus;
     private javax.swing.JTextField ExcuseLabel;
     private javax.swing.JButton getConfigurationButton;
+    private javax.swing.JButton getConfigurationButton1;
+    private javax.swing.JButton getConfigurationButton2;
+    private javax.swing.JButton getConfigurationButton3;
+    private javax.swing.JButton getConfigurationButton4;
+    private javax.swing.JButton getConfigurationButton5;
+    private javax.swing.JButton getConfigurationButton6;
     private javax.swing.JTextField healthLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree jTree1;
     private javax.swing.JTextArea logTA;
     private javax.swing.JTextField positionLabel;
-    private javax.swing.JTextField scoreLabel;
     private javax.swing.JTextField ticksLabel;
-    private javax.swing.JTextField twineCount5;
+    private javax.swing.JScrollPane treeScrollPane;
     private javax.swing.JTextField twineLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -233,9 +319,9 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
         AgentStatus.setText("Status: " + a.getAgentStatus().toString());
         ExcuseLabel.setText("Excuses: " + Integer.toString(agent.getExcuseQueue().size()));
         positionLabel.setText("Agent Position: " + "x: " +a.getLocation().getX() + " y: " + a.getLocation().getY());
-        scoreLabel.setText("Score: " + Double.toString(a.getPoints()));
-        twineCount5.setText("Speed: " + Double.toString(a.getSpeed()));
-        
+//        scoreLabel.setText("Score: " + Double.toString(a.getPoints()));
+//        twineCount5.setText("Speed: " + Double.toString(a.getSpeed()));
+//        
         
     }
     
@@ -251,11 +337,79 @@ public class GameStatus extends javax.swing.JPanel implements Observer{
     }
     @Override
     public void update(Observable o, Object arg) {
+        updateLog("Updating Gui");
         updateAgentInfo();
-        
+        updateTree();
         
         
         repaint();
         validate();
+    }
+    
+    
+    
+    public void updateTree(){
+        updateGameInfo();
+        repaint();
+        validate();
+    }
+    
+    
+
+    private TreeModel getModel() {
+         treeRootNode =new DefaultMutableTreeNode("Game Info");
+         gcNode = new DefaultMutableTreeNode("Game Configuration");
+         gcNode.add(new DefaultMutableTreeNode("No Information Available"));
+         treeRootNode.add(gcNode);
+        TreeModel tm = new DefaultTreeModel(treeRootNode);
+        return tm;
+    }
+
+    private ArrayList<String> getFields(GameConfiguration obj){
+        ArrayList<String> toReturn = new ArrayList<>();
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(GameConfiguration.class);
+            for (PropertyDescriptor propertyDesc : beanInfo.getPropertyDescriptors()) {
+                String propertyName = propertyDesc.getName();
+                Object value = propertyDesc.getReadMethod().invoke(obj);
+                
+                 if(value instanceof Float){
+                    propertyName +=" " + (float) value;
+                }
+                else if(value instanceof Byte){
+                    propertyName +=" " + (byte) value;
+                }
+                else if(value instanceof Short){
+                    propertyName +=" " + (short) value;
+                }
+                 toReturn.add(propertyName);
+            }
+        } catch (IntrospectionException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return toReturn;
+    }
+    
+    private void addList(DefaultMutableTreeNode tn, ArrayList<String> list){
+        for(String t : list){
+            tn.add(new DefaultMutableTreeNode(t));
+        }
+    }
+    private void updateGameInfo() {
+        GameConfiguration gc = agent.getGameConfiguration();
+        if(gc == null){
+            System.out.println("Configuration wa snull");
+            return;
+        }
+        else{
+            gcNode.removeAllChildren();
+            addList(gcNode, getFields(gc));
+        }
     }
 }

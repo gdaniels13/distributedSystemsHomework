@@ -174,33 +174,8 @@ public abstract class Agent extends Observable implements Runnable {
     }
 
     public void setSetConfiguration(GameConfiguration configuration) {
-        try {
-            this.gameConfiguration = configuration;
-            BeanInfo beanInfo = Introspector.getBeanInfo(GameConfiguration.class);
-            for (PropertyDescriptor propertyDesc : beanInfo.getPropertyDescriptors()) {
-                String propertyName = propertyDesc.getName();
-                Object value = propertyDesc.getReadMethod().invoke(configuration);
-                
-                 if(value instanceof Float){
-                    propertyName +=" " + (float) value;
-                }
-                else if(value instanceof Byte){
-                    propertyName +=" " + (byte) value;
-                }
-                else if(value instanceof Short){
-                    propertyName +=" " + (short) value;
-                }
-                 GameStatus.updateLog(propertyName);
-            }
-        } catch (IntrospectionException ex) {
-            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(Agent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.gameConfiguration = configuration;
+        notifyGui();
     }
 
     public GameConfiguration getGameConfiguration() {

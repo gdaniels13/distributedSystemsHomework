@@ -22,23 +22,27 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" pref="666" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="getConfigurationButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="twineCount5" pref="220" max="32767" attributes="0"/>
-                          <Component id="scoreLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="positionLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ExcuseLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="AgentStatus" alignment="0" max="32767" attributes="0"/>
-                          <Component id="twineLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ticksLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="healthLabel" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="getConfigurationButton6" min="-2" pref="220" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="getConfigurationButton2" max="32767" attributes="0"/>
+                              <Component id="positionLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ExcuseLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="AgentStatus" alignment="0" max="32767" attributes="0"/>
+                              <Component id="twineLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ticksLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="healthLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="getConfigurationButton" alignment="1" max="32767" attributes="0"/>
+                              <Component id="getConfigurationButton4" alignment="1" pref="220" max="32767" attributes="0"/>
+                              <Component id="getConfigurationButton1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="getConfigurationButton3" alignment="1" max="32767" attributes="0"/>
+                              <Component id="getConfigurationButton5" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="328" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="treeScrollPane" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -50,7 +54,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="healthLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -59,19 +62,30 @@
                       <Component id="twineLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="AgentStatus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="ExcuseLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="positionLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scoreLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="getConfigurationButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="twineCount5" min="-2" max="-2" attributes="0"/>
+                      <Component id="getConfigurationButton4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="getConfigurationButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="getConfigurationButton2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="getConfigurationButton3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="getConfigurationButton5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="getConfigurationButton6" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="treeScrollPane" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="getConfigurationButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="128" max="-2" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,26 +145,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="positionLabelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="scoreLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Twine Generator Count:"/>
-        <Property name="autoscrolls" type="boolean" value="false"/>
-        <Property name="focusable" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scoreLabelActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="twineCount5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Excuese Generator Count:"/>
-        <Property name="autoscrolls" type="boolean" value="false"/>
-        <Property name="focusable" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twineCount5ActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -170,11 +164,72 @@
     </Container>
     <Component class="javax.swing.JButton" name="getConfigurationButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Get Configuration"/>
+        <Property name="text" type="java.lang.String" value="Get Game Configuration"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getConfigurationButtonActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="getConfigurationButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Get ZombieList"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getConfigurationButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="getConfigurationButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Get TwineGeneratorList"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getConfigurationButton2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="getConfigurationButton3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Get Twine"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getConfigurationButton3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="getConfigurationButton4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Get ExcuseGeneratorList"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getConfigurationButton4ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="getConfigurationButton5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Get Excuse"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getConfigurationButton5ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="getConfigurationButton6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Increase Health"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getConfigurationButton6ActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="treeScrollPane">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTree" name="jTree1">
+          <Properties>
+            <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="getModel()" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
