@@ -3,25 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Gui;
 
 import AgentCommon.Agent;
 import Common.AgentInfo;
 import Common.AgentList;
+import Common.FieldLocation;
 import Common.GameConfiguration;
 import Messages.GetResource;
+import brillianstudent.BrilliantStudent;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -37,15 +38,16 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
      */
     private Agent agent;
     private static GameStatus instance;
-    
+
     private DefaultMutableTreeNode treeRootNode, gcNode, bsNode, egNode, wgNode, zNode;
+    HashMap<String, DefaultMutableTreeNode> bsMap;
 
     public GameStatus(Agent agent) {
         initComponents();
         this.agent = agent;
         this.agent.addObserver(this);
         this.instance = this;
-        
+        this.bsMap = new HashMap<>();
     }
 
     /**
@@ -75,6 +77,13 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
         treeScrollPane = new javax.swing.JScrollPane();
         infoTree = new javax.swing.JTree();
         getExcuseGeneratorList = new javax.swing.JButton();
+        getPlayingField = new javax.swing.JButton();
+        bombX = new javax.swing.JTextField();
+        bombY = new javax.swing.JTextField();
+        throwBombButton = new javax.swing.JButton();
+        moveX = new javax.swing.JTextField();
+        moveY = new javax.swing.JTextField();
+        moveButton = new javax.swing.JButton();
 
         setFocusable(false);
 
@@ -187,14 +196,65 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
             }
         });
 
+        getPlayingField.setText("Get Playing Field Layout");
+        getPlayingField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getPlayingFieldActionPerformed(evt);
+            }
+        });
+
+        bombX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bombXActionPerformed(evt);
+            }
+        });
+
+        bombY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bombYActionPerformed(evt);
+            }
+        });
+
+        throwBombButton.setText("Throw Bomb");
+        throwBombButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                throwBombButtonActionPerformed(evt);
+            }
+        });
+
+        moveX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveXActionPerformed(evt);
+            }
+        });
+
+        moveY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveYActionPerformed(evt);
+            }
+        });
+
+        moveButton.setText("Move");
+        moveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addComponent(bombX, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bombY, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(throwBombButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(getTwineGeneratorList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(positionLabel, javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,25 +264,34 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
                             .addComponent(ticksLabel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(healthLabel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(getConfigurationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(getStudentList, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(getStudentList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(getZombieList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(getTwine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(getExcuse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(getExcuseGeneratorList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(increaseHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(getExcuseGeneratorList, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(increaseHealth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(getPlayingField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(getExcuse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(getTwine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(moveX, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moveY, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(treeScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                    .addComponent(treeScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(treeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(healthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,11 +300,11 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
                         .addComponent(twineLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AgentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
+                        .addGap(5, 5, 5)
                         .addComponent(ExcuseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(positionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(getConfigurationButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(getStudentList)
@@ -247,14 +316,24 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
                         .addComponent(getExcuseGeneratorList)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(getTwine)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(getExcuse))
-                    .addComponent(treeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(increaseHealth))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getExcuse)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(increaseHealth)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getPlayingField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bombX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bombY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(throwBombButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(moveX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(moveY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(moveButton))
+                        .addGap(0, 27, Short.MAX_VALUE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,11 +363,15 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
     }//GEN-LAST:event_getZombieListActionPerformed
 
     private void getTwineGeneratorListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getTwineGeneratorListActionPerformed
-        agent.requestResourceFromServer(GetResource.PossibleResourceType.GameConfiguration);
+        agent.requestResourceFromServer(GetResource.PossibleResourceType.WhiningSpinnerList);
     }//GEN-LAST:event_getTwineGeneratorListActionPerformed
 
     private void getTwineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getTwineActionPerformed
-        agent.requestResourceFromServer(GetResource.PossibleResourceType.WhiningSpinnerList);
+        try {
+            ((BrilliantStudent) agent).requestResource(null, GetResource.PossibleResourceType.WhiningTwine);
+        } catch (ClassCastException e) {
+            updateLog("Dont push that button");
+        }
     }//GEN-LAST:event_getTwineActionPerformed
 
     private void getStudentListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getStudentListActionPerformed
@@ -297,7 +380,11 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
     }//GEN-LAST:event_getStudentListActionPerformed
 
     private void getExcuseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getExcuseActionPerformed
-        // TODO add your handling code here:
+        try {
+            ((BrilliantStudent) agent).requestResource(null, GetResource.PossibleResourceType.Excuse);
+        } catch (ClassCastException e) {
+            updateLog("Dont push that button");
+        }
     }//GEN-LAST:event_getExcuseActionPerformed
 
     private void increaseHealthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_increaseHealthActionPerformed
@@ -305,16 +392,57 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
     }//GEN-LAST:event_increaseHealthActionPerformed
 
     private void getExcuseGeneratorListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getExcuseGeneratorListActionPerformed
-        // TODO add your handling code here:
+        agent.requestResourceFromServer(GetResource.PossibleResourceType.ExcuseGeneratorList);
     }//GEN-LAST:event_getExcuseGeneratorListActionPerformed
+
+    private void getPlayingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayingFieldActionPerformed
+        agent.requestResourceFromServer(GetResource.PossibleResourceType.PlayingFieldLayout);
+
+    }//GEN-LAST:event_getPlayingFieldActionPerformed
+
+    private void bombXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bombXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bombXActionPerformed
+
+    private void bombYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bombYActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bombYActionPerformed
+
+    private void throwBombButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwBombButtonActionPerformed
+       
+
+    }//GEN-LAST:event_throwBombButtonActionPerformed
+
+    private void moveXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moveXActionPerformed
+
+    private void moveYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveYActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moveYActionPerformed
+
+    private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
+    short x = Short.parseShort(moveX.getText());
+        short y = Short.parseShort(moveY.getText());
+        FieldLocation fl= new FieldLocation(x, y, false);
+        try{
+        ((BrilliantStudent)agent).move(fl);
+        }
+        catch(ClassCastException e){
+            updateLog("Don't Push that Button");
+        }
+    }//GEN-LAST:event_moveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AgentStatus;
     private javax.swing.JTextField ExcuseLabel;
+    private javax.swing.JTextField bombX;
+    private javax.swing.JTextField bombY;
     private javax.swing.JButton getConfigurationButton;
     private javax.swing.JButton getExcuse;
     private javax.swing.JButton getExcuseGeneratorList;
+    private javax.swing.JButton getPlayingField;
     private javax.swing.JButton getStudentList;
     private javax.swing.JButton getTwine;
     private javax.swing.JButton getTwineGeneratorList;
@@ -324,7 +452,11 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
     private javax.swing.JTree infoTree;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea logTA;
+    private javax.swing.JButton moveButton;
+    private javax.swing.JTextField moveX;
+    private javax.swing.JTextField moveY;
     private javax.swing.JTextField positionLabel;
+    private javax.swing.JButton throwBombButton;
     private javax.swing.JTextField ticksLabel;
     private javax.swing.JScrollPane treeScrollPane;
     private javax.swing.JTextField twineLabel;
@@ -341,65 +473,74 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
 //        scoreLabel.setText("Score: " + Double.toString(a.getPoints()));
 //        twineCount5.setText("Speed: " + Double.toString(a.getSpeed()));
 //        
-        
+
     }
-    
+
     public static void updateLog(String toAppend) {
         if (instance == null) {
             return;
         } else {
+            boolean moveToEnd = false;
+            if (instance.logTA.getCaretPosition() == instance.logTA.getDocument().getLength()) {
+                moveToEnd = true;
+            }
             instance.logTA.append(toAppend + "\n");
-            instance.logTA.setCaretPosition(instance.logTA.getDocument().getLength());
+            if (moveToEnd) {
+                instance.logTA.setCaretPosition(instance.logTA.getDocument().getLength());
+            }
         }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        updateLog("Updating Gui");
         updateAgentInfo();
         updateTree();
-        
+
         repaint();
         validate();
     }
+
     
     public void updateTree() {
+        
+        
         updateGameInfo();
-        updateAgentList(bsNode, agent.getBrilliantStudentList());
-        updateAgentList(egNode,agent.getExcuseGeneratorList());
-        updateAgentList(wgNode, agent.getWhiningSpinnerList());
-        updateAgentList(zNode,agent.getZombieList());
+        
+        updateAgentList(bsNode, agent.getBrilliantStudentList(),bsMap);
+//        updateAgentList(egNode, agent.getExcuseGeneratorList());
+//        updateAgentList(wgNode, agent.getWhiningSpinnerList());
+//        updateAgentList(zNode, agent.getZombieList());
         infoTree.updateUI();
         repaint();
         validate();
     }
-    
+
     private TreeModel getModel() {
         treeRootNode = new DefaultMutableTreeNode("Game Info");
-        
+
         gcNode = new DefaultMutableTreeNode("Game Configuration");
         gcNode.add(new DefaultMutableTreeNode("No Information Available"));
         treeRootNode.add(gcNode);
-        
+
         egNode = new DefaultMutableTreeNode("Excuse Generator List");
         egNode.add(new DefaultMutableTreeNode("No Information Available"));
         treeRootNode.add(egNode);
-        
+
         bsNode = new DefaultMutableTreeNode("Brilliant Student List");
         bsNode.add(new DefaultMutableTreeNode("No Information Available"));
         treeRootNode.add(bsNode);
-        
+
         wgNode = new DefaultMutableTreeNode("Twine Generator ");
         wgNode.add(new DefaultMutableTreeNode("No Information Available"));
         treeRootNode.add(wgNode);
-        
+
         zNode = new DefaultMutableTreeNode("Zombies ");
         zNode.add(new DefaultMutableTreeNode("No Information Available"));
         treeRootNode.add(zNode);
         TreeModel tm = new DefaultTreeModel(treeRootNode);
         return tm;
     }
-    
+
     private ArrayList<String> getFields(GameConfiguration obj) {
         ArrayList<String> toReturn = new ArrayList<>();
         try {
@@ -407,7 +548,7 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
             for (PropertyDescriptor propertyDesc : beanInfo.getPropertyDescriptors()) {
                 String propertyName = propertyDesc.getName();
                 Object value = propertyDesc.getReadMethod().invoke(obj);
-                
+
                 if (value instanceof Float) {
                     propertyName += " " + (float) value;
                 } else if (value instanceof Byte) {
@@ -428,7 +569,7 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
         }
         return toReturn;
     }
-    
+
     private void addList(DefaultMutableTreeNode tn, ArrayList<String> list) {
         for (String t : list) {
             tn.add(new DefaultMutableTreeNode(t));
@@ -440,38 +581,35 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
         if (gc == null) {
             gcNode.removeAllChildren();
             gcNode.add(new DefaultMutableTreeNode("Game Info was null"));
-            updateLog("Configuration was null");
-            return;
         } else {
-            updateLog("updating Configuration leaf");
             gcNode.removeAllChildren();
+            
             addList(gcNode, getFields(gc));
         }
     }
-    
-    private void updateAgentList(DefaultMutableTreeNode node, AgentList brilliantStudentList) {
-        if (brilliantStudentList == null) {
+
+    private void updateAgentList(DefaultMutableTreeNode node, AgentList agentList, HashMap<String,DefaultMutableTreeNode> map) {
+        if (agentList == null) {
             node.removeAllChildren();
             node.add(new DefaultMutableTreeNode("no known agents"));
-        }
-        else
-        {
+        } else {
             node.removeAllChildren();
-            for (AgentInfo agentInfo : brilliantStudentList) {
+//          Enumeration en = node.children();
+//           while(en.hasMoreElements()){
+//               DefaultMutableTreeNode temp = (DefaultMutableTreeNode)en.nextElement();
+//               updateLog(temp.toString());
+//           }
+           
+           for (AgentInfo agentInfo : agentList) {
                 node.add(getNodeFromAgent(agentInfo));
             }
         }
-        infoTree.updateUI();
     }
-    
-    private DefaultMutableTreeNode getNodeFromAgent(AgentInfo ai){
-        DefaultMutableTreeNode toReturn = new DefaultMutableTreeNode(ai.getFirstName()+ " " + ai.getLastName());
-        toReturn.add(new DefaultMutableTreeNode(ai.getANumber()));
-        toReturn.add(new DefaultMutableTreeNode("Location:" + ai.getLocation().ToString()));
-        toReturn.add(new DefaultMutableTreeNode("Score:" + ai.getPoints()));
-        toReturn.add(new DefaultMutableTreeNode(ai.getStrength()));
-             
+
+    private DefaultMutableTreeNode getNodeFromAgent(AgentInfo ai) {
+        DefaultMutableTreeNode toReturn = new DefaultMutableTreeNode(ai.getFirstName() + "_" + ai.getLastName() +"_"+  ai.getId()
+        + "_"+ ai.getLocation().toString() + "_" + ai.getStrength() + "_" + ai.getPoints());
         return toReturn;
     }
-    
+
 }

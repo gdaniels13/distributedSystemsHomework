@@ -182,6 +182,7 @@ public class SelectGame extends javax.swing.JPanel {
         agent.getConfig().setGameInfo(gi);
         window.setAgent(agent);
         System.out.println(gi.getLabel().getValue());
+        window.setTitle(agent.getConfig().getAgentType().toString());
         window.nextWindow();
 
     }//GEN-LAST:event_selectGameActionPerformed

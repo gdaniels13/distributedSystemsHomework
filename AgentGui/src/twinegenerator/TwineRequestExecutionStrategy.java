@@ -8,10 +8,10 @@ package twinegenerator;
 import AgentCommon.Agent;
 import Common.WhiningTwine;
 import Communication.Envelope;
+import Gui.GameStatus;
+import Messages.GetResource;
 import Messages.Reply;
 import Messages.ResourceReply;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,39 +19,49 @@ import java.util.logging.Logger;
  */
 public class TwineRequestExecutionStrategy extends ExecutionStrategies.ExecutionStrategy {
 
-    private int tickToTwineRatio;
-    private WhiningTwine twine;
     public TwineRequestExecutionStrategy(Agent agent, Envelope envelope) {
         super(agent, envelope);
-        ((TwineGenerator)agent).getRequests().add(this);
-        twine = null;
-        ((TwineGenerator)agent).notify();
+        GameStatus.updateLog("Got request from " + recipient);
     }
 
     @Override
-    public synchronized void run() {
-        while(twine ==null){
-            try {
-                wait(50);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(TwineRequestExecutionStrategy.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    public void run() {
+        
+//        while(twine ==null){
+//            try {
+//                wait(50);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(TwineRequestExecutionStrategy.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+        WhiningTwine twine = ((TwineGenerator)agent).getTwineQueue().poll();
+        Reply.PossibleStatus status ;
+        String message;
+        if(twine == null){
+            status = Reply.PossibleStatus.Failure;
+            message = "no twine for you";
         }
-        ResourceReply rr = new  ResourceReply(Reply.PossibleStatus.Success, twine, "hello");
+        else
+        {
+            message = "here have a piece of twine";
+            status = Reply.PossibleStatus.Success;
+            twine.setRequestTick(((GetResource)first.getMessage()).getEnablingTick());
+        }
+        
+        ResourceReply rr = new  ResourceReply(status, twine, message);
         rr.setConversationId(conversationId);
         Envelope e = new Envelope(rr, recipient);
         
         agent.getCommunicator().send(e);
-        
+        removeFromMap();
     }
 
 
-    public WhiningTwine getTwine() {
-        return twine;
-    }
-
-    public synchronized void setTwine(WhiningTwine twine) {
-        this.twine = twine;
-        notifyAll();
-    }
+//
+//    public synchronized void setTwine(WhiningTwine twine) {
+//        this.twine = twine;
+//        GetResource gr = (GetResource)first.getMessage();
+//        twine.setRequestTick(gr.getEnablingTick());
+//        notifyAll();
+//    }
 }

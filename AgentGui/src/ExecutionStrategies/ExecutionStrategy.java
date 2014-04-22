@@ -19,6 +19,14 @@ public abstract class ExecutionStrategy implements Runnable {
 
     public static final long TIMEOUT = 5000;
     public static final int RETRIES = 3;
+
+    public Envelope getFirst() {
+        return first;
+    }
+
+    public void setFirst(Envelope first) {
+        this.first = first;
+    }
     protected long timeout;
     protected int retries ;
     protected ConcurrentLinkedQueue<Envelope> queue;
@@ -38,6 +46,7 @@ public abstract class ExecutionStrategy implements Runnable {
         this.first = envelope;
         if (envelope != null) {
             this.recipient = envelope.getAddress();
+            this.conversationId = envelope.getMessage().getConversationId();
         }
     }
 

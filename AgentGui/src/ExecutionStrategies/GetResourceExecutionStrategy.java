@@ -23,33 +23,41 @@ import Messages.ResourceReply;
 import java.net.InetAddress;
 
 public class GetResourceExecutionStrategy extends ExecutionStrategy {
-    private final GetResource.PossibleResourceType requestType;
-    private final int port;
-    private final InetAddress address;
 
-    public GetResourceExecutionStrategy(Agent agent,GetResource.PossibleResourceType requestType,Endpoint serverEndpoint ) {
+    private final GetResource.PossibleResourceType requestType;
+
+    public GetResourceExecutionStrategy(Agent agent, GetResource.PossibleResourceType requestType, Endpoint serverEndpoint) {
         super(agent, null);
-        GetResource gr = new GetResource((short)10, requestType, new Tick());
-        
-        first = new Envelope(gr, serverEndpoint);
-//        gr = new GetResource
+
+
+        GetResource gr = new GetResource((short) 10, requestType, new Tick());
         this.conversationId = gr.getConversationId();
+                first = new Envelope(gr, serverEndpoint);
+
+//        gr = new GetResource
         this.requestType = requestType;
-        this.address = serverEndpoint.getAddress();
-        this.port = serverEndpoint.getPort();
     }
 
     @Override
     public void run() {
-
         
+           if (requestType == GetResource.PossibleResourceType.Excuse || requestType == GetResource.PossibleResourceType.WhiningTwine) {
+            ((GetResource)first.getMessage()).setEnablingTick(agent.getTickQueue().poll());
+            if(((GetResource)first.getMessage()).getEnablingTick() == null){
+                GameStatus.updateLog("cannot request resource: no ticks available");
+            }
+        }
+
+
         Envelope env = sendRequest();
-        if(env == null)return;
+        if (env == null) {
+            return;
+        }
+        
         Reply m = (Reply) env.getMessage();
         if (m.getStatus() == Reply.PossibleStatus.Failure) {
-            System.err.println("Failed to get Configuration");
+            GameStatus.updateLog("Failed to get Resource " + m.getNote());
             removeFromMap();
-            return;
         } else {
             switch (m.getReplyType()) {
                 case ResourceReply:

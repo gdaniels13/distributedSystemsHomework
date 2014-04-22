@@ -20,10 +20,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="bombX" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="bombY" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="throwBombButton" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="getTwineGeneratorList" max="32767" attributes="0"/>
                           <Component id="positionLabel" alignment="0" max="32767" attributes="0"/>
                           <Component id="ExcuseLabel" alignment="0" max="32767" attributes="0"/>
@@ -32,22 +39,27 @@
                           <Component id="ticksLabel" alignment="0" max="32767" attributes="0"/>
                           <Component id="healthLabel" alignment="0" max="32767" attributes="0"/>
                           <Component id="getConfigurationButton" alignment="1" max="32767" attributes="0"/>
-                          <Component id="getStudentList" alignment="1" pref="220" max="32767" attributes="0"/>
+                          <Component id="getStudentList" alignment="1" max="32767" attributes="0"/>
                           <Component id="getZombieList" alignment="0" max="32767" attributes="0"/>
-                          <Component id="getTwine" alignment="1" max="32767" attributes="0"/>
-                          <Component id="getExcuse" alignment="1" max="32767" attributes="0"/>
-                          <Component id="getExcuseGeneratorList" alignment="1" max="32767" attributes="0"/>
+                          <Component id="getExcuseGeneratorList" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="increaseHealth" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
+                      <Component id="getPlayingField" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
+                      <Component id="getExcuse" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
+                      <Component id="getTwine" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="moveX" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="increaseHealth" min="-2" pref="220" max="-2" attributes="0"/>
+                      <Component id="moveY" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="moveButton" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Component id="treeScrollPane" pref="440" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="427" max="32767" attributes="0"/>
+                  <Component id="treeScrollPane" pref="427" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -57,7 +69,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="treeScrollPane" min="-2" pref="366" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="healthLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -66,11 +83,11 @@
                       <Component id="twineLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="AgentStatus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Component id="ExcuseLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="positionLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="getConfigurationButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="getStudentList" min="-2" max="-2" attributes="0"/>
@@ -82,17 +99,28 @@
                       <Component id="getExcuseGeneratorList" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="getTwine" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="getExcuse" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="increaseHealth" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="getPlayingField" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="bombX" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bombY" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="throwBombButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="moveX" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="moveY" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="moveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="treeScrollPane" min="-2" pref="366" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="128" max="-2" attributes="0"/>
-                  <Component id="increaseHealth" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -244,6 +272,50 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getExcuseGeneratorListActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="getPlayingField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Get Playing Field Layout"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getPlayingFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="bombX">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bombXActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="bombY">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bombYActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="throwBombButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Throw Bomb"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="throwBombButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="moveX">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moveXActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="moveY">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moveYActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="moveButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Move"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moveButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

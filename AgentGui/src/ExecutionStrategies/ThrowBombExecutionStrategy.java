@@ -48,5 +48,6 @@ public class ThrowBombExecutionStrategy extends ExecutionStrategy {
             }
             log("successfully threw bomb");
         }
+        removeFromMap();
     }
 }

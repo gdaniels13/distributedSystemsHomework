@@ -1,1 +1,0 @@
-This is a net beans project and the common and message classes are not included in this repo i have them setup as links. I reccomend coppying the common and message classes into src and deleting the links

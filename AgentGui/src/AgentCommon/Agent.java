@@ -70,7 +70,7 @@ public abstract class Agent extends Observable implements Runnable {
     public AgentList getZombieList() {
         return zombieList;
     }
-    
+
     public short getPid() {
         return pid;
     }
@@ -78,8 +78,6 @@ public abstract class Agent extends Observable implements Runnable {
     public void setPid(short pid) {
         this.pid = pid;
     }
-
-
 
     public Agent(Config config) {
         this.config = config;
@@ -194,31 +192,31 @@ public abstract class Agent extends Observable implements Runnable {
 
     public void setPlayingField(PlayingFieldLayout layout) {
         this.fieldLayout = layout;
-                notifyGui();
+        notifyGui();
 
     }
 
     public void setBrilliantStudentList(AgentList list) {
         this.brilliantStudentList = list;
-                notifyGui();
+        notifyGui();
 
     }
 
     public void setExcuseGeneratorList(AgentList list) {
         this.excuseGeneratorList = list;
-                notifyGui();
+        notifyGui();
 
     }
 
     public void setWhiningSpinnerList(AgentList list) {
         this.whiningSpinnerList = list;
-                notifyGui();
+        notifyGui();
 
     }
 
     public void setZombieProfessorList(AgentList list) {
         this.zombieList = list;
-                notifyGui();
+        notifyGui();
 
     }
 

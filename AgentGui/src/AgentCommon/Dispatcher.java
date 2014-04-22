@@ -11,15 +11,16 @@ import java.util.concurrent.*;
 
 /**
  * Created by gregor on 2/25/14.
- **/
-public class Dispatcher implements Runnable{
+ *
+ */
+public class Dispatcher implements Runnable {
 
-    private ConcurrentHashMap<String,ExecutionStrategy> esMap;
+    private ConcurrentHashMap<String, ExecutionStrategy> esMap;
     private EnvelopeQueue envelopeQueue;
     private Agent agent;
     private ExecutorService threadPool;
 
-    public Dispatcher(EnvelopeQueue envelopeQueue,Agent agent){
+    public Dispatcher(EnvelopeQueue envelopeQueue, Agent agent) {
         this.esMap = new ConcurrentHashMap<>();
         this.envelopeQueue = envelopeQueue;
         threadPool = Executors.newCachedThreadPool();
@@ -29,14 +30,15 @@ public class Dispatcher implements Runnable{
     @Override
     public void run() {
         Envelope cur;
-        while(true){
+        while (true) {
 
             cur = envelopeQueue.pop();
-            if(cur != null)
-            {
-                System.out.println("dispatching a message");
-                GameStatus.updateLog("received : " + cur.getMessage().MessageTypeId().toString() +
-                        " from " + cur.getAddress().toString());
+            if (cur != null) {
+//                System.out.println("dispatching a message");
+                if (cur.getMessage().getClassId() != Message.MESSAGE_CLASS_IDS.TickDelivery.getValue()) {
+                    GameStatus.updateLog("received : " + cur.getMessage().MessageTypeId().toString()
+                            + " from " + cur.getAddress().toString());
+                }
                 dispatch(cur);
             }
 
@@ -48,20 +50,19 @@ public class Dispatcher implements Runnable{
         }
     }
 
-    public void startConversation(ExecutionStrategy es){
+    public void startConversation(ExecutionStrategy es) {
         esMap.put(es.getConversationId().toString(), es);
         es.setExecutableMap(esMap);
         threadPool.execute(es);
     }
-    
-    public void startConversation(Envelope cur){
+
+    public void startConversation(Envelope cur) {
         ExecutionStrategy es = agent.CreateExecutionStrategy(cur);
         es.setExecutableMap(esMap);
         esMap.put(cur.getMessage().getConversationId().toString(), es);
         threadPool.execute(es);
     }
-    
-    
+
     public synchronized void dispatch(Envelope cur) {
         Message message = cur.getMessage();
         String conversationId = message.getConversationId().toString();
@@ -69,36 +70,32 @@ public class Dispatcher implements Runnable{
         //find the object that was handling that conversation
         ExecutionStrategy es = esMap.get(conversationId);
 
-
-        if(es != null){ // conversation exists put the envelope on that objects queue and execute it
+        if (es != null) { // conversation exists put the envelope on that objects queue and execute it
             //add code here to add things new execution strategies based on the
             es.put(cur);
 //            threadPool.execute(es);
-        }
-        else // no conversation of that ID it should be a request
+        } else // no conversation of that ID it should be a request
         {
             Request req;
-            try{
-                
-                req = (Request)message;
-            }
-            catch(ClassCastException e){
+            try {
+
+                req = (Request) message;
+            } catch (ClassCastException e) {
                 return;
             }
 
-
-
-            if(req.getConversationId().Equals(req.getMessageNr())){
+            if (req.getConversationId().Equals(req.getMessageNr())) {
                 //new Conversation create Correct ExecutionStrategy object and put it in the map
                 es = agent.CreateExecutionStrategy(cur);
-                if (es == null) return;
+                if (es == null) {
+                    return;
+                }
                 es.setExecutableMap(esMap);
                 esMap.put(req.getConversationId().toString(), es);
                 threadPool.execute(es);
             }
         }
     }
-
 
     public ConcurrentHashMap<String, ExecutionStrategy> getEsMap() {
         return esMap;
