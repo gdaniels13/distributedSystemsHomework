@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?wsdl" uri="xml-resources/web-service-references/Registrar/wsdl/cs5200web.serv.usu.edu/Registrar.svc.wsdl"/>
-    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd0" uri="xml-resources/web-service-references/Registrar/wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd0.xsd"/>
-    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd1" uri="xml-resources/web-service-references/Registrar/wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd1.xsd"/>
-    <system systemId="http://cs5200web.serv.usu.edu/Registrar.svc?xsd=xsd2" uri="xml-resources/web-service-references/Registrar/wsdl/cs5200web.serv.usu.edu/Registrar.svc.xsd_xsd2.xsd"/>
-</catalog>
