@@ -110,7 +110,7 @@ public abstract class ExecutionStrategy implements Runnable {
     }
 
     public void removeFromMap() {
-        this.executableMap.remove(this.first.toString());
+        this.executableMap.remove(this.first.getMessage().toString());
     }
 
     public long getTimeout() {

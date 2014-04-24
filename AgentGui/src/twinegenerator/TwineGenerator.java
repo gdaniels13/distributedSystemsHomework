@@ -11,6 +11,7 @@ import Communication.Config;
 import Communication.Envelope;
 import ExecutionStrategies.EndGameExecutionStrategy;
 import ExecutionStrategies.ExecutionStrategy;
+import ExecutionStrategies.GetStatusExecutionStrategy;
 import ExecutionStrategies.StartGameExecutionStrategy;
 import ExecutionStrategies.TickReceiptStrategy;
 import Gui.GameStatus;
@@ -61,6 +62,8 @@ public class TwineGenerator extends AgentCommon.Agent {
                 return new TwineRequestExecutionStrategy(this, cur);
             case TickDelivery:
                 return new TickReceiptStrategy(this, cur);
+            case GetStatus:
+                return new GetStatusExecutionStrategy(this, cur);
             default:
                 return null;
         }

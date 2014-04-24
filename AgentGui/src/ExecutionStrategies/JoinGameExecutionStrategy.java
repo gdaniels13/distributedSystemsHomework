@@ -73,6 +73,7 @@ public class JoinGameExecutionStrategy extends ExecutionStrategy {
         
        // Envelope a = agent.communicator.listen();
         //log(a.getAddress().toString());
+//        removeFromMap();
     }
     
    

@@ -49,7 +49,7 @@ private Excuse excuse;
         Envelope e = new Envelope(rr, recipient);
         
         agent.getCommunicator().send(e);
-        
+        removeFromMap();
     }
 
 

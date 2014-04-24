@@ -9,6 +9,7 @@ package ExecutionStrategies;
 import Messages.ReadyReply;
 import Messages.Reply;
 import AgentCommon.Agent;
+import Common.AgentInfo;
 import Communication.Envelope;
 
 public class StartGameExecutionStrategy extends ExecutionStrategy {
@@ -29,8 +30,9 @@ public class StartGameExecutionStrategy extends ExecutionStrategy {
             log("got nothing back from start game");
             System.exit(1);
         }
-        
+        agent.getAgentInfo().setAgentStatus(AgentInfo.PossibleAgentStatus.InGame);
         agent.go();
+        removeFromMap();
     }
    
 }

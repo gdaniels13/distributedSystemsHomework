@@ -8,6 +8,7 @@ package Gui;
 import AgentCommon.Agent;
 import Common.AgentInfo;
 import Common.AgentList;
+import Common.Bomb;
 import Common.FieldLocation;
 import Common.GameConfiguration;
 import Messages.GetResource;
@@ -84,6 +85,11 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
         moveX = new javax.swing.JTextField();
         moveY = new javax.swing.JTextField();
         moveButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        moveUP = new javax.swing.JButton();
+        moveDown = new javax.swing.JButton();
+        moveRight = new javax.swing.JButton();
+        moveLeft = new javax.swing.JButton();
 
         setFocusable(false);
 
@@ -241,53 +247,113 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
             }
         });
 
+        moveUP.setText("UP");
+        moveUP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveUPActionPerformed(evt);
+            }
+        });
+
+        moveDown.setText("DOWN");
+        moveDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveDownActionPerformed(evt);
+            }
+        });
+
+        moveRight.setText("RIGHT");
+        moveRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveRightActionPerformed(evt);
+            }
+        });
+
+        moveLeft.setText("LEFT");
+        moveLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveLeftActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(moveLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(moveDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(moveUP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(moveRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(moveUP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(moveDown)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(moveRight))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(moveLeft)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bombX, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bombY, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(throwBombButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(getTwineGeneratorList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(positionLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ExcuseLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AgentStatus, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(twineLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ticksLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(healthLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(getConfigurationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(getStudentList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(getZombieList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(getExcuseGeneratorList, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(increaseHealth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(getPlayingField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(getExcuse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(getTwine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(getTwineGeneratorList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(positionLabel)
+                    .addComponent(ExcuseLabel)
+                    .addComponent(AgentStatus)
+                    .addComponent(twineLabel)
+                    .addComponent(ticksLabel)
+                    .addComponent(healthLabel)
+                    .addComponent(getConfigurationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getStudentList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getZombieList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getExcuseGeneratorList, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(increaseHealth, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(getPlayingField, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(getExcuse, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(getTwine, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(moveX, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(moveY, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(moveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
-                    .addComponent(treeScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
+                        .addComponent(moveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(treeScrollPane)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(treeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -332,8 +398,9 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
                             .addComponent(moveX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(moveY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(moveButton))
-                        .addGap(0, 27, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -409,8 +476,20 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
     }//GEN-LAST:event_bombYActionPerformed
 
     private void throwBombButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwBombButtonActionPerformed
-       
-
+        short x = Short.parseShort(bombX.getText());
+        short y = Short.parseShort(bombY.getText());
+        FieldLocation fl= new FieldLocation(x, y, false);
+        BrilliantStudent bs;
+        try{
+            bs = (BrilliantStudent)agent;
+        }
+        catch(ClassCastException e){
+            updateLog("Don't Push that Button");
+            return;
+        }
+        
+        Bomb b = new Bomb(agent.getPid(), bs.getExcuses(Integer.MAX_VALUE), bs.getTwine(Integer.MAX_VALUE), bs.getTickQueue().poll());
+        bs.throwBomb(b, fl);
     }//GEN-LAST:event_throwBombButtonActionPerformed
 
     private void moveXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveXActionPerformed
@@ -422,7 +501,7 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
     }//GEN-LAST:event_moveYActionPerformed
 
     private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
-    short x = Short.parseShort(moveX.getText());
+        short x = Short.parseShort(moveX.getText());
         short y = Short.parseShort(moveY.getText());
         FieldLocation fl= new FieldLocation(x, y, false);
         try{
@@ -432,6 +511,22 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
             updateLog("Don't Push that Button");
         }
     }//GEN-LAST:event_moveButtonActionPerformed
+
+    private void moveUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUPActionPerformed
+        ((BrilliantStudent)agent).move('u');
+    }//GEN-LAST:event_moveUPActionPerformed
+
+    private void moveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownActionPerformed
+        ((BrilliantStudent)agent).move('d');
+    }//GEN-LAST:event_moveDownActionPerformed
+
+    private void moveRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveRightActionPerformed
+        ((BrilliantStudent)agent).move('r');
+    }//GEN-LAST:event_moveRightActionPerformed
+
+    private void moveLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveLeftActionPerformed
+        ((BrilliantStudent)agent).move('d');
+    }//GEN-LAST:event_moveLeftActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -450,9 +545,14 @@ public class GameStatus extends javax.swing.JPanel implements Observer {
     private javax.swing.JTextField healthLabel;
     private javax.swing.JButton increaseHealth;
     private javax.swing.JTree infoTree;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea logTA;
     private javax.swing.JButton moveButton;
+    private javax.swing.JButton moveDown;
+    private javax.swing.JButton moveLeft;
+    private javax.swing.JButton moveRight;
+    private javax.swing.JButton moveUP;
     private javax.swing.JTextField moveX;
     private javax.swing.JTextField moveY;
     private javax.swing.JTextField positionLabel;

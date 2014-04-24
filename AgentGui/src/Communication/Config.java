@@ -22,7 +22,7 @@ public class Config {
     private int localPort;
     private int serverPort;
     public InetAddress serverAddress;
-    private int messageLength = 1024;
+    private int messageLength = 8192;
     private String aNumber;
     private String firstName;
     private String lastName;

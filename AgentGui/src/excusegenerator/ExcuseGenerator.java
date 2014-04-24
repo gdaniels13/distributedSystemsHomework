@@ -13,6 +13,7 @@ import Common.WhiningTwine;
 import Communication.Config;
 import ExecutionStrategies.EndGameExecutionStrategy;
 import ExecutionStrategies.ExecutionStrategy;
+import ExecutionStrategies.GetStatusExecutionStrategy;
 import ExecutionStrategies.StartGameExecutionStrategy;
 import ExecutionStrategies.TickReceiptStrategy;
 import Gui.GameStatus;
@@ -59,6 +60,8 @@ public class ExcuseGenerator extends Agent {
                 return new TickReceiptStrategy(this, cur);
             case EndGame:
                 return new EndGameExecutionStrategy(this, cur);
+            case GetStatus:
+                return new GetStatusExecutionStrategy(this, cur);
             default:
                 return null;
         }

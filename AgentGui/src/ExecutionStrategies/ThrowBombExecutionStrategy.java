@@ -20,17 +20,20 @@ public class ThrowBombExecutionStrategy extends ExecutionStrategy {
     private final Tick t;
     private final FieldLocation dest;
     private final Bomb b;
+    private final ThrowBomb tb;
 
     public ThrowBombExecutionStrategy(Agent agent, Bomb b,FieldLocation dest, Tick t) {
         super(agent, null);
         this.b = b;
         this.dest = dest;
         this.t = t;
+        this.tb = new ThrowBomb(agent.getPid(), b, dest, t);
+        this.conversationId = tb.getConversationId();
     }
 
     @Override
     public void run() {
-        ThrowBomb tb = new ThrowBomb(agent.getPid(), b, dest, t);
+        
         Envelope e = new Envelope(tb,agent.getConfig().getServerAddress(),agent.getConfig().getServerPort());
         e = reliableSendReceive(e);
         if(e == null){

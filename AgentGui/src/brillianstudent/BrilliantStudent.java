@@ -3,14 +3,18 @@ package brillianstudent;
 import AgentCommon.Agent;
 import Common.AgentInfo;
 import Common.Bomb;
+import Common.ComponentInfo;
+import Common.Excuse;
 import Common.FieldLocation;
 import Common.Tick;
+import Common.WhiningTwine;
 import Communication.Config;
 import Communication.Endpoint;
 import Communication.Envelope;
 import ExecutionStrategies.EndGameExecutionStrategy;
 import ExecutionStrategies.ExecutionStrategy;
 import ExecutionStrategies.GetResourceExecutionStrategy;
+import ExecutionStrategies.GetStatusExecutionStrategy;
 import ExecutionStrategies.StartGameExecutionStrategy;
 import ExecutionStrategies.ThrowBombExecutionStrategy;
 import ExecutionStrategies.TickReceiptStrategy;
@@ -21,6 +25,7 @@ import Messages.Message.MESSAGE_CLASS_IDS;
 import static Messages.Message.MESSAGE_CLASS_IDS;
 import Messages.Move;
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,10 +35,9 @@ import java.util.logging.Logger;
  * 11:43 AM
  */
 public class BrilliantStudent extends Agent {
-
+    private ComponentInfo currentTarget;
     public BrilliantStudent(Config config) {
         super(config);
-
     }
 
     @Override
@@ -48,6 +52,8 @@ public class BrilliantStudent extends Agent {
                 return new TickReceiptStrategy(this, cur);
             case EndGame:
                 return new EndGameExecutionStrategy(this, cur);
+            case GetStatus:
+                return new GetStatusExecutionStrategy(this, cur);
             default:
                 return null;
         }
@@ -112,6 +118,23 @@ public class BrilliantStudent extends Agent {
         this.dispatcher.startConversation(ms);
     }
     
+    public void move(char dir){
+        short X = agentInfo.getLocation().getX();
+        short Y = agentInfo.getLocation().getY();
+        switch(dir){
+            case 'u':
+                Y +=agentInfo.getSpeed();
+            case 'd':
+                Y -=agentInfo.getSpeed();
+            case 'l':
+                X -=agentInfo.getSpeed();
+            case 'r':
+                X+=agentInfo.getSpeed();
+        }
+        FieldLocation fl = new FieldLocation(X,Y , false);
+        move(fl);
+    }
+    
     public void throwBomb(Bomb b,FieldLocation dest){
         Tick t = tickQueue.poll();
         if(t == null){
@@ -120,6 +143,24 @@ public class BrilliantStudent extends Agent {
         }
         ExecutionStrategy ex = new ThrowBombExecutionStrategy(this, b, dest,t);
         this.dispatcher.startConversation(ex);
+    }
+    
+    public ArrayList<Excuse> getExcuses(int n){
+        n = Math.min(n, excuseQueue.size());
+        ArrayList<Excuse> excuses = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            excuses.add(excuseQueue.poll());
+        }
+        return excuses;
+    }
+    
+    public ArrayList<WhiningTwine> getTwine(int n){
+        n = Math.min(n, twineQueue.size());
+        ArrayList<WhiningTwine> twine = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            twine.add(twineQueue.poll());
+        }
+        return twine;
     }
     
 }

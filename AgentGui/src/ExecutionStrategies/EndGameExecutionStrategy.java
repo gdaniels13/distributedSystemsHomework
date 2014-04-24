@@ -27,6 +27,7 @@ public class EndGameExecutionStrategy extends ExecutionStrategy {
         } else {
             GameStatus.updateLog("Received EndGame from " + first.getAddress().toString());
         }
+        removeFromMap();
     }
 
 }

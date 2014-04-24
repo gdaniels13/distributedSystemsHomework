@@ -15,11 +15,13 @@ import Communication.Envelope;
 import Communication.EnvelopeQueue;
 import Communication.Listener;
 import ExecutionStrategies.ExecutionStrategy;
+import ExecutionStrategies.ExitGameExecutionStrategy;
 import ExecutionStrategies.GetResourceExecutionStrategy;
 import ExecutionStrategies.JoinGameExecutionStrategy;
 import Gui.GameStatus;
 import Messages.GetResource;
 import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -50,6 +52,36 @@ public abstract class Agent extends Observable implements Runnable {
     protected AgentList excuseGeneratorList;
     protected AgentList whiningSpinnerList;
     protected AgentList zombieList;
+    protected HashMap<Integer, AgentInfo> bsMap;
+    protected HashMap<Integer, AgentInfo> zMap;
+    protected HashMap<Integer, AgentInfo> egMap;
+    protected HashMap<Integer, AgentInfo> wgMap;
+
+    public void updateMaps(AgentList al) {
+        for (int i = 0; i < al.Count(); i++) {
+            AgentInfo a = al.getAgentInfo(i);
+            switch (a.getAgentType()) {
+                case BrilliantStudent:
+                    insert(bsMap, a);
+                    break;
+                case ExcuseGenerator:
+                    insert(egMap, a);
+                    break;
+                case WhiningSpinner:
+                    insert(wgMap, a);
+                    break;
+                case ZombieProfessor:
+                    insert(zMap, a);
+                    break;
+            }
+        }
+    }
+
+    
+    private void insert(HashMap<Integer, AgentInfo> map, AgentInfo ai) {
+       int key = ai.getId();
+       map.put(key, ai);
+    }
 
     public PlayingFieldLayout getFieldLayout() {
         return fieldLayout;
@@ -220,6 +252,11 @@ public abstract class Agent extends Observable implements Runnable {
 
     }
 
+    public void exitGame() {
+        ExecutionStrategy es = new ExitGameExecutionStrategy(this, null);
+        this.dispatcher.startConversation(es);
+    }
+
     public boolean verifyServer(Envelope env) {
         InetAddress mAddress = env.getAddress().getAddress();
         int mPort = env.getAddress().getPort();
@@ -229,7 +266,10 @@ public abstract class Agent extends Observable implements Runnable {
         if (mAddress.toString().compareTo(sAddress.toString()) == 0 && sPort == mPort) {
             return true;
         }
+        else
+        {
         return false;
+        }
     }
 
     public void requestResourceFromServer(GetResource.PossibleResourceType type) {
@@ -237,4 +277,5 @@ public abstract class Agent extends Observable implements Runnable {
         this.dispatcher.startConversation(es);
     }
 
+     
 }
