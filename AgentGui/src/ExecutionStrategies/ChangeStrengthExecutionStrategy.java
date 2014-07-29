@@ -8,7 +8,9 @@ package ExecutionStrategies;
 
 import AgentCommon.Agent;
 import Communication.Envelope;
+import Messages.AckNak;
 import Messages.ChangeStrength;
+import Messages.Reply;
 
 
 public class ChangeStrengthExecutionStrategy extends ExecutionStrategy {
@@ -19,9 +21,14 @@ public class ChangeStrengthExecutionStrategy extends ExecutionStrategy {
 
     @Override
     public void run() {
+        if(!agent.verifyServer(first)){
+            return;
+        }
         ChangeStrength cs = (ChangeStrength) first.getMessage();
-        agent.getAgentInfo().setStrength(agent.getAgentInfo().getStrength()-cs.DeltaValue);
-        
+        agent.getAgentInfo().setStrength(agent.getAgentInfo().getStrength()+cs.DeltaValue);
+        AckNak a = new AckNak(Reply.PossibleStatus.Success);
+        Envelope ack= new Envelope(a, recipient);
+        agent.getCommunicator().send(ack);
     }
     
 }

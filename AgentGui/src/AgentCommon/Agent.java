@@ -18,8 +18,10 @@ import ExecutionStrategies.ExecutionStrategy;
 import ExecutionStrategies.ExitGameExecutionStrategy;
 import ExecutionStrategies.GetResourceExecutionStrategy;
 import ExecutionStrategies.JoinGameExecutionStrategy;
+import ExecutionStrategies.UpdateStreamStrategy;
 import Gui.GameStatus;
 import Messages.GetResource;
+import Messages.StartUpdateStream;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Observable;
@@ -56,6 +58,22 @@ public abstract class Agent extends Observable implements Runnable {
     protected HashMap<Integer, AgentInfo> zMap;
     protected HashMap<Integer, AgentInfo> egMap;
     protected HashMap<Integer, AgentInfo> wgMap;
+    protected boolean auto;
+    public HashMap<Integer, AgentInfo> getBsMap() {
+        return bsMap;
+    }
+
+    public HashMap<Integer, AgentInfo> getzMap() {
+        return zMap;
+    }
+
+    public HashMap<Integer, AgentInfo> getEgMap() {
+        return egMap;
+    }
+
+    public HashMap<Integer, AgentInfo> getWgMap() {
+        return wgMap;
+    }
 
     public void updateMaps(AgentList al) {
         for (int i = 0; i < al.Count(); i++) {
@@ -114,6 +132,10 @@ public abstract class Agent extends Observable implements Runnable {
     public Agent(Config config) {
         this.config = config;
         this.go = false;
+        this.bsMap = new HashMap<>();
+        this.egMap = new HashMap<>();
+        this.wgMap = new HashMap<>();
+        this.zMap = new HashMap<>();
     }
 
     public void joinGame() {
@@ -123,6 +145,7 @@ public abstract class Agent extends Observable implements Runnable {
     public abstract ExecutionStrategy CreateExecutionStrategy(Envelope cur);
 
     public void init() {
+        this.auto = true;
         this.communicator = new Communicator(config);
         this.envelopeQueue = new EnvelopeQueue();
         this.dispatcher = new Dispatcher(this.envelopeQueue, this);
@@ -268,7 +291,7 @@ public abstract class Agent extends Observable implements Runnable {
         }
         else
         {
-        return false;
+            return false;
         }
     }
 
@@ -277,5 +300,25 @@ public abstract class Agent extends Observable implements Runnable {
         this.dispatcher.startConversation(es);
     }
 
-     
+     public void startUpdateStream(){
+         StartUpdateStream ss = new StartUpdateStream();
+         Envelope env = new Envelope(ss, config.getServerEndpoint());
+         
+         dispatcher.startConversation(new UpdateStreamStrategy(this,env));
+     }
+     public void stopUpdateStream(){
+         for(ExecutionStrategy es : dispatcher.getEsMap().values()){
+             try{
+                 ((UpdateStreamStrategy)es).stop();
+             }
+             catch(ClassCastException e){
+                 //nothing
+             }
+         }
+     }
+
+
+    public void toggleAuto() {
+        auto = !auto;
+    }
 }

@@ -23,7 +23,6 @@ public class TickReceiptStrategy extends ExecutionStrategy {
             Tick t = ((TickDelivery) first.getMessage()).getCurrentTick();
             agent.getTickQueue().add(t);
             agent.notifyGui();
-            log("got tick");
             removeFromMap();
     }
 }

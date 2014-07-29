@@ -53,7 +53,6 @@ public abstract class ExecutionStrategy implements Runnable {
     //add an envelope to the queue of the execution strategy
     public synchronized void put(Envelope cur) {
         queue.add(cur);
-        log("notifying of receipt");
         notifyAll();
     }
 
@@ -65,24 +64,16 @@ public abstract class ExecutionStrategy implements Runnable {
         }
 
         for (int i = 0; i < retries; ++i) {
-            log("sending "+i);
             agent.getCommunicator().send(env);
-            log("sent "+i);
             try {
-                log("going to sleep "+ i);
                 wait(timeout);
-                log("waking up "+ i);
 
             } catch (InterruptedException ex) {
-                log("interupted " + i);
                 Logger.getLogger(ExecutionStrategy.class.getName()).log(Level.SEVERE, null, ex);
             }
-            log("done waiting " + i);
             
             toReturn = queue.poll();
-            log("polling " + toReturn);
             if (toReturn != null) {
-                log("returning something " +i);
                 return toReturn;
             }
             log("finished attempt " + i);

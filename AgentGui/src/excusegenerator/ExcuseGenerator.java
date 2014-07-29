@@ -11,6 +11,7 @@ import Common.Excuse;
 import Common.Tick;
 import Common.WhiningTwine;
 import Communication.Config;
+import ExecutionStrategies.ChangeStrengthExecutionStrategy;
 import ExecutionStrategies.EndGameExecutionStrategy;
 import ExecutionStrategies.ExecutionStrategy;
 import ExecutionStrategies.GetStatusExecutionStrategy;
@@ -62,6 +63,8 @@ public class ExcuseGenerator extends Agent {
                 return new EndGameExecutionStrategy(this, cur);
             case GetStatus:
                 return new GetStatusExecutionStrategy(this, cur);
+            case ChangeStrength:
+                return new ChangeStrengthExecutionStrategy(this, cur);
             default:
                 return null;
         }

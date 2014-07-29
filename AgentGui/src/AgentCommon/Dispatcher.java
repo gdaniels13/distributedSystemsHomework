@@ -3,6 +3,7 @@ package AgentCommon;
 import ExecutionStrategies.ExecutionStrategy;
 import Communication.Envelope;
 import Communication.EnvelopeQueue;
+import ExecutionStrategies.UpdateStreamStrategy;
 import Gui.GameStatus;
 import Messages.Message;
 import Messages.Request;
@@ -30,16 +31,19 @@ public class Dispatcher implements Runnable {
     @Override
     public void run() {
         Envelope cur;
+        long messagecount =0;
         while (true) {
 
             cur = envelopeQueue.pop();
             if (cur != null) {
 //                System.out.println("dispatching a message");
                 if (cur.getMessage().getClassId() != Message.MESSAGE_CLASS_IDS.TickDelivery.getValue()) {
-                    GameStatus.updateLog("received : " + cur.getMessage().MessageTypeId().toString()
-                            + " from " + cur.getAddress().toString());
+//                    GameStatus.updateLog("received : " + cur.getMessage().MessageTypeId().toString()
+//                            + " from " + cur.getAddress().toString());
                 }
+                System.out.println("dispatching message #" + messagecount ++);
                 dispatch(cur);
+                
             }
 
             try {
@@ -73,7 +77,8 @@ public class Dispatcher implements Runnable {
         if (es != null) { // conversation exists put the envelope on that objects queue and execute it
             //add code here to add things new execution strategies based on the
             es.put(cur);
-//            threadPool.execute(es);
+//            if(es instanceof UpdateStreamStrategy)
+//                threadPool.execute(es);
         } else // no conversation of that ID it should be a request
         {
             Request req;

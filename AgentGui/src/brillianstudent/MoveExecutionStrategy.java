@@ -32,11 +32,12 @@ public class MoveExecutionStrategy extends ExecutionStrategy {
            return;
        }
        AckNak ack = (AckNak) response.getMessage();
-       if(ack.getStatus() == Reply.PossibleStatus.Failure){
-           GameStatus.updateLog("Unable to move "+ ack.getMessage());
+       if(ack.getStatus() == Reply.PossibleStatus.Success){
+           agent.getAgentInfo().setLocation(((Move)first.getMessage()).getToSquare());
+           GameStatus.updateLog("moved");
        }
        else{
-           agent.getAgentInfo().setLocation(((Move)first.getMessage()).getToSquare());
+           GameStatus.updateLog("Unable to move "+ ack.getMessage());
        }
        removeFromMap();
     }

@@ -26,8 +26,8 @@ public class Listener implements Runnable
             Envelope t = communicator.listen();
             if(t!=null){
                 envelopeQueue.push(t);
-                System.out.println("************" + t.getMessage());
-                System.out.println("got a message : " + t.getMessage().getConversationId());
+//                System.out.println("************" + t.getMessage());
+//                System.out.println("got a message : " + t.getMessage().getConversationId());
             }
         }
     }

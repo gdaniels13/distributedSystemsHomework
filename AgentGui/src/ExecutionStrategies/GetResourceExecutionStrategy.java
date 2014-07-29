@@ -104,19 +104,21 @@ public class GetResourceExecutionStrategy extends ExecutionStrategy {
     }
 
     private void routeAgentLists(AgentList list) {
-        switch (getListType()) {
-            case BrillianStudentList:
-                agent.setBrilliantStudentList(list);
-                break;
-            case ExcuseGeneratorList:
-                agent.setExcuseGeneratorList(list);
-                break;
-            case WhiningSpinnerList:
-                agent.setWhiningSpinnerList(list);
-                break;
-            case ZombieProfessorList:
-                agent.setZombieProfessorList(list);
-                break;
-        }
+        agent.updateMaps(list);
+//        return;
+//        switch (getListType()) {
+//            case BrillianStudentList:
+//                agent.setBrilliantStudentList(list);
+//                break;
+//            case ExcuseGeneratorList:
+//                agent.setExcuseGeneratorList(list);
+//                break;
+//            case WhiningSpinnerList:
+//                agent.setWhiningSpinnerList(list);
+//                break;
+//            case ZombieProfessorList:
+//                agent.setZombieProfessorList(list);
+//                break;
+//        }
     }
 }

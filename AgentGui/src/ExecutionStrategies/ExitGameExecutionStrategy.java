@@ -21,7 +21,7 @@ public class ExitGameExecutionStrategy extends ExecutionStrategy {
 
     @Override
     public void run() {
-        ExitGame eg = new ExitGame();
+        ExitGame eg = new ExitGame((short)10);
         Envelope env = new Envelope(eg, agent.getConfig().getServerEndpoint());
         
         Envelope e = reliableSendReceive(env);
